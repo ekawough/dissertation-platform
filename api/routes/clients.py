@@ -254,3 +254,48 @@ def remove_chapter(client_id: str, chapter_name: str):
         except Exception as e:
             print(f"Remove chapter error: {e}")
     return {"status": "removed"}
+
+class ClientUpdate(BaseModel):
+    name: Optional[str] = None
+    degree: Optional[str] = None
+    field: Optional[str] = None
+    institution: Optional[str] = None
+    topic: Optional[str] = None
+    advisor: Optional[str] = None
+    citation_style: Optional[str] = None
+    quality_target: Optional[int] = None
+    formatting_notes: Optional[str] = None
+
+@router.put("/{client_id}")
+def update_client(client_id: str, req: ClientUpdate):
+    updates = {k: v for k, v in req.dict().items() if v is not None}
+    if not updates:
+        return {"status": "no changes"}
+    # Always allow updating Mitchell too
+    db = get_db()
+    if db:
+        try:
+            db.table("clients").update(updates).eq("id", client_id).execute()
+        except Exception as e:
+            print(f"Update client error: {e}")
+    # If Mitchell, update in-memory data too
+    if client_id == MITCHELL_DATA["id"]:
+        MITCHELL_DATA.update(updates)
+    return {"status": "updated"}
+
+class ChapterStatusUpdate(BaseModel):
+    status: str
+    notes: Optional[str] = None
+
+@router.put("/{client_id}/chapters/{chapter_name}/status")
+def update_chapter_status(client_id: str, chapter_name: str, req: ChapterStatusUpdate):
+    db = get_db()
+    if db:
+        try:
+            db.table("chapters").update({
+                "status": req.status,
+                "notes": req.notes or ""
+            }).eq("client_id", client_id).eq("chapter_name", chapter_name).execute()
+        except Exception as e:
+            print(f"Update chapter status error: {e}")
+    return {"status": "updated"}
