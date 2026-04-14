@@ -143,10 +143,11 @@ def get_chapters(client_id: str):
     if db:
         try:
             r = db.table("chapters").select("*").eq("client_id", client_id).order("chapter_name").execute()
-            return {"chapters": r.data or []}
+            if r.data:
+                return {"chapters": r.data}
         except Exception as e:
             print(f"Get chapters error: {e}")
-    # fallback for Mitchell
+    # fallback — always return Mitchell's hardcoded chapters if no DB data
     if client_id == MITCHELL_DATA["id"]:
         return {"chapters": json.loads(MITCHELL_DATA["chapter_structure"])}
     return {"chapters": []}
