@@ -67,13 +67,18 @@ def upsert_mitchell():
 @router.get("/")
 def list_clients():
     db = get_db()
+    clients = []
     if db:
         try:
             r = db.table("clients").select("*").order("created_at", desc=True).execute()
-            return {"clients": r.data or []}
+            clients = r.data or []
         except Exception as e:
             print(f"List clients error: {e}")
-    return {"clients": [MITCHELL_DATA]}
+    # Always ensure Mitchell is in the list
+    mitchell_ids = [c["id"] for c in clients]
+    if MITCHELL_DATA["id"] not in mitchell_ids:
+        clients = [MITCHELL_DATA] + clients
+    return {"clients": clients}
 
 @router.get("/{client_id}")
 def get_client(client_id: str):
