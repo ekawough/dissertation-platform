@@ -3,180 +3,189 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Dissertation Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --paper:#faf9f6;--white:#fff;--s1:#f4f3ef;--s2:#ebe9e2;--s3:#dddbd2;
-  --ink:#1a1916;--i2:#5c5b54;--i3:#9b9a93;
-  --blue:#2563eb;--bdim:rgba(37,99,235,0.09);--bt:#1d4ed8;
-  --green:#16a34a;--gdim:rgba(22,163,74,0.09);
-  --amber:#d97706;--adim:rgba(217,119,6,0.09);
-  --red:#dc2626;--rdim:rgba(220,38,38,0.08);
-  --sb:230px;--cw:320px;
+  --bg:#f8f7f4;--w:#fff;--s1:#f2f1ed;--s2:#e8e6e0;--s3:#d8d5cc;
+  --ink:#181714;--i2:#57564f;--i3:#96948d;
+  --blue:#2563eb;--bd:rgba(37,99,235,.1);--bt:#1d4ed8;
+  --green:#15803d;--gd:rgba(21,128,61,.1);
+  --amber:#b45309;--ad:rgba(180,83,9,.1);
+  --red:#dc2626;--rd:rgba(220,38,38,.09);
+  --SB:240px;--CP:320px;
 }
 html,body{height:100%;overflow:hidden}
-body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);display:flex;font-size:14px}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);display:flex;font-size:14px;line-height:1.5}
 
-/* SIDEBAR */
-.csb{width:var(--sb);height:100vh;background:var(--white);border-right:1px solid rgba(0,0,0,0.07);display:flex;flex-direction:column;flex-shrink:0}
-.csb-top{padding:14px 14px 10px;border-bottom:1px solid rgba(0,0,0,0.07)}
-.brand{display:flex;align-items:center;gap:8px}
-.brand-icon{width:28px;height:28px;background:var(--ink);border-radius:6px;display:grid;place-items:center;color:#fff;font-size:14px}
-.brand-name{font-size:13px;font-weight:700;letter-spacing:-.2px;line-height:1.2}
-.brand-sub{font-size:10px;color:var(--i3);font-weight:400}
-.sb-scroll{flex:1;overflow-y:auto;padding:8px}
-.sb-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--i3);padding:6px 8px 4px}
-.ci{display:flex;align-items:stretch;border-radius:8px;margin-bottom:2px;border:1.5px solid transparent;transition:all .12s;cursor:pointer}
-.ci:hover{background:var(--s1)}
-.ci.on{background:var(--bdim);border-color:rgba(37,99,235,.15)}
-.ci-main{flex:1;padding:8px 10px;min-width:0}
-.ci-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ci-sub{font-size:10px;color:var(--i3);margin-top:1px}
-.ci-dots{display:flex;gap:2px;margin-top:4px}
+/* ─ SIDEBAR ─────────────────────────────────── */
+.sb{width:var(--SB);height:100vh;background:var(--w);border-right:1px solid rgba(0,0,0,.06);display:flex;flex-direction:column;flex-shrink:0}
+.sb-brand{padding:16px 14px 12px;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:center;gap:9px}
+.sb-logo{width:30px;height:30px;background:var(--ink);border-radius:7px;display:grid;place-items:center;font-size:15px;flex-shrink:0}
+.sb-title{font-size:13px;font-weight:700;line-height:1.2;letter-spacing:-.2px}
+.sb-sub{font-size:10px;color:var(--i3)}
+.sb-clients{flex:1;overflow-y:auto;padding:8px}
+.sb-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--i3);padding:8px 8px 5px}
+.cl{display:flex;align-items:stretch;border-radius:8px;margin-bottom:3px;border:1.5px solid transparent;cursor:pointer;transition:all .12s}
+.cl:hover{background:var(--s1)}
+.cl.on{background:var(--bd);border-color:rgba(37,99,235,.18)}
+.cl-body{flex:1;padding:8px 10px;min-width:0}
+.cl-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cl-meta{font-size:10px;color:var(--i3);margin-top:1px}
+.cl-dots{display:flex;gap:2px;margin-top:4px}
 .dot{width:6px;height:6px;border-radius:50%}
 .dot-c{background:var(--green)}.dot-p{background:var(--amber)}.dot-n{background:var(--s3)}
-.ci-acts{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:4px 5px 4px 0;opacity:0;transition:opacity .1s}
-.ci:hover .ci-acts{opacity:1}
-.cia{background:none;border:none;font-size:10px;cursor:pointer;padding:2px 5px;border-radius:4px;color:var(--i3);font-family:inherit}
-.cia:hover{background:var(--blue);color:#fff}
-.cia.d:hover{background:var(--red);color:#fff}
-.sb-add{width:calc(100% - 16px);margin:4px 8px;padding:8px 10px;border:1.5px dashed rgba(0,0,0,.14);border-radius:8px;background:none;color:var(--i3);font-size:12px;font-family:inherit;cursor:pointer;transition:all .12s}
-.sb-add:hover{border-color:var(--blue);color:var(--blue);background:var(--bdim)}
-.sb-foot{padding:8px 14px;font-size:10px;color:var(--i3);border-top:1px solid rgba(0,0,0,.06);line-height:1.8;flex-shrink:0}
+.cl-side{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:4px 6px 4px 0;opacity:0;transition:opacity .1s}
+.cl:hover .cl-side{opacity:1}
+.cl-btn{background:none;border:none;font-size:11px;cursor:pointer;padding:2px 5px;border-radius:4px;color:var(--i3);font-family:inherit;transition:all .1s}
+.cl-btn:hover{background:var(--blue);color:#fff}
+.cl-btn.del:hover{background:var(--red);color:#fff}
+.sb-new{width:calc(100% - 16px);margin:4px 8px;padding:8px 10px;border:1.5px dashed rgba(0,0,0,.14);border-radius:8px;background:none;color:var(--i3);font-size:12px;font-family:inherit;cursor:pointer;transition:all .12s;text-align:center}
+.sb-new:hover{border-color:var(--blue);color:var(--blue);background:var(--bd)}
+.sb-foot{padding:8px 14px;font-size:10px;color:var(--i3);border-top:1px solid rgba(0,0,0,.05);line-height:1.9;flex-shrink:0}
 
-/* MAIN */
+/* ─ MAIN ─────────────────────────────────────── */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 
-/* TOP BAR */
-.topbar{height:48px;background:var(--white);border-bottom:1px solid rgba(0,0,0,.07);display:flex;align-items:center;padding:0 20px;gap:10px;flex-shrink:0}
+/* ─ TOPBAR ───────────────────────────────────── */
+.topbar{height:48px;background:var(--w);border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:center;padding:0 18px;gap:10px;flex-shrink:0}
 .tb-name{font-size:15px;font-weight:600;letter-spacing:-.3px}
-.tb-sep{color:var(--s3)}
+.tb-dot{color:var(--s3);font-size:12px}
 .tb-meta{font-size:12px;color:var(--i3);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tb-words{font-size:12px;color:var(--i3);padding:3px 10px;background:var(--s1);border-radius:20px;flex-shrink:0}
-.btn{display:inline-flex;align-items:center;gap:5px;padding:0 12px;height:30px;border-radius:6px;border:1px solid rgba(0,0,0,.14);background:var(--white);color:var(--i2);font-size:12px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .12s;white-space:nowrap;flex-shrink:0}
+.badge-words{font-size:11px;color:var(--i3);background:var(--s1);border-radius:20px;padding:3px 10px;flex-shrink:0}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:0 12px;height:30px;border-radius:6px;border:1px solid rgba(0,0,0,.13);background:var(--w);color:var(--i2);font-size:12px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .12s;white-space:nowrap;flex-shrink:0}
 .btn:hover{background:var(--s1);color:var(--ink)}
-.btn-blue{background:var(--blue);color:#fff;border-color:var(--blue)}
-.btn-blue:hover{opacity:.87}
-.btn-blue:disabled{opacity:.4;cursor:not-allowed}
+.btn-p{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn-p:hover{opacity:.88;background:var(--blue)}
+.btn-p:disabled{opacity:.4;cursor:not-allowed}
 .btn-sm{height:26px;padding:0 9px;font-size:11px}
+.btn-r{color:var(--red)}.btn-r:hover{background:var(--rd);border-color:rgba(220,38,38,.2)}
 
-/* WORKSPACE */
-.ws{flex:1;display:flex;overflow:hidden}
+/* ─ BODY ─────────────────────────────────────── */
+.body{flex:1;display:flex;overflow:hidden}
 
-/* DOC AREA */
-.doc-area{flex:1;display:flex;flex-direction:column;overflow:hidden}
+/* ─ EMPTY ────────────────────────────────────── */
+#v-empty{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:12px;padding:40px}
+.empty-ico{font-size:52px}
+.empty-h{font-family:'Lora',serif;font-size:26px;font-weight:600;letter-spacing:-.5px}
+.empty-s{font-size:13px;color:var(--i3);line-height:1.7;max-width:380px}
 
-/* EMPTY / SETUP STATE */
-.setup-view{flex:1;overflow-y:auto;padding:40px;display:none}
-.setup-card{max-width:680px;margin:0 auto;background:var(--white);border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:32px 36px;box-shadow:0 2px 20px rgba(0,0,0,.06)}
-.setup-icon{font-size:36px;margin-bottom:16px}
-.setup-h{font-family:'Crimson Pro',serif;font-size:26px;font-weight:600;letter-spacing:-.5px;margin-bottom:6px}
-.setup-sub{font-size:13px;color:var(--i2);line-height:1.6;margin-bottom:24px}
-.setup-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
-.sf{display:flex;flex-direction:column;gap:5px}
-.sf.full{grid-column:1/-1}
-.sf label{font-size:11px;font-weight:600;color:var(--i2);text-transform:uppercase;letter-spacing:.3px}
-.sf input,.sf select,.sf textarea{padding:9px 11px;background:var(--s1);border:1.5px solid rgba(0,0,0,.1);border-radius:8px;font-size:13px;font-family:inherit;color:var(--ink);outline:none;transition:border .15s}
-.sf input:focus,.sf select:focus,.sf textarea:focus{border-color:var(--blue);background:var(--white)}
-.sf textarea{resize:vertical;min-height:80px;line-height:1.6}
-.sf select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239b9a93'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px}
-.setup-footer{display:flex;gap:10px;margin-top:8px}
+/* ─ WORKSPACE ────────────────────────────────── */
+#v-ws{display:none;flex:1;overflow:hidden}
+.ws{display:flex;height:100%;overflow:hidden}
 
-/* DOC EDITOR */
-.doc-scroll{flex:1;overflow-y:auto;padding:40px 0;display:none}
-.doc-page{max-width:760px;margin:0 auto;padding:0 40px;position:relative}
-.doc-header{margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--s2)}
-.doc-client-h{font-family:'Crimson Pro',serif;font-size:26px;font-weight:600;letter-spacing:-.5px;margin-bottom:3px}
-.doc-topic-h{font-family:'Crimson Pro',serif;font-size:15px;color:var(--i2);font-style:italic;line-height:1.5;margin-bottom:5px}
-.doc-degree-h{font-size:11px;color:var(--i3);letter-spacing:.3px}
-.editor{width:100%;min-height:600px;border:none;outline:none;font-family:'Crimson Pro',serif;font-size:17px;line-height:1.95;color:var(--ink);resize:none;background:transparent;-webkit-font-smoothing:antialiased}
-.editor::placeholder{color:var(--i3);font-style:italic;font-size:16px}
+/* ─ DOC AREA ─────────────────────────────────── */
+.doc-area{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 
-/* gen overlay */
-.gen-ov{position:absolute;inset:0;background:rgba(250,249,246,.88);display:none;align-items:flex-start;justify-content:center;padding-top:80px;flex-direction:column;gap:10px;backdrop-filter:blur(3px);padding-left:40px}
-.gen-ov.show{display:flex}
-.gen-spinner{width:32px;height:32px;border:3px solid var(--s2);border-top-color:var(--blue);border-radius:50%;animation:spin 1s linear infinite}
+/* New client onboarding - shown when no doc yet */
+.onboard{flex:1;overflow-y:auto;padding:32px}
+.ob-card{max-width:660px;margin:0 auto;background:var(--w);border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:28px 32px;box-shadow:0 2px 16px rgba(0,0,0,.05)}
+.ob-h{font-family:'Lora',serif;font-size:22px;font-weight:600;margin-bottom:6px;letter-spacing:-.3px}
+.ob-s{font-size:13px;color:var(--i2);margin-bottom:22px;line-height:1.65}
+.ob-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:18px}
+.ob-f{display:flex;flex-direction:column;gap:4px}
+.ob-f.wide{grid-column:1/-1}
+.ob-f label{font-size:11px;font-weight:600;color:var(--i2);text-transform:uppercase;letter-spacing:.3px}
+.ob-f input,.ob-f select,.ob-f textarea{padding:9px 11px;background:var(--s1);border:1.5px solid rgba(0,0,0,.09);border-radius:8px;font-size:13px;font-family:inherit;color:var(--ink);outline:none;transition:border .15s;width:100%}
+.ob-f input:focus,.ob-f select:focus,.ob-f textarea:focus{border-color:var(--blue);background:var(--w)}
+.ob-f textarea{resize:vertical;min-height:90px;line-height:1.6}
+.ob-f select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2396948d'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px}
+.ob-btns{display:flex;gap:10px;align-items:center}
+
+/* Doc editor */
+.doc-scroll{flex:1;overflow-y:auto;padding:36px 0}
+.doc-page{max-width:720px;margin:0 auto;padding:0 44px;position:relative}
+.doc-hdr{margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid var(--s2)}
+.doc-cname{font-family:'Lora',serif;font-size:24px;font-weight:600;letter-spacing:-.4px;margin-bottom:3px}
+.doc-topic{font-family:'Lora',serif;font-size:14px;color:var(--i2);font-style:italic;line-height:1.5;margin-bottom:4px}
+.doc-deg{font-size:11px;color:var(--i3);letter-spacing:.2px}
+.doc-ed{width:100%;min-height:560px;border:none;outline:none;font-family:'Lora',Georgia,serif;font-size:16.5px;line-height:1.95;color:var(--ink);resize:none;background:transparent;-webkit-font-smoothing:antialiased;padding:0}
+.doc-ed::placeholder{color:var(--i3);font-style:italic;font-size:15px}
+
+/* spinner overlay */
+.spin-ov{position:absolute;inset:0;background:rgba(248,247,244,.9);display:none;align-items:flex-start;justify-content:center;padding-top:60px;flex-direction:column;gap:10px;backdrop-filter:blur(4px);padding-left:44px}
+.spin-ov.on{display:flex}
+.spin{width:28px;height:28px;border:3px solid var(--s2);border-top-color:var(--blue);border-radius:50%;animation:spin .9s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.gen-lbl{font-size:15px;font-weight:600;color:var(--ink)}
-.gen-sub{font-size:12px;color:var(--i3)}
+.spin-lbl{font-size:15px;font-weight:600}
+.spin-sub{font-size:12px;color:var(--i3)}
 
-/* CHAT PANEL */
-.chat-panel{width:var(--cw);border-left:1px solid rgba(0,0,0,.07);background:var(--white);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
-.cp-head{padding:11px 14px;border-bottom:1px solid rgba(0,0,0,.07);display:flex;align-items:center;gap:8px}
+/* ─ CHAT PANEL ───────────────────────────────── */
+.chat-panel{width:var(--CP);border-left:1px solid rgba(0,0,0,.06);background:var(--w);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
+.cp-head{padding:12px 14px 10px;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:center;gap:8px;flex-shrink:0}
 .cp-title{font-size:13px;font-weight:600;flex:1}
-.cp-client{font-size:11px;color:var(--i3)}
-.cp-tabs{display:flex;border-bottom:1px solid rgba(0,0,0,.07);flex-shrink:0}
+.cp-who{font-size:11px;color:var(--i3)}
+.cp-tabs{display:flex;border-bottom:1px solid rgba(0,0,0,.06);flex-shrink:0}
 .cptab{flex:1;padding:9px 4px;border:none;background:none;font-size:12px;font-weight:500;color:var(--i3);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .1s}
 .cptab.on{color:var(--bt);border-bottom-color:var(--blue)}
 
-/* Chat messages */
-.msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
-.msg-u{align-self:flex-end;max-width:88%}
-.msg-a{align-self:flex-start;max-width:92%}
-.bubble{padding:9px 12px;border-radius:10px;font-size:13px;line-height:1.55}
-.msg-u .bubble{background:var(--blue);color:#fff;border-radius:10px 10px 2px 10px}
-.msg-a .bubble{background:var(--s1);color:var(--ink);border-radius:10px 10px 10px 2px;border:1px solid rgba(0,0,0,.07)}
-.msg-a .bubble.dim{color:var(--i3);font-style:italic}
-.msg-ts{font-size:10px;color:var(--i3);margin-top:2px}
-.msg-u .msg-ts{text-align:right}
+/* messages */
+.msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;min-height:0}
+.mu{align-self:flex-end;max-width:86%}
+.ma{align-self:flex-start;max-width:92%}
+.bbl{padding:9px 12px;border-radius:10px;font-size:13px;line-height:1.55}
+.mu .bbl{background:var(--blue);color:#fff;border-radius:10px 10px 2px 10px}
+.ma .bbl{background:var(--s1);border:1px solid rgba(0,0,0,.07);border-radius:10px 10px 10px 2px}
+.ma .bbl.dim{color:var(--i3);font-style:italic}
+.mts{font-size:10px;color:var(--i3);margin-top:2px}
+.mu .mts{text-align:right}
 
 /* chips */
-.chips{padding:8px 10px;display:flex;flex-wrap:wrap;gap:5px;border-top:1px solid rgba(0,0,0,.06)}
-.chip{padding:4px 10px;border:1px solid rgba(0,0,0,.12);border-radius:20px;font-size:11px;color:var(--i2);cursor:pointer;background:var(--white);font-family:inherit;transition:all .1s}
-.chip:hover{border-color:var(--blue);color:var(--blue);background:var(--bdim)}
+.chips{padding:8px 10px;display:flex;flex-wrap:wrap;gap:5px;border-top:1px solid rgba(0,0,0,.05);flex-shrink:0}
+.chip{padding:4px 10px;border:1px solid rgba(0,0,0,.11);border-radius:20px;font-size:11px;color:var(--i2);cursor:pointer;background:var(--w);font-family:inherit;transition:all .1s}
+.chip:hover{border-color:var(--blue);color:var(--blue);background:var(--bd)}
 
 /* chat input */
-.chat-input-wrap{padding:10px 12px;border-top:1px solid rgba(0,0,0,.07);flex-shrink:0}
+.chat-inp-wrap{padding:10px 12px;border-top:1px solid rgba(0,0,0,.06);flex-shrink:0}
 .chat-row{display:flex;gap:7px;align-items:flex-end}
-.chat-in{flex:1;padding:9px 12px;background:var(--s1);border:1.5px solid rgba(0,0,0,.09);border-radius:10px;font-size:13px;font-family:inherit;outline:none;resize:none;line-height:1.5;max-height:120px;transition:border .15s;color:var(--ink)}
-.chat-in:focus{border-color:var(--blue);background:var(--white)}
-.chat-in::placeholder{color:var(--i3)}
-.send{width:34px;height:34px;background:var(--blue);border:none;border-radius:8px;cursor:pointer;display:grid;place-items:center;flex-shrink:0;transition:opacity .15s}
-.send:hover{opacity:.85}.send:disabled{opacity:.4;cursor:not-allowed}
-.send svg{width:15px;height:15px;fill:#fff}
+.chat-ta{flex:1;padding:9px 12px;background:var(--s1);border:1.5px solid rgba(0,0,0,.09);border-radius:10px;font-size:13px;font-family:inherit;outline:none;resize:none;line-height:1.5;max-height:120px;transition:border .15s;color:var(--ink)}
+.chat-ta:focus{border-color:var(--blue);background:var(--w)}
+.chat-ta::placeholder{color:var(--i3)}
+.send-btn{width:34px;height:34px;background:var(--blue);border:none;border-radius:8px;cursor:pointer;display:grid;place-items:center;flex-shrink:0;transition:opacity .15s}
+.send-btn:hover{opacity:.84}.send-btn:disabled{opacity:.38;cursor:not-allowed}
+.send-btn svg{width:14px;height:14px;fill:#fff}
 
-/* notebook & docs panel */
-.cpanel{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:12px}
-.sec-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--i3)}
-.scrta{width:100%;min-height:200px;padding:10px 12px;background:var(--s1);border:1.5px solid rgba(0,0,0,.09);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.65;color:var(--ink);resize:vertical;outline:none;transition:border .15s}
-.scrta:focus{border-color:var(--blue)}
-.scrta::placeholder{color:var(--i3)}
+/* notebook + docs panel content */
+.cpanel{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:12px;min-height:0}
+.slbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--i3);margin-bottom:2px}
+.nta{width:100%;min-height:180px;padding:10px 12px;background:var(--s1);border:1.5px solid rgba(0,0,0,.09);border-radius:8px;font-family:'Outfit',sans-serif;font-size:13px;line-height:1.65;color:var(--ink);resize:vertical;outline:none;transition:border .15s}
+.nta:focus{border-color:var(--blue)}
+.nta::placeholder{color:var(--i3)}
 .ai-card{background:var(--s1);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--i2);line-height:1.65}
-.ai-card-t{font-size:11px;font-weight:600;margin-bottom:6px;color:var(--ink)}
-.kp{display:flex;gap:6px;font-size:12px;color:var(--i2);padding:3px 0;border-bottom:1px solid rgba(0,0,0,.06);line-height:1.45}
+.ai-t{font-size:11px;font-weight:600;margin-bottom:5px;color:var(--ink)}
+.kp{display:flex;gap:6px;font-size:12px;color:var(--i2);padding:3px 0;border-bottom:1px solid rgba(0,0,0,.05);line-height:1.4}
 .kp::before{content:'→';color:var(--blue);flex-shrink:0}.kp:last-child{border:none}
-.voice-badge{background:var(--gdim);border:1px solid rgba(22,163,74,.15);border-radius:6px;padding:7px 10px;font-size:11px;color:var(--green);line-height:1.5;display:none}
-.doc-up-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
-.dt-sel{padding:6px 20px 6px 8px;background:var(--s1);border:1px solid rgba(0,0,0,.1);border-radius:6px;font-size:12px;font-family:inherit;outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%239b9a93'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 6px center;cursor:pointer}
-.up-lbl{cursor:pointer;display:inline-flex;align-items:center;gap:4px;padding:0 10px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.14);background:var(--white);color:var(--i2);font-size:12px;font-weight:500;font-family:inherit;transition:all .12s}
+.voice-ok{background:var(--gd);border:1px solid rgba(21,128,61,.14);border-radius:6px;padding:7px 10px;font-size:11px;color:var(--green);line-height:1.5;display:none}
+.dup-row{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.dt-sel{padding:6px 20px 6px 8px;background:var(--s1);border:1px solid rgba(0,0,0,.1);border-radius:6px;font-size:12px;font-family:inherit;outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%2396948d'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 6px center;cursor:pointer}
+.up-lbl{cursor:pointer;display:inline-flex;align-items:center;gap:4px;padding:0 10px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.13);background:var(--w);color:var(--i2);font-size:12px;font-weight:500;font-family:inherit;transition:all .12s}
 .up-lbl:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
-.doc-item{padding:9px 12px;background:var(--s1);border-radius:7px}
-.doc-name{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.doc-meta{font-size:10px;color:var(--i3);margin-top:2px}
-.doc-style{font-size:11px;color:var(--i2);margin-top:4px;font-style:italic;line-height:1.4}
+.di{padding:9px 12px;background:var(--s1);border-radius:7px}
+.di-name{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.di-meta{font-size:10px;color:var(--i3);margin-top:2px}
+.di-style{font-size:11px;color:var(--i2);margin-top:4px;font-style:italic;line-height:1.4}
 
-/* MODAL */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:200;display:none;align-items:center;justify-content:center}
-.modal-bg.on{display:flex}
-.modal{background:var(--white);border-radius:12px;width:560px;max-width:96vw;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+/* MODALS */
+.mbg{position:fixed;inset:0;background:rgba(0,0,0,.36);z-index:200;display:none;align-items:center;justify-content:center}
+.mbg.on{display:flex}
+.modal{background:var(--w);border-radius:12px;width:540px;max-width:96vw;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 56px rgba(0,0,0,.18)}
 .modal.sm{width:400px}
-.mh{padding:15px 18px;border-bottom:1px solid rgba(0,0,0,.07);display:flex;align-items:center;justify-content:space-between}
+.mh{padding:15px 18px;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .mh-t{font-size:14px;font-weight:600}
-.mx{background:none;border:none;font-size:20px;cursor:pointer;color:var(--i3);line-height:1;padding:0 4px;border-radius:4px}
+.mx{background:none;border:none;font-size:19px;cursor:pointer;color:var(--i3);line-height:1;padding:0 4px;border-radius:4px}
 .mx:hover{background:var(--s1)}
 .mb{padding:16px 18px;overflow-y:auto;flex:1}
-.mf{padding:12px 18px;border-top:1px solid rgba(0,0,0,.07);display:flex;gap:7px;justify-content:flex-end}
+.mf{padding:12px 18px;border-top:1px solid rgba(0,0,0,.06);display:flex;gap:7px;justify-content:flex-end;flex-shrink:0}
 .f{margin-bottom:11px}.f:last-child{margin-bottom:0}
 .fl{display:block;font-size:11px;font-weight:600;color:var(--i2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px}
-.fi,.fs,.ft{width:100%;padding:8px 10px;background:var(--s1);border:1px solid rgba(0,0,0,.1);border-radius:6px;color:var(--ink);font-size:13px;font-family:inherit;outline:none;transition:border .15s}
-.fi:focus,.ft:focus,.fs:focus{border-color:var(--blue)}
-.ft{resize:vertical;min-height:60px}
-.fs{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239b9a93'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:22px}
+.fi,.fsel,.fta{width:100%;padding:8px 10px;background:var(--s1);border:1px solid rgba(0,0,0,.09);border-radius:6px;color:var(--ink);font-size:13px;font-family:inherit;outline:none;transition:border .15s}
+.fi:focus,.fta:focus,.fsel:focus{border-color:var(--blue)}
+.fta{resize:vertical;min-height:60px;line-height:1.6}
+.fsel{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2396948d'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:22px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.tmpl-prev{background:var(--s1);border-radius:6px;padding:8px 10px;font-size:12px;color:var(--i2);line-height:1.8;margin-top:5px}
+.tmpl{background:var(--s1);border-radius:6px;padding:8px 10px;font-size:12px;color:var(--i2);line-height:1.85;margin-top:5px}
 
-/* typing indicator */
+/* typing */
 .typing span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--i3);animation:blink 1.2s infinite both;margin:0 1px}
 .typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
 @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
@@ -189,14 +198,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);d
 <body>
 
 <!-- ADD CLIENT MODAL -->
-<div class="modal-bg" id="m-add" onclick="if(event.target===this)closeM('m-add')">
+<div class="mbg" id="m-add" onclick="if(event.target===this)closeM('m-add')">
   <div class="modal">
     <div class="mh"><div class="mh-t">Add New Client</div><button class="mx" onclick="closeM('m-add')">×</button></div>
     <div class="mb">
       <div class="g2">
         <div class="f"><label class="fl">Full Name *</label><input class="fi" id="a-name" placeholder="e.g. Sarah Johnson"></div>
         <div class="f"><label class="fl">Degree *</label>
-          <select class="fs" id="a-deg" onchange="prevTmpl()">
+          <select class="fsel" id="a-deg" onchange="prevTmpl()">
             <option value="dba">DBA</option><option value="phd">PhD</option>
             <option value="edd">EdD</option><option value="masters">Masters</option><option value="custom">Custom</option>
           </select>
@@ -205,674 +214,620 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);d
       <div class="g2">
         <div class="f"><label class="fl">Field *</label><input class="fi" id="a-field" placeholder="e.g. Human Resources"></div>
         <div class="f"><label class="fl">Citation Style</label>
-          <select class="fs" id="a-cite"><option>APA 7th</option><option>MLA 9th</option><option>Chicago 17th</option><option>Harvard</option></select>
+          <select class="fsel" id="a-cite"><option>APA 7th</option><option>MLA 9th</option><option>Chicago 17th</option><option>Harvard</option></select>
         </div>
       </div>
       <div class="f"><label class="fl">Institution *</label><input class="fi" id="a-inst" placeholder="e.g. University of La Verne"></div>
-      <div class="f"><label class="fl">Dissertation Topic *</label><input class="fi" id="a-topic" placeholder="Full research question or title"></div>
+      <div class="f"><label class="fl">Dissertation Topic *</label><input class="fi" id="a-topic" placeholder="Full research question or dissertation title"></div>
       <div class="f"><label class="fl">Advisor</label><input class="fi" id="a-adv" placeholder="e.g. Professor Zhang"></div>
-      <div class="f"><label class="fl">Chapter Structure</label><div class="tmpl-prev" id="a-tmpl-prev"></div></div>
+      <div class="f"><label class="fl">Chapter Structure (auto by degree)</label><div class="tmpl" id="a-tmpl"></div></div>
     </div>
-    <div class="mf"><button class="btn" onclick="closeM('m-add')">Cancel</button><button class="btn btn-blue" onclick="addClient()">Add Client</button></div>
+    <div class="mf"><button class="btn" onclick="closeM('m-add')">Cancel</button><button class="btn btn-p" onclick="addClient()">Add Client</button></div>
   </div>
 </div>
 
 <!-- EDIT CLIENT MODAL -->
-<div class="modal-bg" id="m-edit" onclick="if(event.target===this)closeM('m-edit')">
+<div class="mbg" id="m-edit" onclick="if(event.target===this)closeM('m-edit')">
   <div class="modal">
     <div class="mh"><div class="mh-t">Edit Client Profile</div><button class="mx" onclick="closeM('m-edit')">×</button></div>
     <div class="mb">
       <div class="g2">
         <div class="f"><label class="fl">Name</label><input class="fi" id="e-name"></div>
         <div class="f"><label class="fl">Degree</label>
-          <select class="fs" id="e-deg"><option>DBA</option><option>PhD</option><option>EdD</option><option>MBA</option><option>MS</option><option>MA</option></select>
+          <select class="fsel" id="e-deg"><option>DBA</option><option>PhD</option><option>EdD</option><option>MBA</option><option>MS</option><option>MA</option></select>
         </div>
       </div>
       <div class="g2">
         <div class="f"><label class="fl">Field</label><input class="fi" id="e-field"></div>
         <div class="f"><label class="fl">Citation Style</label>
-          <select class="fs" id="e-cite"><option>APA 7th</option><option>MLA 9th</option><option>Chicago 17th</option><option>Harvard</option></select>
+          <select class="fsel" id="e-cite"><option>APA 7th</option><option>MLA 9th</option><option>Chicago 17th</option><option>Harvard</option></select>
         </div>
       </div>
       <div class="f"><label class="fl">Institution</label><input class="fi" id="e-inst"></div>
       <div class="f"><label class="fl">Dissertation Topic</label><input class="fi" id="e-topic"></div>
       <div class="f"><label class="fl">Advisor</label><input class="fi" id="e-adv"></div>
-      <div class="f"><label class="fl">Formatting / Institution Requirements</label><textarea class="ft" id="e-fmt" placeholder="Page requirements, heading format, margin specs, anything the professor specified..."></textarea></div>
+      <div class="f"><label class="fl">Professor Requirements / Rubric / Formatting Notes</label>
+        <textarea class="fta" id="e-fmt" placeholder="Paste professor rubric, formatting specs, assignment requirements, page count, etc..."></textarea>
+      </div>
     </div>
-    <div class="mf"><button class="btn" onclick="closeM('m-edit')">Cancel</button><button class="btn btn-blue" onclick="saveEdit()">Save Changes</button></div>
+    <div class="mf"><button class="btn" onclick="closeM('m-edit')">Cancel</button><button class="btn btn-p" onclick="saveEdit()">Save</button></div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <!-- SIDEBAR -->
-<nav class="csb">
-  <div class="csb-top">
-    <div class="brand">
-      <div class="brand-icon">📚</div>
-      <div><div class="brand-name">Dissertation<br><span class="brand-sub">Writing Platform</span></div></div>
-    </div>
+<nav class="sb">
+  <div class="sb-brand">
+    <div class="sb-logo">📚</div>
+    <div><div class="sb-title">Dissertation</div><div class="sb-sub">Writing Platform</div></div>
   </div>
-  <div class="sb-scroll">
+  <div class="sb-clients">
     <div class="sb-lbl">Clients</div>
-    <div id="client-list"></div>
-    <button class="sb-add" onclick="openM('m-add')">+ Add New Client</button>
+    <div id="cl-list"></div>
+    <button class="sb-new" onclick="openM('m-add')">+ Add New Client</button>
   </div>
   <div class="sb-foot">Gemini 2.5 Flash<br>CrossRef · OpenAlex · Semantic Scholar<br>Supabase · Railway</div>
 </nav>
 
 <!-- MAIN -->
 <div class="main">
+  <!-- TOPBAR -->
   <div class="topbar">
-    <div class="tb-name" id="tb-name">Select a client</div>
-    <span class="tb-sep" id="tb-sep" style="display:none">·</span>
+    <div class="tb-name" id="tb-name">Dissertation Platform</div>
+    <span class="tb-dot" id="tb-dot" style="display:none">·</span>
     <div class="tb-meta" id="tb-meta"></div>
-    <span class="tb-words" id="tb-words" style="display:none">0 words</span>
+    <span class="badge-words" id="tb-words" style="display:none">0 words</span>
     <button class="btn btn-sm" id="btn-save" style="display:none" onclick="saveDoc()">💾 Save</button>
-    <button class="btn btn-sm" id="btn-export" style="display:none" onclick="exportDoc()">↓ DOCX</button>
+    <button class="btn btn-sm" id="btn-docx" style="display:none" onclick="exportDoc()">↓ DOCX</button>
     <button class="btn btn-sm" id="btn-edit" style="display:none" onclick="openEditClient()">✏️ Edit</button>
-    <button class="btn btn-sm" id="btn-del" style="display:none;color:var(--red)" onclick="deleteCurrentClient()">Delete</button>
+    <button class="btn btn-sm btn-r" id="btn-del" style="display:none" onclick="delCurrentClient()">Delete</button>
   </div>
 
-  <div class="ws">
-    <!-- DOC AREA -->
-    <div class="doc-area">
+  <div class="body">
+    <!-- EMPTY STATE -->
+    <div id="v-empty" style="flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:12px;padding:40px">
+      <div style="font-size:52px">📄</div>
+      <div style="font-family:'Lora',serif;font-size:24px;font-weight:600;letter-spacing:-.4px">Select a client to begin</div>
+      <div style="font-size:13px;color:var(--i3);line-height:1.7;max-width:360px">Pick a client from the sidebar or add a new one.<br>The full dissertation opens as one document.<br>Use the chat to write or fix anything.</div>
+    </div>
 
-      <!-- EMPTY STATE — no client selected -->
-      <div id="v-empty" style="flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:40px;gap:10px">
-        <div style="font-size:48px">📄</div>
-        <div style="font-family:'Crimson Pro',serif;font-size:24px;font-weight:600;letter-spacing:-.4px">Your dissertation lives here</div>
-        <div style="font-size:13px;color:var(--i3);line-height:1.65;max-width:380px">Select a client from the sidebar, or add a new one.<br>The full dissertation loads as one document. Use the chat to edit anything.</div>
+    <!-- WORKSPACE -->
+    <div id="v-ws" class="ws">
+      <!-- DOC AREA -->
+      <div class="doc-area">
+
+        <!-- ONBOARDING (new client, no doc) -->
+        <div class="onboard" id="v-onboard" style="display:none">
+          <div class="ob-card">
+            <div style="font-size:32px;margin-bottom:12px">🎓</div>
+            <div class="ob-h" id="ob-h">Ready to write</div>
+            <div class="ob-s" id="ob-s">Give me the assignment details and I'll write the complete dissertation. Or just click "Start Writing" and tell me in the chat.</div>
+            <div class="ob-grid">
+              <div class="ob-f">
+                <label>Assignment Type</label>
+                <select id="ob-type">
+                  <option value="">Not specified</option>
+                  <option>Full Dissertation (all chapters)</option>
+                  <option>Chapter I: Introduction only</option>
+                  <option>Chapter II: Literature Review only</option>
+                  <option>Chapter III: Methodology only</option>
+                  <option>Research Proposal</option>
+                  <option>Capstone Project</option>
+                  <option>Thesis</option>
+                  <option>Term Paper / Essay</option>
+                </select>
+              </div>
+              <div class="ob-f">
+                <label>Page / Word Count</label>
+                <input id="ob-pages" placeholder="e.g. 80-100 pages">
+              </div>
+              <div class="ob-f wide">
+                <label>Professor Rubric / Requirements</label>
+                <textarea id="ob-rubric" placeholder="Paste the professor's exact rubric, grading criteria, required sections, formatting specs...&#10;&#10;The more detail here, the better the output matches what they want."></textarea>
+              </div>
+              <div class="ob-f wide">
+                <label>Existing Work <span style="font-weight:400;color:var(--i3)">(optional — paste drafts, outlines, notes)</span></label>
+                <textarea id="ob-existing" placeholder="Paste any existing drafts or research the client already has..."></textarea>
+              </div>
+            </div>
+            <div class="ob-btns">
+              <button class="btn btn-p" style="height:40px;padding:0 22px;font-size:13px" onclick="startOnboard()">✨ Write the Dissertation</button>
+              <button class="btn" style="height:40px" onclick="skipOnboard()">Skip — use the chat</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- DOCUMENT EDITOR -->
+        <div class="doc-scroll" id="v-doc" style="display:none">
+          <div class="doc-page">
+            <div class="doc-hdr">
+              <div class="doc-cname" id="doc-name"></div>
+              <div class="doc-topic" id="doc-topic"></div>
+              <div class="doc-deg" id="doc-deg"></div>
+            </div>
+            <textarea class="doc-ed" id="doc-ed"
+              placeholder="Your dissertation appears here. Use the chat on the right to write or edit anything."
+              oninput="onDocType()" spellcheck="true"></textarea>
+            <div class="spin-ov" id="spin-ov">
+              <div class="spin"></div>
+              <div class="spin-lbl" id="spin-lbl">Writing…</div>
+              <div class="spin-sub" id="spin-sub">Gemini 2.5 Flash</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- SETUP VIEW — new client, no content yet -->
-      <div class="setup-view" id="v-setup">
-        <div class="setup-card">
-          <div class="setup-icon">🎓</div>
-          <div class="setup-h" id="setup-h">Ready to start</div>
-          <div class="setup-sub" id="setup-sub">Give me a few details about the assignment and I'll write the full dissertation. The more context you give, the better it matches what the professor wants.</div>
+      <!-- CHAT PANEL -->
+      <div class="chat-panel">
+        <div class="cp-head">
+          <div class="cp-title">AI Assistant</div>
+          <div class="cp-who" id="cp-who"></div>
+        </div>
+        <div class="cp-tabs">
+          <button class="cptab on" onclick="showCTab('chat',this)">Chat</button>
+          <button class="cptab" onclick="showCTab('notebook',this)">Notebook</button>
+          <button class="cptab" onclick="showCTab('docs',this)">Documents</button>
+        </div>
 
-          <div class="setup-fields">
-            <div class="sf">
-              <label>Assignment Type</label>
-              <select id="su-type">
-                <option value="">-- Select type --</option>
-                <option>Full Dissertation (all chapters)</option>
-                <option>Chapter I: Introduction only</option>
-                <option>Chapter II: Literature Review only</option>
-                <option>Chapter III: Methodology only</option>
-                <option>Capstone Project</option>
-                <option>Research Proposal</option>
-                <option>Thesis</option>
-                <option>Term Paper</option>
-                <option>Essay</option>
-                <option>Literature Review</option>
+        <!-- CHAT -->
+        <div id="ct-chat" style="display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0">
+          <div class="msgs" id="msgs"></div>
+          <div class="chips" id="chips">
+            <button class="chip" onclick="useChip(this)">Write the full dissertation</button>
+            <button class="chip" onclick="useChip(this)">Make the intro stronger</button>
+            <button class="chip" onclick="useChip(this)">Expand the literature review</button>
+            <button class="chip" onclick="useChip(this)">Methodology needs more detail</button>
+            <button class="chip" onclick="useChip(this)">Add more citations throughout</button>
+            <button class="chip" onclick="useChip(this)">Make it sound more human</button>
+            <button class="chip" onclick="useChip(this)">Fix APA formatting</button>
+            <button class="chip" onclick="useChip(this)">Tighten the conclusions</button>
+          </div>
+          <div class="chat-inp-wrap">
+            <div class="chat-row">
+              <textarea class="chat-ta" id="chat-ta" rows="2"
+                placeholder="Tell me what to write or fix…"
+                onkeydown="onKey(event)"></textarea>
+              <button class="send-btn" id="send-btn" onclick="sendMsg()">
+                <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- NOTEBOOK -->
+        <div id="ct-notebook" style="display:none;flex:1;overflow:hidden;flex-direction:column;min-height:0">
+          <div class="cpanel">
+            <div class="slbl">Research Notes</div>
+            <textarea class="nta" id="nb-ta" placeholder="Dump anything here:&#10;• Research ideas and angles&#10;• Professor feedback / emails&#10;• Source notes&#10;• Theoretical frameworks&#10;• Arguments to make&#10;&#10;The AI reads this before every edit."></textarea>
+            <div style="display:flex;gap:7px;align-items:center">
+              <button class="btn btn-p btn-sm" onclick="saveNb()">💾 Save</button>
+              <button class="btn btn-sm" id="nb-analyze" onclick="analyzeNb()">🤖 Analyze</button>
+              <span style="font-size:11px;color:var(--i3)" id="nb-saved"></span>
+            </div>
+            <div id="nb-sum" style="display:none">
+              <div class="slbl">AI Summary</div>
+              <div class="ai-card"><div class="ai-t">Key Themes</div><div id="nb-sum-txt"></div></div>
+            </div>
+            <div id="nb-pts" style="display:none">
+              <div class="slbl">Points for Dissertation</div>
+              <div id="nb-pts-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DOCUMENTS -->
+        <div id="ct-docs" style="display:none;flex:1;overflow:hidden;flex-direction:column;min-height:0">
+          <div class="cpanel">
+            <div class="slbl">Voice Profile</div>
+            <div class="voice-ok" id="voice-ok">✅ Voice profile active — AI will match this writer's style</div>
+            <div style="font-size:12px;color:var(--i2);line-height:1.65;margin-bottom:8px">Upload past essays so the AI writes in their voice, not generic AI.</div>
+            <div class="dup-row">
+              <select class="dt-sel" id="dt-sel">
+                <option value="writing_sample">Past Essay</option>
+                <option value="professor_feedback">Prof Feedback</option>
+                <option value="research_notes">Research Notes</option>
+                <option value="syllabus">Syllabus / Rubric</option>
               </select>
+              <label class="up-lbl">
+                <input type="file" id="doc-file" style="display:none" accept=".txt,.md,.pdf,.docx" onchange="uploadDoc(event)">
+                ↑ Upload
+              </label>
+              <span style="font-size:10px;color:var(--i3)">max 10MB</span>
             </div>
-            <div class="sf">
-              <label>Page / Word Count</label>
-              <input id="su-pages" placeholder="e.g. 80-100 pages or 20,000 words">
-            </div>
-            <div class="sf full">
-              <label>Rubric / Professor Instructions</label>
-              <textarea id="su-rubric" placeholder="Paste the rubric or professor's exact requirements here. Include grading criteria, required sections, formatting specs, etc.&#10;&#10;The more detail, the better the output matches what they want."></textarea>
-            </div>
-            <div class="sf full">
-              <label>What does the client already have? <span style="font-weight:400;color:var(--i3)">(optional)</span></label>
-              <textarea id="su-existing" placeholder="Paste any existing drafts, outlines, notes, or research the client already has. The AI will use this as a foundation."></textarea>
-            </div>
-          </div>
-          <div class="setup-footer">
-            <button class="btn btn-blue" style="height:40px;padding:0 24px;font-size:14px" onclick="startFromSetup()">✨ Write the Dissertation</button>
-            <button class="btn" style="height:40px" onclick="skipSetup()">Skip — I'll type in the chat</button>
+            <span style="font-size:11px;color:var(--green)" id="up-status"></span>
+            <div class="slbl" style="margin-top:4px">Uploaded Files</div>
+            <div id="docs-list" style="display:flex;flex-direction:column;gap:6px"><div style="font-size:12px;color:var(--i3)">No files yet.</div></div>
           </div>
         </div>
-      </div>
 
-      <!-- DOC EDITOR -->
-      <div class="doc-scroll" id="v-doc">
-        <div class="doc-page">
-          <div class="doc-header">
-            <div class="doc-client-h" id="doc-name"></div>
-            <div class="doc-topic-h" id="doc-topic"></div>
-            <div class="doc-degree-h" id="doc-degree"></div>
-          </div>
-          <textarea class="editor" id="editor"
-            placeholder="Dissertation will appear here…"
-            oninput="onType()" spellcheck="true"></textarea>
-          <div class="gen-ov" id="gen-ov">
-            <div class="gen-spinner"></div>
-            <div class="gen-lbl" id="gen-lbl">Writing…</div>
-            <div class="gen-sub" id="gen-sub">Gemini 2.5 Flash is working on it</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CHAT PANEL -->
-    <div class="chat-panel">
-      <div class="cp-head">
-        <div class="cp-title">AI Assistant</div>
-        <div class="cp-client" id="cp-client"></div>
-      </div>
-      <div class="cp-tabs">
-        <button class="cptab on" onclick="showCTab('chat',this)">Chat</button>
-        <button class="cptab" onclick="showCTab('notebook',this)">Notebook</button>
-        <button class="cptab" onclick="showCTab('docs',this)">Documents</button>
-      </div>
-
-      <!-- CHAT -->
-      <div id="ct-chat" style="flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0">
-        <div class="msgs" id="msgs"></div>
-        <div class="chips" id="chips">
-          <button class="chip" onclick="chip(this)">Make the intro stronger</button>
-          <button class="chip" onclick="chip(this)">Expand the literature review</button>
-          <button class="chip" onclick="chip(this)">Methodology needs more detail</button>
-          <button class="chip" onclick="chip(this)">Add more citations</button>
-          <button class="chip" onclick="chip(this)">Make it sound more human</button>
-          <button class="chip" onclick="chip(this)">Tighten the conclusion</button>
-          <button class="chip" onclick="chip(this)">Fix APA formatting</button>
-          <button class="chip" onclick="chip(this)">Write the full dissertation</button>
-        </div>
-        <div class="chat-input-wrap">
-          <div class="chat-row">
-            <textarea class="chat-in" id="chat-in" rows="2"
-              placeholder="Tell me what to fix or write…"
-              onkeydown="onKey(event)"></textarea>
-            <button class="send" id="send-btn" onclick="send()">
-              <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- NOTEBOOK -->
-      <div id="ct-notebook" style="display:none;flex:1;overflow:hidden;min-height:0">
-        <div class="cpanel">
-          <div class="sec-lbl">Research Notes</div>
-          <textarea class="scrta" id="scratch-ta" placeholder="Dump anything here:&#10;• Research ideas&#10;• Professor feedback or emails&#10;• Source notes&#10;• Arguments to make&#10;&#10;AI reads this before every edit."></textarea>
-          <div style="display:flex;gap:7px;align-items:center">
-            <button class="btn btn-blue btn-sm" onclick="saveScratch()">💾 Save</button>
-            <button class="btn btn-sm" id="analyze-btn" onclick="analyzeScratch()">🤖 Analyze</button>
-            <span style="font-size:11px;color:var(--i3)" id="scratch-saved"></span>
-          </div>
-          <div id="ai-sum" style="display:none">
-            <div class="sec-lbl">AI Summary</div>
-            <div class="ai-card"><div class="ai-card-t">Summary</div><div id="ai-sum-text"></div></div>
-          </div>
-          <div id="ai-pts" style="display:none">
-            <div class="sec-lbl">Key Themes</div>
-            <div id="ai-pts-list"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- DOCUMENTS -->
-      <div id="ct-docs" style="display:none;flex:1;overflow:hidden;min-height:0">
-        <div class="cpanel">
-          <div class="sec-lbl">Voice Profile</div>
-          <div class="voice-badge" id="voice-badge">✅ Voice profile active — AI will match this writer's style</div>
-          <div style="font-size:12px;color:var(--i2);line-height:1.6">Upload past essays so the AI writes in their voice.</div>
-          <div class="doc-up-row">
-            <select class="dt-sel" id="doc-type">
-              <option value="writing_sample">Past Essay</option>
-              <option value="professor_feedback">Prof Feedback</option>
-              <option value="research_notes">Research Notes</option>
-              <option value="syllabus">Syllabus</option>
-            </select>
-            <label class="up-lbl">
-              <input type="file" id="doc-file" style="display:none" accept=".txt,.md,.pdf,.docx" onchange="uploadDoc(event)">
-              ↑ Upload
-            </label>
-          </div>
-          <span style="font-size:11px;color:var(--green)" id="upload-status"></span>
-          <div class="sec-lbl">Files</div>
-          <div id="docs-list" style="display:flex;flex-direction:column;gap:6px"><div style="font-size:12px;color:var(--i3)">No files yet.</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+      </div><!-- /chat-panel -->
+    </div><!-- /ws -->
+  </div><!-- /body -->
+</div><!-- /main -->
 
 <script>
-// ─── STATE ───────────────────────────────────────────────────
-let clients=[], activeClient=null, templates={};
-let jobId=null, pollTimer=null, typingEl=null;
-const API=()=>window.location.origin;
+// ── STATE ────────────────────────────────────────────────────
+let clients=[], AC=null, templates={};
+let jid=null, ptimer=null;
+const API=()=>location.origin;
 const fmt=n=>(n||0).toLocaleString();
-const TS=()=>new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+const ts=()=>new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+const $=id=>document.getElementById(id);
 
-// ─── BOOT ────────────────────────────────────────────────────
+// ── BOOT ─────────────────────────────────────────────────────
 window.onload=async()=>{
-  await loadTemplates();
+  await loadTmpls();
   await loadClients();
   const m=clients.find(c=>c.id==='mitchell-dba-ulv-001');
-  if(m) selectClient(m.id);
-  addMsg('a','👋 Select a client from the sidebar. Their dissertation loads as one document here. Tell me what to fix or write — I handle everything in the chat.');
+  if(m) pick(m.id);
+  msg('a','👋 Select a client from the sidebar — their dissertation loads here as one document. Just tell me what to write or fix in the chat.');
 };
 
-// ─── TEMPLATES ───────────────────────────────────────────────
-async function loadTemplates(){
+// ── TEMPLATES ────────────────────────────────────────────────
+async function loadTmpls(){
   try{const d=await fetch(API()+'/clients/templates').then(r=>r.json());templates=d.templates||{};}catch{}
   prevTmpl();
 }
 function prevTmpl(){
-  const k=document.getElementById('a-deg')?.value||'dba';
+  const k=$('a-deg')?.value||'dba';
   const t=templates[k];
-  const el=document.getElementById('a-tmpl-prev');
-  if(el&&t) el.innerHTML=t.chapters.map((c,i)=>`${i+1}. ${c}`).join('<br>');
+  const el=$('a-tmpl');
+  if(el&&t) el.innerHTML=t.chapters.join('<br>');
 }
 
-// ─── CLIENTS ─────────────────────────────────────────────────
+// ── CLIENTS ──────────────────────────────────────────────────
 async function loadClients(){
   try{const d=await fetch(API()+'/clients/').then(r=>r.json());clients=d.clients||[];}catch{}
   renderSB();
 }
-
 function renderSB(){
-  const el=document.getElementById('client-list');
+  const el=$('cl-list');
   if(!clients.length){el.innerHTML='<div style="padding:6px 10px;font-size:12px;color:var(--i3)">No clients yet.</div>';return;}
   el.innerHTML=clients.map(c=>{
-    const chs=parseJ(c.chapter_structure);
+    const chs=pj(c.chapter_structure);
     const dots=chs.map(ch=>`<div class="dot ${ch.status==='complete'?'dot-c':ch.status==='pending_irb'?'dot-p':'dot-n'}"></div>`).join('');
     const isM=c.id==='mitchell-dba-ulv-001';
-    return `<div class="ci ${c.id===activeClient?'on':''}">
-      <div class="ci-main" onclick="selectClient('${c.id}')">
-        <div class="ci-name">${c.name}</div>
-        <div class="ci-sub">${c.degree||''} · ${c.institution||''}</div>
-        <div class="ci-dots">${dots}</div>
+    return `<div class="cl ${c.id===AC?'on':''}">
+      <div class="cl-body" onclick="pick('${c.id}')">
+        <div class="cl-name">${c.name}</div>
+        <div class="cl-meta">${c.degree||''} · ${c.institution||''}</div>
+        <div class="cl-dots">${dots}</div>
       </div>
-      <div class="ci-acts">
-        <button class="cia" onclick="event.stopPropagation();selectClient('${c.id}');openEditClient()" title="Edit">✏️</button>
-        ${!isM?`<button class="cia d" onclick="event.stopPropagation();confirmDel('${c.id}','${c.name}')" title="Delete">✕</button>`:''}
+      <div class="cl-side">
+        <button class="cl-btn" onclick="event.stopPropagation();pick('${c.id}');openEditClient()">✏️</button>
+        ${!isM?`<button class="cl-btn del" onclick="event.stopPropagation();confirmDel('${c.id}','${c.name}')">✕</button>`:''}
       </div>
     </div>`;
   }).join('');
 }
+function pj(r){if(!r)return[];try{return typeof r==='string'?JSON.parse(r):r;}catch{return[];}}
 
-function parseJ(raw){if(!raw)return[];try{return typeof raw==='string'?JSON.parse(raw):raw;}catch{return[];}}
-
-async function selectClient(id){
-  activeClient=id;
-  renderSB();
-  const c=clients.find(x=>x.id===id);
-  if(!c)return;
-
+async function pick(id){
+  AC=id;renderSB();
+  const c=clients.find(x=>x.id===id);if(!c)return;
   // topbar
-  document.getElementById('tb-name').textContent=c.name;
-  document.getElementById('tb-sep').style.display='';
-  document.getElementById('tb-meta').textContent=`${c.degree||''} · ${c.field||''} · ${c.institution||''}`;
-  document.getElementById('cp-client').textContent=c.name;
-  ['btn-save','btn-export','btn-edit','tb-words'].forEach(id=>document.getElementById(id).style.display='');
-  const delBtn=document.getElementById('btn-del');
-  delBtn.style.display=id==='mitchell-dba-ulv-001'?'none':'';
-
+  $('tb-name').textContent=c.name;
+  $('tb-dot').style.display='';
+  $('tb-meta').textContent=`${c.degree||''} · ${c.field||''} · ${c.institution||''}`;
+  $('cp-who').textContent=c.name;
+  ['tb-words','btn-save','btn-docx','btn-edit'].forEach(i=>$(i).style.display='');
+  $('btn-del').style.display=id==='mitchell-dba-ulv-001'?'none':'';
   // doc header
-  document.getElementById('doc-name').textContent=c.name;
-  document.getElementById('doc-topic').textContent=c.topic||'';
-  document.getElementById('doc-degree').textContent=`${c.degree||''} · ${c.institution||''} · ${c.citation_style||'APA 7th'}`;
-  document.getElementById('setup-h').textContent=`Ready to start ${c.name}'s dissertation`;
-  document.getElementById('setup-sub').textContent=`Topic: ${c.topic||'—'}. Give me the assignment details below and I'll write the full thing.`;
-
-  // load doc
+  $('doc-name').textContent=c.name;
+  $('doc-topic').textContent=c.topic||'';
+  $('doc-deg').textContent=`${c.degree||''} · ${c.institution||''} · ${c.citation_style||'APA 7th'}`;
+  $('ob-h').textContent=`Start ${c.name}'s Dissertation`;
+  $('ob-s').textContent=`Topic: ${c.topic||'—'}. Fill in the details below and I'll write the complete dissertation, or click "Skip" and tell me in the chat.`;
+  showMain('loading');
   await loadDoc(id);
-  await loadScratch(id);
+  await loadNb(id);
 }
 
-// ─── DOC ─────────────────────────────────────────────────────
-async function loadDoc(clientId){
-  showView('loading');
+// ── DOC ──────────────────────────────────────────────────────
+async function loadDoc(id){
   try{
-    const d=await fetch(API()+`/doc/load/${clientId}`).then(r=>r.json());
-    if(d.content && d.content.trim().length > 100){
-      document.getElementById('editor').value=d.content;
-      updateWC();
-      showView('doc');
-      if(d.source==='stitched') addMsg('a',`Loaded ${fmt(d.word_count)} words from existing chapters. Tell me what to fix.`);
-      else addMsg('a',`Loaded ${fmt(d.word_count)} words. What needs work?`);
+    const d=await fetch(API()+`/doc/load/${id}`).then(r=>r.json());
+    if(d.content&&d.content.trim().length>80){
+      $('doc-ed').value=d.content;updateWC();
+      showMain('doc');
+      msg('a',`Loaded ${fmt(d.word_count)} words. What needs work?`);
     } else {
-      showView('setup');
-      addMsg('a',`No dissertation yet for this client. Fill in the setup card on the left — I'll write the whole thing once you hit the button.`);
+      showMain('onboard');
+      msg('a',`No document yet. Fill in the setup card, or just click "Skip" and tell me in the chat what to write.`);
     }
-  }catch(e){showView('setup');}
+  }catch{showMain('onboard');}
 }
 
-function showView(name){
-  document.getElementById('v-empty').style.display='none';
-  document.getElementById('v-setup').style.display='none';
-  document.getElementById('v-doc').style.display='none';
-  if(name==='empty') document.getElementById('v-empty').style.display='flex';
-  else if(name==='setup') document.getElementById('v-setup').style.display='block';
-  else if(name==='doc') document.getElementById('v-doc').style.display='';
-  else if(name==='loading'){
-    // briefly show doc area empty while loading
-    document.getElementById('v-doc').style.display='';
-    document.getElementById('editor').value='';
-    updateWC();
+function showMain(name){
+  $('v-empty').style.display='none';
+  $('v-ws').style.display='none';
+  $('v-onboard').style.display='none';
+  $('v-doc').style.display='none';
+  if(name==='empty'){$('v-empty').style.display='flex';}
+  else{
+    $('v-ws').style.display='flex';
+    if(name==='onboard') $('v-onboard').style.display='block';
+    else if(name==='doc'||name==='loading') $('v-doc').style.display='';
   }
 }
 
-function onType(){updateWC();}
+function onDocType(){updateWC();}
 function updateWC(){
-  const t=document.getElementById('editor').value||'';
+  const t=$('doc-ed').value||'';
   const w=t.trim()?t.trim().split(/\s+/).length:0;
-  document.getElementById('tb-words').textContent=fmt(w)+' words';
+  $('tb-words').textContent=fmt(w)+' words';
 }
 
 async function saveDoc(){
-  if(!activeClient){toast('Select a client first');return;}
-  const content=document.getElementById('editor').value;
+  if(!AC){toast('Select a client first');return;}
   try{
     await fetch(API()+'/doc/save',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({client_id:activeClient,content})});
+      body:JSON.stringify({client_id:AC,content:$('doc-ed').value})});
     toast('✓ Saved');
   }catch(e){toast('Error: '+e.message);}
 }
 
 function exportDoc(){
-  if(!activeClient)return;
-  saveDoc().then(()=>window.open(API()+`/chapters/${activeClient}/export/full`,'_blank'));
+  if(!AC)return;
+  saveDoc().then(()=>window.open(API()+`/chapters/${AC}/export/full`,'_blank'));
 }
 
-// ─── SETUP / ONBOARDING ──────────────────────────────────────
-async function startFromSetup(){
-  const type=document.getElementById('su-type').value;
-  const pages=document.getElementById('su-pages').value.trim();
-  const rubric=document.getElementById('su-rubric').value.trim();
-  const existing=document.getElementById('su-existing').value.trim();
+// ── ONBOARDING ───────────────────────────────────────────────
+async function startOnboard(){
+  const type=$('ob-type').value;
+  const pages=$('ob-pages').value.trim();
+  const rubric=$('ob-rubric').value.trim();
+  const existing=$('ob-existing').value.trim();
+  const c=clients.find(x=>x.id===AC);
 
-  const c=clients.find(x=>x.id===activeClient);
-  let instruction=`Write the complete dissertation for ${c?.name||'this client'}.`;
-  if(type) instruction+=` Assignment type: ${type}.`;
-  if(pages) instruction+=` Length: ${pages}.`;
-  if(rubric) instruction+=`\n\nPROFESSOR RUBRIC / REQUIREMENTS:\n${rubric}`;
-  if(existing) instruction+=`\n\nEXISTING WORK TO BUILD ON:\n${existing}`;
-
-  // Save rubric to client profile
+  // Save rubric to profile
   if(rubric||pages||type){
-    const intakeNote=`${type?'Type: '+type+'\n':''}${pages?'Length: '+pages+'\n':''}${rubric?'Rubric:\n'+rubric:''}`;
-    try{
-      await fetch(API()+'/doc/intake',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({client_id:activeClient,intake_context:intakeNote})});
-    }catch{}
+    const note=[type&&`Type: ${type}`,pages&&`Length: ${pages}`,rubric&&`Rubric:\n${rubric}`].filter(Boolean).join('\n');
+    try{await fetch(API()+'/doc/intake',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({client_id:AC,intake_context:note})});}catch{}
   }
 
-  // Switch to doc view and start generating
-  document.getElementById('editor').value='';
-  showView('doc');
-  addMsg('u',`Write the full dissertation${type?' ('+type+')':''}`);
-  runEdit(instruction,'');
+  let instr=`Write the complete dissertation for ${c?.name||'this client'}`;
+  if(type) instr+=`. Assignment type: ${type}`;
+  if(pages) instr+=`. Length: ${pages}`;
+  if(rubric) instr+=`.\n\nPROFESSOR RUBRIC:\n${rubric}`;
+  if(existing) instr+=`\n\nEXISTING WORK TO BUILD ON:\n${existing}`;
+
+  showMain('doc');
+  $('doc-ed').value='';
+  updateWC();
+  runEdit(instr,'');
+  msg('u',`Write ${type||'full dissertation'}${pages?' ('+pages+')':''}`);
 }
 
-function skipSetup(){
-  showView('doc');
-  addMsg('a',"OK — just tell me what to write in the chat. What do you want to start with?");
+function skipOnboard(){
+  showMain('doc');
+  msg('a',"Got it — tell me what to write in the chat below. I'll start writing as soon as you send.");
 }
 
-// ─── CHAT ────────────────────────────────────────────────────
-function addMsg(role, text){
-  const el=document.getElementById('msgs');
-  const wrap=document.createElement('div');
-  wrap.className=role==='u'?'msg-u':'msg-a';
-  wrap.innerHTML=`<div class="bubble">${text}</div><div class="msg-ts">${TS()}</div>`;
-  el.appendChild(wrap);
-  el.scrollTop=el.scrollHeight;
-  return wrap;
+// ── CHAT ─────────────────────────────────────────────────────
+function msg(role,text,isTyping=false){
+  const el=$('msgs');
+  const d=document.createElement('div');
+  d.className=role==='u'?'mu':'ma';
+  if(isTyping) d.id='typing-el';
+  d.innerHTML=`<div class="bbl${isTyping?' dim typing':''}">${isTyping?'<span></span><span></span><span></span>':text}</div><div class="mts">${ts()}</div>`;
+  el.appendChild(d);el.scrollTop=el.scrollHeight;
+  return d;
+}
+function rmTyping(){$('typing-el')?.remove();}
+
+function useChip(btn){$('chat-ta').value=btn.textContent.trim();sendMsg();}
+function onKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg();}}
+
+async function sendMsg(){
+  const ta=$('chat-ta');
+  const text=ta.value.trim();if(!text)return;
+  if(!AC){toast('Select a client first');return;}
+  ta.value='';
+  msg('u',text);
+  const cur=$('doc-ed').value||'';
+  runEdit(text,cur);
 }
 
-function addTyping(){
-  const el=document.getElementById('msgs');
-  const wrap=document.createElement('div');
-  wrap.className='msg-a';
-  wrap.id='typing-el';
-  wrap.innerHTML=`<div class="bubble dim typing"><span></span><span></span><span></span></div>`;
-  el.appendChild(wrap);
-  el.scrollTop=el.scrollHeight;
-  return wrap;
-}
-
-function removeTyping(){document.getElementById('typing-el')?.remove();}
-
-function chip(btn){
-  document.getElementById('chat-in').value=btn.textContent.trim();
-  send();
-}
-
-function onKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}}
-
-async function send(){
-  const input=document.getElementById('chat-in');
-  const msg=input.value.trim();
-  if(!msg)return;
-  if(!activeClient){toast('Select a client first');return;}
-  input.value='';
-  addMsg('u',msg);
-  const currentDoc=document.getElementById('editor').value||'';
-  runEdit(msg, currentDoc);
-}
-
-async function runEdit(instruction, currentDoc){
+async function runEdit(instr,cur){
   setSending(true);
-  typingEl=addTyping();
-  const isGen=!currentDoc.trim()||currentDoc.trim().length<100;
-
-  document.getElementById('gen-ov').classList.add('show');
-  document.getElementById('gen-lbl').textContent=isGen?'Writing dissertation…':'Applying edit…';
-  document.getElementById('gen-sub').textContent=`"${instruction.substring(0,60)}${instruction.length>60?'…':''}"`;
-
-  if(isGen) showView('doc');
-
+  msg('a','',true);
+  const isEmpty=!cur.trim()||cur.trim().length<80;
+  $('spin-ov').classList.add('on');
+  $('spin-lbl').textContent=isEmpty?'Writing dissertation…':'Applying edit…';
+  $('spin-sub').textContent=`"${instr.substring(0,55)}${instr.length>55?'…':''}"`;
+  if(isEmpty) showMain('doc');
   try{
-    const d=await fetch(API()+'/doc/edit',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({client_id:activeClient,instruction,current_doc:currentDoc,mode:'auto'})
+    const d=await fetch(API()+'/doc/edit',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({client_id:AC,instruction:instr,current_doc:cur,mode:'auto'})
     }).then(r=>r.json());
-    if(!d.job_id){done(null,'Error starting — try again.');return;}
-    jobId=d.job_id;
-    if(pollTimer)clearInterval(pollTimer);
-    pollTimer=setInterval(poll,2500);
-  }catch(e){done(null,'Error: '+e.message);}
+    if(!d.job_id){finish(null,'Error starting. Try again.');return;}
+    jid=d.job_id;
+    if(ptimer)clearInterval(ptimer);
+    ptimer=setInterval(pollJob,2500);
+  }catch(e){finish(null,'Error: '+e.message);}
 }
 
-async function poll(){
-  if(!jobId)return;
+async function pollJob(){
+  if(!jid)return;
   try{
-    const j=await fetch(API()+'/doc/job/'+jobId).then(r=>r.json());
+    const j=await fetch(API()+'/doc/job/'+jid).then(r=>r.json());
     if(j.status==='complete'){
-      clearInterval(pollTimer);
-      document.getElementById('editor').value=j.content||'';
-      updateWC();
-      document.getElementById('gen-ov').classList.remove('show');
-      done(j,`✓ Done — ${fmt(j.word_count)} words. What else needs work?`);
+      clearInterval(ptimer);
+      $('doc-ed').value=j.content||'';updateWC();
+      $('spin-ov').classList.remove('on');
+      finish(j,`✓ Done — ${fmt(j.word_count)} words. What else?`);
     }else if(j.status==='failed'){
-      clearInterval(pollTimer);
-      document.getElementById('gen-ov').classList.remove('show');
-      done(null,'Something went wrong: '+(j.error||'unknown'));
+      clearInterval(ptimer);
+      $('spin-ov').classList.remove('on');
+      finish(null,'Something went wrong: '+(j.error||'unknown'));
     }
   }catch(e){console.error(e);}
 }
 
-function done(job, text){
-  removeTyping();
-  addMsg('a',text);
-  setSending(false);
-  if(job) toast('✓ Saved');
-}
+function finish(job,text){rmTyping();msg('a',text);setSending(false);if(job)toast('✓ Auto-saved');}
+function setSending(on){$('send-btn').disabled=on;$('chat-ta').disabled=on;}
 
-function setSending(on){
-  document.getElementById('send-btn').disabled=on;
-  document.getElementById('chat-in').disabled=on;
-}
-
-// ─── CHAT TABS ───────────────────────────────────────────────
+// ── CHAT TABS ────────────────────────────────────────────────
 function showCTab(name,btn){
   ['chat','notebook','docs'].forEach(n=>{
-    const el=document.getElementById('ct-'+n);
+    const el=$('ct-'+n);
     el.style.display=n===name?'flex':'none';
   });
   document.querySelectorAll('.cptab').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
-  if(name==='docs'&&activeClient)loadDocs();
+  if(name==='docs'&&AC) loadDocs();
 }
 
-// ─── SCRATCHPAD ──────────────────────────────────────────────
-async function loadScratch(id){
+// ── NOTEBOOK ─────────────────────────────────────────────────
+async function loadNb(id){
   try{
     const d=await fetch(API()+`/scratchpad/${id}`).then(r=>r.json());
-    document.getElementById('scratch-ta').value=d.content||'';
-    if(d.ai_summary){document.getElementById('ai-sum-text').textContent=d.ai_summary;document.getElementById('ai-sum').style.display='';}
+    $('nb-ta').value=d.content||'';
+    if(d.ai_summary){$('nb-sum-txt').textContent=d.ai_summary;$('nb-sum').style.display='';}
   }catch{}
 }
-async function saveScratch(){
+async function saveNb(){
   try{
     await fetch(API()+'/scratchpad/save',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({client_id:activeClient,content:document.getElementById('scratch-ta').value})});
-    const m=document.getElementById('scratch-saved');m.textContent='✓ Saved';setTimeout(()=>m.textContent='',2000);
+      body:JSON.stringify({client_id:AC,content:$('nb-ta').value})});
+    const m=$('nb-saved');m.textContent='✓ Saved';setTimeout(()=>m.textContent='',2000);
   }catch(e){toast('Error: '+e.message);}
 }
-async function analyzeScratch(){
-  if(!document.getElementById('scratch-ta').value.trim()){toast('Add notes first');return;}
-  await saveScratch();
-  const btn=document.getElementById('analyze-btn');btn.disabled=true;btn.textContent='Analyzing…';
+async function analyzeNb(){
+  if(!$('nb-ta').value.trim()){toast('Add notes first');return;}
+  await saveNb();
+  const btn=$('nb-analyze');btn.disabled=true;btn.textContent='Analyzing…';
   try{
     const d=await fetch(API()+'/scratchpad/summarize',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({client_id:activeClient})}).then(r=>r.json());
-    if(d.summary){document.getElementById('ai-sum-text').textContent=d.summary;document.getElementById('ai-sum').style.display='';}
+      body:JSON.stringify({client_id:AC})}).then(r=>r.json());
+    if(d.summary){$('nb-sum-txt').textContent=d.summary;$('nb-sum').style.display='';}
     if(d.key_points?.length){
-      document.getElementById('ai-pts-list').innerHTML=d.key_points.map(p=>`<div class="kp">${p}</div>`).join('');
-      document.getElementById('ai-pts').style.display='';
+      $('nb-pts-list').innerHTML=d.key_points.map(p=>`<div class="kp">${p}</div>`).join('');
+      $('nb-pts').style.display='';
     }
-    toast('✓ Analysis complete');
+    toast('✓ Analysis done');
   }catch(e){toast('Error: '+e.message);}
   finally{btn.disabled=false;btn.textContent='🤖 Analyze';}
 }
 
-// ─── DOCUMENTS ───────────────────────────────────────────────
+// ── DOCUMENTS ────────────────────────────────────────────────
 async function loadDocs(){
-  if(!activeClient)return;
-  const el=document.getElementById('docs-list');
+  if(!AC)return;
+  const el=$('docs-list');
   try{
-    const d=await fetch(API()+'/documents/'+activeClient).then(r=>r.json());
+    const d=await fetch(API()+'/documents/'+AC).then(r=>r.json());
     const docs=d.documents||[];
-    document.getElementById('voice-badge').style.display=docs.length?'':'none';
+    $('voice-ok').style.display=docs.length?'':'none';
     if(!docs.length){el.innerHTML='<div style="font-size:12px;color:var(--i3)">No files yet.</div>';return;}
     const tlbl={writing_sample:'Essay',professor_feedback:'Prof Feedback',research_notes:'Notes',syllabus:'Syllabus'};
     el.innerHTML=docs.map(doc=>{
       let ss='';try{const s=JSON.parse(doc.extracted_style||'{}');ss=s.style_summary||'';}catch{}
-      return `<div class="doc-item">
+      return `<div class="di">
         <div style="display:flex;align-items:center;gap:6px">
           <div style="flex:1;min-width:0">
-            <div class="doc-name">📄 ${doc.filename}</div>
-            <div class="doc-meta">${tlbl[doc.doc_type]||doc.doc_type} · ${fmt(doc.word_count)} words</div>
-            ${ss?`<div class="doc-style">${ss.substring(0,110)}…</div>`:''}
+            <div class="di-name">📄 ${doc.filename}</div>
+            <div class="di-meta">${tlbl[doc.doc_type]||doc.doc_type} · ${fmt(doc.word_count)} words</div>
+            ${ss?`<div class="di-style">${ss.substring(0,120)}…</div>`:''}
           </div>
-          <button onclick="deleteDoc('${doc.id}')" class="btn btn-sm" style="color:var(--red);flex-shrink:0">✕</button>
+          <button onclick="delDoc('${doc.id}')" class="btn btn-sm btn-r">✕</button>
         </div>
       </div>`;
     }).join('');
-  }catch{el.innerHTML='<div style="font-size:12px;color:var(--red)">Error</div>';}
+  }catch{el.innerHTML='<div style="font-size:12px;color:var(--red)">Error loading.</div>';}
 }
 
 async function uploadDoc(evt){
   const file=evt.target.files[0];
-  if(!file||!activeClient)return;
+  if(!file||!AC)return;
   if(file.size>10*1024*1024){toast('Max 10MB');return;}
-  const st=document.getElementById('upload-status');st.textContent='Uploading…';
+  const st=$('up-status');st.textContent='Uploading & analyzing…';
   const form=new FormData();
-  form.append('client_id',activeClient);
-  form.append('doc_type',document.getElementById('doc-type').value);
-  form.append('file',file);
+  form.append('client_id',AC);form.append('doc_type',$('dt-sel').value);form.append('file',file);
   try{
     const resp=await fetch(API()+'/documents/upload',{method:'POST',body:form});
     const text=await resp.text();
     let d;try{d=JSON.parse(text);}catch{st.textContent='Upload failed';return;}
     if(d.status==='error'){st.textContent='Error: '+(d.detail||'');return;}
-    st.textContent='✓ Uploaded';setTimeout(()=>st.textContent='',3000);
+    st.textContent='✓ Uploaded — voice profile updated';setTimeout(()=>st.textContent='',3000);
     evt.target.value='';await loadDocs();
   }catch(e){st.textContent='Error: '+e.message;}
 }
 
-async function deleteDoc(id){
+async function delDoc(id){
   if(!confirm('Remove this document?'))return;
   try{await fetch(API()+'/documents/'+id,{method:'DELETE'});await loadDocs();}
   catch(e){toast('Error: '+e.message);}
 }
 
-// ─── CLIENT EDIT ─────────────────────────────────────────────
+// ── CLIENT CRUD ──────────────────────────────────────────────
 function openEditClient(){
-  const c=clients.find(x=>x.id===activeClient);if(!c)return;
-  document.getElementById('e-name').value=c.name||'';
-  document.getElementById('e-deg').value=c.degree||'DBA';
-  document.getElementById('e-field').value=c.field||'';
-  document.getElementById('e-inst').value=c.institution||'';
-  document.getElementById('e-topic').value=c.topic||'';
-  document.getElementById('e-adv').value=c.advisor||'';
-  document.getElementById('e-fmt').value=c.formatting_notes||'';
-  const cs=document.getElementById('e-cite');
-  for(let o of cs.options) if(o.value===c.citation_style){cs.value=c.citation_style;break;}
+  const c=clients.find(x=>x.id===AC);if(!c)return;
+  $('e-name').value=c.name||'';$('e-deg').value=c.degree||'DBA';
+  $('e-field').value=c.field||'';$('e-inst').value=c.institution||'';
+  $('e-topic').value=c.topic||'';$('e-adv').value=c.advisor||'';
+  $('e-fmt').value=c.formatting_notes||'';
+  const cs=$('e-cite');for(let o of cs.options)if(o.value===c.citation_style){cs.value=c.citation_style;break;}
   openM('m-edit');
 }
+
 async function saveEdit(){
-  if(!activeClient)return;
-  const updates={name:document.getElementById('e-name').value.trim(),degree:document.getElementById('e-deg').value,
-    field:document.getElementById('e-field').value.trim(),institution:document.getElementById('e-inst').value.trim(),
-    topic:document.getElementById('e-topic').value.trim(),advisor:document.getElementById('e-adv').value.trim()||null,
-    citation_style:document.getElementById('e-cite').value,formatting_notes:document.getElementById('e-fmt').value.trim()||null};
+  if(!AC)return;
+  const u={name:$('e-name').value.trim(),degree:$('e-deg').value,field:$('e-field').value.trim(),
+    institution:$('e-inst').value.trim(),topic:$('e-topic').value.trim(),
+    advisor:$('e-adv').value.trim()||null,citation_style:$('e-cite').value,
+    formatting_notes:$('e-fmt').value.trim()||null};
   try{
-    await fetch(API()+`/clients/${activeClient}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(updates)});
-    const idx=clients.findIndex(x=>x.id===activeClient);if(idx>=0)clients[idx]={...clients[idx],...updates};
-    closeM('m-edit');toast('✓ Profile saved');
-    document.getElementById('tb-name').textContent=updates.name;
-    document.getElementById('tb-meta').textContent=`${updates.degree}·${updates.field}·${updates.institution}`;
-    document.getElementById('doc-name').textContent=updates.name;
-    document.getElementById('doc-topic').textContent=updates.topic;
+    await fetch(API()+`/clients/${AC}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(u)});
+    const i=clients.findIndex(x=>x.id===AC);if(i>=0)clients[i]={...clients[i],...u};
+    closeM('m-edit');toast('✓ Saved');
+    $('tb-name').textContent=u.name;
+    $('tb-meta').textContent=`${u.degree}·${u.field}·${u.institution}`;
+    $('doc-name').textContent=u.name;$('doc-topic').textContent=u.topic;
     renderSB();
   }catch(e){toast('Error: '+e.message);}
 }
 
 async function addClient(){
-  const name=document.getElementById('a-name').value.trim();
-  const inst=document.getElementById('a-inst').value.trim();
-  const topic=document.getElementById('a-topic').value.trim();
+  const name=$('a-name').value.trim(),inst=$('a-inst').value.trim(),topic=$('a-topic').value.trim();
   if(!name||!inst||!topic){toast('Name, institution and topic required');return;}
   try{
-    const degEl=document.getElementById('a-deg');
+    const dEl=$('a-deg');
     const d=await fetch(API()+'/clients/',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({name,institution:inst,topic,degree:degEl.selectedOptions[0].text,
-        field:document.getElementById('a-field').value.trim(),
-        citation_style:document.getElementById('a-cite').value,
-        advisor:document.getElementById('a-adv').value.trim()||null,
-        chapter_template:degEl.value,quality_target:75})
+      body:JSON.stringify({name,institution:inst,topic,degree:dEl.selectedOptions[0].text,
+        field:$('a-field').value.trim(),citation_style:$('a-cite').value,
+        advisor:$('a-adv').value.trim()||null,chapter_template:dEl.value,quality_target:75})
     }).then(r=>r.json());
     closeM('m-add');
-    ['a-name','a-field','a-inst','a-topic','a-adv'].forEach(id=>document.getElementById(id).value='');
+    ['a-name','a-field','a-inst','a-topic','a-adv'].forEach(id=>$(id).value='');
     toast(`✓ ${name} added`);
     await loadClients();
-    selectClient(d.client_id);
+    pick(d.client_id);
   }catch(e){toast('Error: '+e.message);}
 }
 
-function confirmDel(id,name){if(confirm(`Delete "${name}" and all their data?`))deleteCl(id,name);}
-async function deleteCl(id,name){
+function confirmDel(id,name){if(confirm(`Delete "${name}" and all their data?`))doDelClient(id,name);}
+async function doDelClient(id,name){
   try{
     await fetch(API()+`/clients/${id}`,{method:'DELETE'});
     toast(`Deleted ${name}`);
-    if(activeClient===id){
-      activeClient=null;showView('empty');
-      document.getElementById('tb-name').textContent='Select a client';
-      document.getElementById('tb-sep').style.display='none';
-      document.getElementById('tb-meta').textContent='';
-      ['btn-save','btn-export','btn-edit','btn-del','tb-words'].forEach(id=>document.getElementById(id).style.display='none');
+    if(AC===id){
+      AC=null;showMain('empty');
+      $('tb-name').textContent='Dissertation Platform';
+      $('tb-dot').style.display='none';$('tb-meta').textContent='';
+      ['tb-words','btn-save','btn-docx','btn-edit','btn-del'].forEach(i=>$(i).style.display='none');
     }
     await loadClients();
   }catch(e){toast('Error: '+e.message);}
 }
-function deleteCurrentClient(){const c=clients.find(x=>x.id===activeClient);if(c)confirmDel(c.id,c.name);}
+function delCurrentClient(){const c=clients.find(x=>x.id===AC);if(c)confirmDel(c.id,c.name);}
 
-// ─── MODALS & UTILS ──────────────────────────────────────────
-function openM(id){document.getElementById(id).classList.add('on');}
-function closeM(id){document.getElementById(id).classList.remove('on');}
-function toast(msg,dur=2800){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('on');setTimeout(()=>el.classList.remove('on'),dur);}
+// ── MODALS & UTILS ────────────────────────────────────────────
+function openM(id){$(id).classList.add('on');}
+function closeM(id){$(id).classList.remove('on');}
+function toast(m,dur=2800){const el=$('toast');el.textContent=m;el.classList.add('on');setTimeout(()=>el.classList.remove('on'),dur);}
 </script>
 </body>
 </html>
