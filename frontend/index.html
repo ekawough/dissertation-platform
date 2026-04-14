@@ -1,141 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Dissertation Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#faf9f6;--surface:#fff;--s2:#f3f2ee;--s3:#eae9e3;
+  --bg:#f5f4f0;--surface:#fff;--s2:#f0efe9;--s3:#e6e5dd;
   --border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.13);
   --ink:#1c1b18;--ink2:#6b6960;--ink3:#9e9d94;
-  --blue:#2563eb;--blue-bg:rgba(37,99,235,0.07);--blue-text:#1d4ed8;
-  --green:#15803d;--green-bg:rgba(21,128,61,0.07);
-  --amber:#b45309;--amber-bg:rgba(180,83,9,0.08);
-  --red:#dc2626;--red-bg:rgba(220,38,38,0.07);
-  --purple:#7c3aed;--purple-bg:rgba(124,58,237,0.07);
-  --sidebar:248px;--panel:288px;
+  --blue:#2563eb;--blue-dim:rgba(37,99,235,0.08);--blue-t:#1d4ed8;
+  --green:#15803d;--green-dim:rgba(21,128,61,0.08);
+  --amber:#b45309;--amber-dim:rgba(180,83,9,0.08);
+  --red:#dc2626;--red-dim:rgba(220,38,38,0.08);
+  --purple:#7c3aed;--purple-dim:rgba(124,58,237,0.08);
+  --sidebar:252px;--panel:292px;--r:8px;
 }
 html,body{height:100%;overflow:hidden}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);display:flex;font-size:14px;line-height:1.5}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);display:flex;font-size:14px}
 
-/* ── SIDEBAR ─────────────────────────────────────── */
-.sidebar{width:var(--sidebar);height:100vh;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden}
-.brand{padding:18px 16px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.brand-icon{width:32px;height:32px;background:var(--ink);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--bg);font-size:16px;flex-shrink:0}
-.brand-name{font-size:14px;font-weight:700;letter-spacing:-.3px}
-.brand-sub{font-size:11px;color:var(--ink3)}
-.sb-nav{flex:1;overflow-y:auto;padding:10px 8px}
-.sb-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);padding:8px 8px 5px}
-.client-card{padding:9px 10px;border-radius:8px;cursor:pointer;border:1.5px solid transparent;margin-bottom:3px;transition:all .12s}
-.client-card:hover{background:var(--s2)}
-.client-card.on{background:var(--blue-bg);border-color:rgba(37,99,235,0.18)}
-.cc-name{font-size:13px;font-weight:600}
-.cc-meta{font-size:11px;color:var(--ink3);margin-top:1px}
-.cc-dots{display:flex;gap:3px;margin-top:5px}
+/* ── SIDEBAR ── */
+.sidebar{width:var(--sidebar);height:100vh;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
+.brand{padding:16px 14px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:9px}
+.brand-icon{width:30px;height:30px;background:var(--ink);border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--bg);font-size:15px;flex-shrink:0}
+.brand-name{font-size:13px;font-weight:700;letter-spacing:-.2px;line-height:1.2}
+.brand-sub{font-size:10px;color:var(--ink3)}
+.sb-clients{flex:1;overflow-y:auto;padding:8px}
+.sb-section-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);padding:6px 6px 4px}
+.client-row{display:flex;align-items:center;gap:0;border-radius:var(--r);margin-bottom:2px;transition:all .1s;cursor:pointer;border:1.5px solid transparent}
+.client-row:hover{background:var(--s2)}
+.client-row.on{background:var(--blue-dim);border-color:rgba(37,99,235,0.16)}
+.client-main{flex:1;padding:8px 10px;min-width:0}
+.client-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.client-meta{font-size:11px;color:var(--ink3);margin-top:1px}
+.client-dots{display:flex;gap:3px;margin-top:4px}
 .dot{width:7px;height:7px;border-radius:50%}
-.dot-c{background:var(--green)}
-.dot-p{background:var(--amber)}
-.dot-n{background:var(--s3);border:1px solid var(--border2)}
-.add-btn{width:100%;padding:8px 10px;border:1.5px dashed var(--border2);border-radius:8px;background:none;color:var(--ink3);font-size:12px;font-family:inherit;cursor:pointer;margin-top:4px;transition:all .12s;text-align:center}
-.add-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-bg)}
-.sb-footer{padding:10px 16px;font-size:10px;color:var(--ink3);border-top:1px solid var(--border);line-height:1.8;flex-shrink:0}
+.dot-c{background:var(--green)}.dot-p{background:var(--amber)}.dot-n{background:var(--s3);border:1px solid var(--border2)}
+.client-del{width:28px;height:100%;display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:14px;opacity:0;transition:opacity .1s;border-radius:0 6px 6px 0;flex-shrink:0;border:none;background:none;cursor:pointer}
+.client-row:hover .client-del{opacity:1}
+.client-del:hover{color:var(--red);background:var(--red-dim)}
+.add-client-btn{width:100%;padding:8px 10px;border:1.5px dashed var(--border2);border-radius:var(--r);background:none;color:var(--ink3);font-size:12px;font-family:inherit;cursor:pointer;margin-top:4px;transition:all .12s}
+.add-client-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-dim)}
+.sb-footer{padding:10px 14px;font-size:10px;color:var(--ink3);border-top:1px solid var(--border);line-height:1.8;flex-shrink:0}
 
-/* ── MAIN ─────────────────────────────────────────── */
+/* ── MAIN ── */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 
-/* ── DASHBOARD ─────────────────────────────────────── */
-#pg-dash{display:flex;flex-direction:column;flex:1;overflow:hidden}
-.dash-hero{padding:24px 28px 18px;border-bottom:1px solid var(--border);background:var(--surface);flex-shrink:0}
-.dash-name{font-size:24px;font-weight:700;letter-spacing:-.5px}
-.dash-meta{font-size:13px;color:var(--ink2);margin-top:3px}
-.dash-topic{font-size:13px;color:var(--ink3);font-style:italic;margin-top:2px}
-.dash-actions{display:flex;gap:8px;margin-top:14px}
-.dash-body{flex:1;overflow-y:auto;padding:24px 28px}
-.section-head{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);margin-bottom:12px}
-.ch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
-.ch-tile{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;transition:all .15s;position:relative}
-.ch-tile:hover{border-color:var(--blue);box-shadow:0 2px 12px rgba(37,99,235,.1);transform:translateY(-1px)}
-.ch-tile-name{font-size:13px;font-weight:600;margin-bottom:7px;line-height:1.3}
-.ch-tile-notes{font-size:11px;color:var(--ink3);margin-top:6px;line-height:1.4}
-.ch-tile-words{font-size:11px;color:var(--ink3);margin-top:4px}
-.stat-row{display:flex;gap:10px}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 18px;flex:1;cursor:default}
-.stat.clickable{cursor:pointer;transition:all .12s}
-.stat.clickable:hover{border-color:var(--blue);background:var(--blue-bg)}
-.stat-n{font-size:20px;font-weight:700;line-height:1}
-.stat-l{font-size:11px;color:var(--ink3);margin-top:3px}
-.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:60px;text-align:center}
+/* ── EMPTY STATE ── */
+#view-empty{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:40px;background:var(--bg)}
 .empty-icon{font-size:48px;margin-bottom:16px}
-.empty-title{font-size:18px;font-weight:700;letter-spacing:-.3px;margin-bottom:6px}
+.empty-title{font-size:20px;font-weight:700;letter-spacing:-.4px;margin-bottom:6px}
 .empty-sub{font-size:13px;color:var(--ink3)}
 
-/* ── CHAPTER WORKSPACE ──────────────────────────────── */
-#pg-chapter{display:none;flex:1;overflow:hidden}
-.ws-layout{display:flex;height:100%;overflow:hidden}
+/* ── DASHBOARD ── */
+#view-dash{display:none;flex:1;flex-direction:column;overflow:hidden}
+.dash-header{padding:22px 28px 16px;border-bottom:1px solid var(--border);background:var(--surface);flex-shrink:0}
+.dash-name{font-size:22px;font-weight:700;letter-spacing:-.4px}
+.dash-degree{font-size:13px;color:var(--ink2);margin-top:2px}
+.dash-topic{font-size:13px;color:var(--ink3);font-style:italic;margin-top:2px;line-height:1.4}
+.dash-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.dash-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--surface);flex-shrink:0}
+.dtab{padding:10px 18px;border:none;background:none;font-size:13px;font-weight:500;color:var(--ink3);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .12s}
+.dtab.on{color:var(--blue-t);border-bottom-color:var(--blue)}
+.dash-body{flex:1;overflow-y:auto;padding:24px 28px}
 
-/* Chapter list column */
+/* Chapter grid */
+.ch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:24px}
+.ch-tile{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;transition:all .15s;position:relative}
+.ch-tile:hover{border-color:var(--blue);box-shadow:0 2px 10px rgba(37,99,235,.1);transform:translateY(-1px)}
+.ch-tile-name{font-size:13px;font-weight:600;margin-bottom:7px;line-height:1.35}
+.ch-tile-notes{font-size:11px;color:var(--ink3);margin-top:5px;line-height:1.4}
+.ch-tile-words{font-size:11px;color:var(--ink3);margin-top:3px}
+.ch-add{border-style:dashed;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:13px;gap:6px;min-height:70px}
+.ch-add:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-dim)}
+
+/* Stats */
+.stats-row{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.stat-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;flex:1;min-width:100px}
+.stat-box.click{cursor:pointer;transition:all .12s}
+.stat-box.click:hover{border-color:var(--blue);background:var(--blue-dim)}
+.stat-n{font-size:20px;font-weight:700;line-height:1}
+.stat-l{font-size:11px;color:var(--ink3);margin-top:3px}
+
+/* ── SCRATCHPAD ── */
+.scratchpad-area{display:flex;flex-direction:column;gap:16px}
+.scratch-top{display:flex;gap:12px;align-items:flex-start}
+.scratch-editor-wrap{flex:1;display:flex;flex-direction:column;gap:8px}
+.scratch-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--ink3)}
+.scratch-textarea{width:100%;min-height:280px;padding:14px 16px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;color:var(--ink);resize:vertical;outline:none;transition:border .15s}
+.scratch-textarea:focus{border-color:var(--blue)}
+.scratch-textarea::placeholder{color:var(--ink3)}
+.scratch-ai-panel{width:280px;flex-shrink:0}
+.ai-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.ai-card-title{font-size:12px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.ai-summary{font-size:13px;color:var(--ink2);line-height:1.65}
+.key-points{list-style:none;padding:0}
+.key-points li{font-size:12px;color:var(--ink2);padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:6px;align-items:flex-start;line-height:1.45}
+.key-points li:last-child{border:none}
+.key-points li::before{content:'→';color:var(--blue);flex-shrink:0;margin-top:1px}
+
+/* ── CHAPTER WORKSPACE ── */
+#view-chapter{display:none;flex:1;overflow:hidden}
+.ws{display:flex;height:100%;overflow:hidden}
+
+/* Left chapter nav */
 .ch-nav{width:196px;border-right:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
-.ch-nav-head{padding:12px 14px;border-bottom:1px solid var(--border);flex-shrink:0}
-.back-btn{background:none;border:none;color:var(--blue);font-size:12px;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:3px;margin-bottom:4px;padding:0}
-.back-btn:hover{opacity:.75}
-.ch-nav-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)}
-.ch-nav-list{flex:1;overflow-y:auto}
-.ch-nav-item{padding:10px 14px;cursor:pointer;border-left:3px solid transparent;transition:all .1s}
+.ch-nav-head{padding:10px 12px;border-bottom:1px solid var(--border);flex-shrink:0}
+.back-link{background:none;border:none;color:var(--blue);font-size:12px;font-family:inherit;cursor:pointer;padding:0;display:flex;align-items:center;gap:3px;margin-bottom:5px}
+.back-link:hover{opacity:.75}
+.ch-nav-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)}
+.ch-nav-scroll{flex:1;overflow-y:auto}
+.ch-nav-item{padding:9px 12px;cursor:pointer;border-left:3px solid transparent;transition:all .1s}
 .ch-nav-item:hover{background:var(--s2)}
-.ch-nav-item.on{background:var(--blue-bg);border-left-color:var(--blue)}
+.ch-nav-item.on{background:var(--blue-dim);border-left-color:var(--blue)}
 .ch-nav-name{font-size:12px;font-weight:500;line-height:1.35;color:var(--ink)}
-.ch-nav-status{margin-top:3px}
+.ch-nav-badge{margin-top:3px}
 
-/* Editor column */
-.ed-col{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
-.ed-topbar{height:46px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 18px;flex-shrink:0;background:var(--surface)}
-.ed-title{font-size:14px;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ed-scroll{flex:1;overflow-y:auto;padding:28px 32px;background:var(--bg)}
-.ed-inner{max-width:700px;margin:0 auto}
-.ed-doc-title{font-size:20px;font-weight:700;letter-spacing:-.4px;margin-bottom:16px;color:var(--ink)}
-.editor{width:100%;min-height:520px;border:none;outline:none;font-family:'Lora',Georgia,serif;font-size:16px;line-height:1.9;color:var(--ink);resize:none;background:transparent;padding:0}
-.editor::placeholder{color:var(--ink3);font-style:italic;font-size:15px}
-.ed-statusbar{height:26px;border-top:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:14px;font-size:11px;color:var(--ink3);flex-shrink:0;background:var(--surface)}
-.sb-live{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;margin-right:3px}
-.sb-live.busy{background:var(--amber)}
-
-/* Progress bar */
-.prog-strip{padding:9px 18px;background:var(--blue-bg);border-bottom:1px solid rgba(37,99,235,.12);display:none;flex-shrink:0}
+/* Editor pane */
+.ed-pane{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;background:var(--bg)}
+.ed-bar{height:46px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 16px;background:var(--surface);flex-shrink:0}
+.ed-chapter-name{font-size:14px;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog-strip{padding:8px 16px;background:var(--blue-dim);border-bottom:1px solid rgba(37,99,235,.12);display:none;flex-shrink:0}
 .prog-row{display:flex;align-items:center;gap:7px;margin-bottom:4px}
-.prog-bar{height:2px;background:rgba(37,99,235,.15);border-radius:1px;overflow:hidden}
-.prog-fill{height:100%;background:var(--blue);border-radius:1px;transition:width .5s}
-.prog-detail{font-size:11px;color:var(--ink3);margin-top:3px}
+.pbar{height:2px;background:rgba(37,99,235,.15);border-radius:1px;overflow:hidden}
+.pfill{height:100%;background:var(--blue);border-radius:1px;transition:width .5s}
+.prog-det{font-size:11px;color:var(--ink3);margin-top:3px}
+.ed-scroll{flex:1;overflow-y:auto;padding:28px 32px}
+.ed-wrap{max-width:700px;margin:0 auto}
+.ed-doc-title{font-size:18px;font-weight:700;letter-spacing:-.3px;margin-bottom:16px;font-family:'Lora',serif}
+.editor{width:100%;min-height:480px;border:none;outline:none;font-family:'Lora',Georgia,serif;font-size:16px;line-height:1.9;color:var(--ink);resize:none;background:transparent;padding:0}
+.editor::placeholder{color:var(--ink3);font-style:italic;font-size:15px}
+.ed-statusbar{height:25px;border-top:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:14px;font-size:11px;color:var(--ink3);flex-shrink:0;background:var(--surface)}
+.sb-dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;margin-right:3px}
+.sb-dot.busy{background:var(--amber)}
 
-/* AI Panel */
+/* AI panel */
 .ai-panel{width:var(--panel);border-left:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
-.panel-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0}
-.ptab{flex:1;padding:11px 4px;border:none;background:none;font-size:12px;font-weight:500;color:var(--ink3);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .12s}
-.ptab.on{color:var(--blue-text);border-bottom-color:var(--blue)}
-.pb{flex:1;overflow-y:auto;padding:16px}
+.ptabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0}
+.ptab{flex:1;padding:10px 4px;border:none;background:none;font-size:12px;font-weight:500;color:var(--ink3);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .1s}
+.ptab.on{color:var(--blue-t);border-bottom-color:var(--blue)}
+.pb{flex:1;overflow-y:auto;padding:14px}
 
-/* Panel elements */
-.pl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--ink3);margin-bottom:5px;display:block}
-.ps{width:100%;padding:7px 9px 7px 10px;background:var(--s2);border:1px solid var(--border);border-radius:6px;color:var(--ink);font-size:12px;font-family:inherit;outline:none;margin-bottom:10px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239e9d94'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:22px;cursor:pointer}
+/* Panel widgets */
+.pl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--ink3);margin-bottom:5px}
+.ps{width:100%;padding:7px 22px 7px 9px;background:var(--s2);border:1px solid var(--border);border-radius:6px;color:var(--ink);font-size:12px;font-family:inherit;outline:none;margin-bottom:10px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239e9d94'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;cursor:pointer}
 .pt{width:100%;padding:8px 10px;background:var(--s2);border:1px solid var(--border);border-radius:6px;color:var(--ink);font-size:12px;font-family:inherit;outline:none;resize:vertical;margin-bottom:10px;transition:border .15s}
 .pt:focus,.ps:focus{border-color:var(--blue)}
 .pa{width:100%;padding:9px 12px;background:var(--blue);color:#fff;border:none;border-radius:7px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:opacity .15s;display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:8px}
-.pa:hover{opacity:.87}
-.pa:disabled{opacity:.4;cursor:not-allowed}
-.pa-sec{background:var(--s2);color:var(--ink2);border:1px solid var(--border2)}
-.pa-sec:hover{background:var(--s3);opacity:1}
-.p-sec{margin-bottom:14px}
-.p-divider{height:1px;background:var(--border);margin:10px 0}
-.feedback-notice{background:var(--amber-bg);border:1px solid rgba(180,83,9,.18);border-radius:7px;padding:10px 12px;margin-bottom:12px;font-size:11px;color:var(--amber);line-height:1.6}
+.pa:hover{opacity:.87}.pa:disabled{opacity:.4;cursor:not-allowed}
+.pa-sec{background:var(--s2);color:var(--ink2);border:1px solid var(--border2)}.pa-sec:hover{background:var(--s3);opacity:1}
+.psec{margin-bottom:12px}
+.feedback-notice{background:var(--amber-dim);border:1px solid rgba(180,83,9,.16);border-radius:7px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:var(--amber);line-height:1.6}
 .src-item{padding:5px 0;border-bottom:1px solid var(--border);font-size:11px;color:var(--ink2);line-height:1.5}
 .src-item:last-child{border:none}
 .src-num{color:var(--ink3);font-weight:700;margin-right:3px}
-.gen-stats{display:flex;gap:6px;margin:8px 0}
-.gs-box{background:var(--s2);border-radius:6px;padding:7px 10px;flex:1;text-align:center}
-.gs-n{font-size:16px;font-weight:700}
-.gs-l{font-size:10px;color:var(--ink3)}
+.gen-done{display:none}
+.gstats{display:flex;gap:6px;margin:8px 0}
+.gsb{background:var(--s2);border-radius:6px;padding:7px 10px;flex:1;text-align:center}
+.gsb-n{font-size:16px;font-weight:700}.gsb-l{font-size:10px;color:var(--ink3)}
+.scratch-hint{background:var(--green-dim);border:1px solid rgba(21,128,61,.15);border-radius:6px;padding:8px 10px;font-size:11px;color:var(--green);margin-bottom:10px;line-height:1.5}
 
 /* Buttons */
 .btn{display:inline-flex;align-items:center;gap:5px;padding:0 12px;height:30px;border-radius:6px;border:1px solid var(--border2);background:var(--surface);color:var(--ink2);font-size:12px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .12s;white-space:nowrap}
@@ -144,23 +168,29 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--i
 .btn-primary:hover{opacity:.87;background:var(--blue)}
 .btn-primary:disabled{opacity:.4;cursor:not-allowed}
 .btn-sm{height:26px;padding:0 9px;font-size:11px}
+.btn-danger{color:var(--red);border-color:var(--red-dim)}.btn-danger:hover{background:var(--red-dim)}
 
-/* Badges */
-.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
-.b-complete{background:var(--green-bg);color:var(--green)}
-.b-draft{background:var(--blue-bg);color:var(--blue-text)}
-.b-revised{background:var(--purple-bg);color:var(--purple)}
-.b-pending_irb{background:var(--amber-bg);color:var(--amber)}
+/* Badge */
+.badge{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600}
+.b-complete{background:var(--green-dim);color:var(--green)}
+.b-draft{background:var(--blue-dim);color:var(--blue-t)}
+.b-revised{background:var(--purple-dim);color:var(--purple)}
+.b-pending_irb{background:var(--amber-dim);color:var(--amber)}
 .b-not_started{background:var(--s2);color:var(--ink3)}
+.b-q{background:var(--s2);color:var(--ink3)}
+.b-r{background:var(--amber-dim);color:var(--amber)}
+.b-w{background:var(--blue-dim);color:var(--blue-t)}
+.b-done{background:var(--green-dim);color:var(--green)}
+.b-fail{background:var(--red-dim);color:var(--red)}
 
 /* Modal */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:200;display:none;align-items:center;justify-content:center}
 .modal-bg.on{display:flex}
-.modal{background:var(--surface);border-radius:12px;width:520px;max-width:95vw;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.18)}
+.modal{background:var(--surface);border-radius:12px;width:560px;max-width:96vw;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.2)}
 .modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .modal-title{font-size:15px;font-weight:600}
-.modal-x{background:none;border:none;font-size:20px;cursor:pointer;color:var(--ink3);line-height:1;padding:0 4px;border-radius:4px}
-.modal-x:hover{background:var(--s2)}
+.mclose{background:none;border:none;font-size:20px;cursor:pointer;color:var(--ink3);line-height:1;padding:0 4px;border-radius:4px}
+.mclose:hover{background:var(--s2)}
 .modal-body{padding:18px 20px;overflow-y:auto}
 .modal-foot{padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end}
 .f{margin-bottom:12px}.f:last-child{margin-bottom:0}
@@ -170,223 +200,265 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--i
 .ft{resize:vertical;min-height:64px}
 .fs{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239e9d94'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:22px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.template-preview{background:var(--s2);border-radius:6px;padding:10px 12px;margin-top:8px;font-size:12px;color:var(--ink2);line-height:1.7}
+
+/* Add chapter input row */
+.add-ch-row{display:flex;gap:6px;margin-top:8px}
+.add-ch-input{flex:1;padding:7px 10px;background:var(--s2);border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:inherit;outline:none;color:var(--ink)}
+.add-ch-input:focus{border-color:var(--blue)}
 
 /* Toast */
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--ink);color:#fff;padding:7px 18px;border-radius:20px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:all .2s;pointer-events:none;white-space:nowrap}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--ink);color:#fff;padding:7px 18px;border-radius:20px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:all .2s;pointer-events:none}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
 
 <!-- ADD CLIENT MODAL -->
-<div class="modal-bg" id="modal-add" onclick="if(event.target===this)closeModal()">
+<div class="modal-bg" id="modal-add" onclick="if(event.target===this)closeModal('modal-add')">
   <div class="modal">
     <div class="modal-head">
       <div class="modal-title">Add New Client</div>
-      <button class="modal-x" onclick="closeModal()">×</button>
+      <button class="mclose" onclick="closeModal('modal-add')">×</button>
     </div>
     <div class="modal-body">
       <div class="g2">
         <div class="f"><label class="fl">Full Name *</label><input class="fi" id="nc-name" placeholder="e.g. Sarah Johnson"></div>
         <div class="f"><label class="fl">Degree *</label>
-          <select class="fs" id="nc-degree"><option>DBA</option><option>PhD</option><option>EdD</option><option>MBA</option><option>MS</option><option>MA</option></select>
+          <select class="fs" id="nc-degree" onchange="previewTemplate()">
+            <option value="dba">DBA — Doctor of Business Admin</option>
+            <option value="phd">PhD — Doctor of Philosophy</option>
+            <option value="edd">EdD — Doctor of Education</option>
+            <option value="masters">Masters (MS / MA / MBA)</option>
+            <option value="custom">Custom Structure</option>
+          </select>
         </div>
       </div>
       <div class="g2">
-        <div class="f"><label class="fl">Field *</label><input class="fi" id="nc-field" placeholder="e.g. Human Resources"></div>
+        <div class="f"><label class="fl">Field / Discipline *</label><input class="fi" id="nc-field" placeholder="e.g. Human Resources"></div>
         <div class="f"><label class="fl">Citation Style</label>
-          <select class="fs" id="nc-citation"><option>APA 7th</option><option>MLA 9th</option><option>Chicago 17th</option><option>Harvard</option><option>Vancouver</option><option>IEEE</option></select>
+          <select class="fs" id="nc-citation">
+            <option>APA 7th</option><option>MLA 9th</option><option>Chicago 17th</option><option>Harvard</option><option>Vancouver</option><option>IEEE</option>
+          </select>
         </div>
       </div>
       <div class="f"><label class="fl">Institution *</label><input class="fi" id="nc-inst" placeholder="e.g. University of Southern California"></div>
       <div class="f"><label class="fl">Dissertation Topic *</label><input class="fi" id="nc-topic" placeholder="Full research question or dissertation title"></div>
       <div class="f"><label class="fl">Advisor</label><input class="fi" id="nc-advisor" placeholder="e.g. Professor Zhang"></div>
+      <div class="f">
+        <label class="fl">Chapter Structure</label>
+        <div class="template-preview" id="template-preview">Loading chapters…</div>
+      </div>
       <div class="f"><label class="fl">Formatting Notes <span style="font-weight:400;color:var(--ink3)">(optional)</span></label>
-        <textarea class="ft" id="nc-fmt" placeholder="Any institution-specific formatting requirements, template notes, etc."></textarea>
+        <textarea class="ft" id="nc-fmt" placeholder="Institution-specific formatting requirements..."></textarea>
       </div>
     </div>
     <div class="modal-foot">
-      <button class="btn" onclick="closeModal()">Cancel</button>
+      <button class="btn" onclick="closeModal('modal-add')">Cancel</button>
       <button class="btn btn-primary" onclick="addClient()">Add Client</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD CHAPTER MODAL -->
+<div class="modal-bg" id="modal-ch" onclick="if(event.target===this)closeModal('modal-ch')">
+  <div class="modal" style="width:400px">
+    <div class="modal-head">
+      <div class="modal-title">Add Chapter</div>
+      <button class="mclose" onclick="closeModal('modal-ch')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="f"><label class="fl">Chapter Name</label><input class="fi" id="new-ch-name" placeholder="e.g. Chapter VI: Conclusions"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" onclick="closeModal('modal-ch')">Cancel</button>
+      <button class="btn btn-primary" onclick="addChapter()">Add Chapter</button>
     </div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<!-- ── SIDEBAR ───────────────────────────────────── -->
+<!-- ── SIDEBAR ──────────────────────────────────── -->
 <nav class="sidebar">
   <div class="brand">
     <div class="brand-icon">📚</div>
     <div>
-      <div class="brand-name">Dissertation</div>
+      <div class="brand-name">Dissertation Platform</div>
       <div class="brand-sub">Doctoral Writing Suite</div>
     </div>
   </div>
-  <div class="sb-nav">
-    <div class="sb-label">Clients</div>
+  <div class="sb-clients">
+    <div class="sb-section-label">Clients</div>
     <div id="client-list"></div>
-    <button class="add-btn" onclick="openModal()">+ Add New Client</button>
+    <button class="add-client-btn" onclick="openModal('modal-add')">+ Add New Client</button>
   </div>
-  <div class="sb-footer">Gemini 2.5 Flash · Free tier<br>CrossRef · OpenAlex · Semantic Scholar<br>Railway · Supabase · Notion</div>
+  <div class="sb-footer">Gemini 2.5 Flash<br>CrossRef · OpenAlex · Semantic Scholar<br>Supabase · Notion · Railway</div>
 </nav>
 
-<!-- ── MAIN ─────────────────────────────────────── -->
+<!-- ── MAIN ──────────────────────────────────────── -->
 <div class="main">
 
+  <!-- EMPTY -->
+  <div id="view-empty" style="flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:40px">
+    <div style="font-size:48px;margin-bottom:16px">📚</div>
+    <div style="font-size:20px;font-weight:700;letter-spacing:-.4px;margin-bottom:6px">Select a client to begin</div>
+    <div style="font-size:13px;color:var(--ink3)">Mitchell is pre-loaded — click his name in the sidebar<br>or add a new client with + Add New Client</div>
+  </div>
+
   <!-- DASHBOARD -->
-  <div id="pg-dash" style="display:flex;flex-direction:column;flex:1;overflow:hidden">
-
-    <!-- empty state -->
-    <div id="dash-empty" class="empty-state">
-      <div class="empty-icon">📚</div>
-      <div class="empty-title">Select a client to get started</div>
-      <div class="empty-sub">Mitchell is pre-loaded — click his name in the sidebar</div>
+  <div id="view-dash" style="display:none;flex:1;flex-direction:column;overflow:hidden">
+    <div class="dash-header">
+      <div class="dash-name" id="d-name"></div>
+      <div class="dash-degree" id="d-degree"></div>
+      <div class="dash-topic" id="d-topic"></div>
+      <div class="dash-actions">
+        <button class="btn btn-primary" onclick="exportFull()">↓ Export Full Dissertation</button>
+        <button class="btn btn-danger" id="del-btn" onclick="deleteCurrentClient()">Delete Client</button>
+      </div>
     </div>
+    <div class="dash-tabs">
+      <button class="dtab on" onclick="showDashTab('chapters',this)">Chapters</button>
+      <button class="dtab" onclick="showDashTab('scratchpad',this)">📓 Scratchpad</button>
+    </div>
+    <div class="dash-body" style="flex:1;overflow-y:auto">
 
-    <!-- client dashboard -->
-    <div id="dash-content" style="display:none;flex:1;overflow:hidden;display:none;flex-direction:column">
-      <div class="dash-hero">
-        <div class="dash-name" id="d-name">—</div>
-        <div class="dash-meta" id="d-meta"></div>
-        <div class="dash-topic" id="d-topic"></div>
-        <div class="dash-actions">
-          <button class="btn btn-primary" onclick="exportFull()">↓ Export Full Dissertation</button>
+      <!-- CHAPTERS TAB -->
+      <div id="dtab-chapters">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);margin-bottom:12px">Overview</div>
+        <div class="stats-row" id="stat-row"></div>
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);margin-bottom:12px">Chapter Progress</div>
+        <div class="ch-grid" id="ch-grid"></div>
+      </div>
+
+      <!-- SCRATCHPAD TAB -->
+      <div id="dtab-scratchpad" style="display:none">
+        <div style="margin-bottom:14px;font-size:13px;color:var(--ink2);line-height:1.6">
+          📓 Your research notebook for <strong id="scratch-client-name"></strong>. Dump ideas, professor emails, source notes, research angles — anything. The AI reads this and uses it when generating chapters.
+        </div>
+        <div class="scratch-top">
+          <div class="scratch-editor-wrap">
+            <div class="scratch-label">Notes &amp; Ideas</div>
+            <textarea class="scratch-textarea" id="scratch-editor"
+              placeholder="Dump anything here:&#10;• Research ideas and angles&#10;• Professor feedback or emails&#10;• Interesting sources you found&#10;• Theoretical frameworks to use&#10;• Arguments you want to make&#10;• Notes from reading papers&#10;&#10;The AI reads this before writing every chapter for this client."></textarea>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-primary" onclick="saveScratch()">💾 Save Notes</button>
+              <button class="btn" onclick="summarizeScratch()" id="summarize-btn">🤖 Analyze with AI</button>
+              <span style="font-size:11px;color:var(--ink3);line-height:1;align-self:center" id="scratch-saved"></span>
+            </div>
+          </div>
+          <div class="scratch-ai-panel">
+            <div class="ai-card" id="ai-summary-card" style="display:none">
+              <div class="ai-card-title">🤖 AI Summary</div>
+              <div class="ai-summary" id="ai-summary-text"></div>
+            </div>
+            <div class="ai-card" id="ai-points-card" style="display:none">
+              <div class="ai-card-title">📌 Key Points for Dissertation</div>
+              <ul class="key-points" id="ai-key-points"></ul>
+            </div>
+            <div id="scratch-empty-hint" style="font-size:12px;color:var(--ink3);text-align:center;padding:20px 10px;line-height:1.6">
+              Add notes then click<br><strong>Analyze with AI</strong><br>to extract key dissertation themes
+            </div>
+          </div>
         </div>
       </div>
-      <div class="dash-body" style="flex:1;overflow-y:auto">
-        <div class="section-head">CHAPTER PROGRESS</div>
-        <div class="ch-grid" id="ch-grid"></div>
-        <div class="section-head">OVERVIEW</div>
-        <div class="stat-row" id="stat-row"></div>
-      </div>
+
     </div>
   </div>
 
   <!-- CHAPTER WORKSPACE -->
-  <div id="pg-chapter" style="display:none;flex:1;overflow:hidden">
-    <div class="ws-layout">
-
-      <!-- chapter nav -->
+  <div id="view-chapter" style="display:none;flex:1;overflow:hidden">
+    <div class="ws">
       <div class="ch-nav">
         <div class="ch-nav-head">
-          <button class="back-btn" onclick="goBack()">← Dashboard</button>
-          <div class="ch-nav-label">Chapters</div>
+          <button class="back-link" onclick="goBack()">← Dashboard</button>
+          <div class="ch-nav-title">Chapters</div>
         </div>
-        <div class="ch-nav-list" id="ch-nav-list"></div>
+        <div class="ch-nav-scroll" id="ch-nav-scroll"></div>
       </div>
 
-      <!-- editor -->
-      <div class="ed-col">
-        <div class="ed-topbar">
-          <span class="ed-title" id="ed-title">Chapter</span>
-          <button class="btn btn-sm" onclick="saveDraft()">💾 Save Draft</button>
+      <div class="ed-pane">
+        <div class="ed-bar">
+          <span class="ed-chapter-name" id="ed-chapter-name">Chapter</span>
+          <button class="btn btn-sm" onclick="saveDraft()">💾 Save</button>
           <button class="btn btn-sm" onclick="exportChapter()">↓ DOCX</button>
           <button class="btn btn-sm btn-primary" id="gen-btn-top" onclick="generateChapter()">✨ Generate</button>
         </div>
-
-        <!-- progress strip (hidden until generating) -->
         <div class="prog-strip" id="prog-strip">
           <div class="prog-row">
             <span class="badge" id="prog-badge">Queued</span>
             <span style="font-size:12px;color:var(--ink2)" id="prog-msg">Starting…</span>
           </div>
-          <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:5%"></div></div>
-          <div class="prog-detail" id="prog-detail"></div>
+          <div class="pbar"><div class="pfill" id="prog-fill" style="width:5%"></div></div>
+          <div class="prog-det" id="prog-det"></div>
         </div>
-
         <div class="ed-scroll">
-          <div class="ed-inner">
+          <div class="ed-wrap">
             <div class="ed-doc-title" id="ed-doc-title"></div>
-            <textarea
-              class="editor"
-              id="editor"
-              placeholder="Click ✨ Generate to write this chapter with AI, or paste your existing draft here and hit Save Draft to store it."
-              oninput="onType()"
-              spellcheck="true"
-            ></textarea>
+            <textarea class="editor" id="editor"
+              placeholder="Click ✨ Generate to write this chapter with AI, or paste existing text and save as a draft."
+              oninput="onEditorInput()" spellcheck="true"></textarea>
           </div>
         </div>
-
         <div class="ed-statusbar">
-          <span><span class="sb-live" id="sb-live"></span><span id="sb-status">Ready</span></span>
+          <span><span class="sb-dot" id="sb-dot"></span><span id="sb-status">Ready</span></span>
           <span id="sb-words">0 words</span>
-          <span style="margin-left:auto;color:var(--ink3)" id="sb-client-name"></span>
+          <span style="margin-left:auto" id="sb-client"></span>
           <span>Gemini 2.5 Flash</span>
         </div>
       </div>
 
-      <!-- AI panel -->
       <div class="ai-panel">
-        <div class="panel-tabs">
-          <button class="ptab on" onclick="showTab('gen',this)">Generate</button>
-          <button class="ptab" onclick="showTab('feedback',this)">Feedback</button>
-          <button class="ptab" onclick="showTab('sources',this)">Sources</button>
+        <div class="ptabs">
+          <button class="ptab on" onclick="showPTab('gen',this)">Generate</button>
+          <button class="ptab" onclick="showPTab('feedback',this)">Feedback</button>
+          <button class="ptab" onclick="showPTab('sources',this)">Sources</button>
         </div>
 
         <!-- GENERATE -->
-        <div class="pb" id="tab-gen">
-          <div class="p-sec">
+        <div class="pb" id="ptab-gen">
+          <div id="scratch-used-hint" class="scratch-hint" style="display:none">
+            📓 Scratchpad notes will be included in generation
+          </div>
+          <div class="psec">
             <label class="pl">Chapter</label>
-            <select class="ps" id="p-ch">
-              <option value="Abstract">Abstract</option>
-              <option value="Chapter I: Introduction">Chapter I: Introduction</option>
-              <option value="Chapter II: Literature Review">Chapter II: Literature Review</option>
-              <option value="Chapter III: Methodology">Chapter III: Methodology</option>
-              <option value="Chapter IV: Results">Chapter IV: Results</option>
-              <option value="Chapter V: Discussion">Chapter V: Discussion</option>
-              <option value="Literature Review Section">Extra Lit Review Section</option>
-              <option value="Custom Section">Custom Section</option>
-            </select>
+            <select class="ps" id="p-chapter"></select>
           </div>
-
-          <div class="p-sec">
+          <div class="psec">
             <label class="pl">Instructions <span style="font-weight:400;color:var(--ink3)">(optional)</span></label>
-            <textarea class="pt" id="p-inst" rows="3" placeholder="e.g. Focus on Meyer & Allen three-component model. Include 15+ sources. Emphasize turnover in healthcare HR context."></textarea>
+            <textarea class="pt" id="p-inst" rows="3" placeholder="e.g. Focus heavily on Meyer & Allen model. Include 15+ sources. Emphasize HR in healthcare context."></textarea>
           </div>
-
-          <div class="p-sec">
+          <div class="psec">
             <label class="pl">Existing draft to improve <span style="font-weight:400;color:var(--ink3)">(optional)</span></label>
-            <textarea class="pt" id="p-draft" rows="3" placeholder="Paste an existing draft here to improve it rather than start from scratch…"></textarea>
+            <textarea class="pt" id="p-draft" rows="3" placeholder="Paste an existing draft to improve rather than start fresh…"></textarea>
           </div>
-
           <button class="pa" id="p-gen-btn" onclick="generateChapter()">✨ Generate Chapter</button>
-
-          <div id="gen-done" style="display:none">
-            <div class="gen-stats" id="gen-stats-row"></div>
+          <div class="gen-done" id="gen-done">
+            <div class="gstats" id="gen-stats"></div>
             <button class="pa pa-sec" style="margin-top:6px" onclick="generateChapter()">↺ Regenerate</button>
           </div>
         </div>
 
         <!-- FEEDBACK -->
-        <div class="pb" id="tab-feedback" style="display:none">
+        <div class="pb" id="ptab-feedback" style="display:none">
           <div class="feedback-notice">
             ⚡ <strong>Professor Feedback Mode</strong><br>
-            Paste the professor's exact feedback below. The AI will revise the current chapter draft to address every single point raised.
+            Paste the professor's exact comments. The AI will revise every section of this chapter to directly address each point.
           </div>
-
-          <div class="p-sec">
+          <div class="psec">
             <label class="pl">Professor Feedback</label>
-            <textarea class="pt" id="p-feedback" style="min-height:200px"
-              placeholder="Paste professor feedback here…&#10;&#10;Examples:&#10;— Literature review needs more empirical studies on turnover intentions&#10;— Methodology lacks detail on sampling procedures&#10;— References not consistently in APA 7th format&#10;— Problem statement needs to be more specific&#10;— Introduction section is too brief"></textarea>
+            <textarea class="pt" id="p-feedback" style="min-height:220px"
+              placeholder="Paste feedback here…&#10;&#10;Examples:&#10;• Lit review needs more empirical studies on turnover&#10;• Methodology lacks sampling detail&#10;• References not in APA 7th format&#10;• Problem statement too vague&#10;• Introduction is too brief"></textarea>
           </div>
-
           <button class="pa" id="p-revise-btn" onclick="reviseChapter()">🔄 Revise Based on Feedback</button>
-          <div style="font-size:11px;color:var(--ink3);text-align:center;margin-top:6px;line-height:1.5">
-            The AI reads every point and updates the chapter accordingly
-          </div>
+          <div style="font-size:11px;color:var(--ink3);text-align:center;margin-top:6px;line-height:1.5">Revises the current draft to address all points</div>
         </div>
 
         <!-- SOURCES -->
-        <div class="pb" id="tab-sources" style="display:none">
-          <div style="font-size:12px;color:var(--ink2);margin-bottom:10px;line-height:1.6">
-            Academic sources verified against 250M+ papers via CrossRef, OpenAlex &amp; Semantic Scholar.
-          </div>
-          <div id="sources-body">
-            <div style="font-size:12px;color:var(--ink3);text-align:center;padding:20px 0">Generate a chapter to see sources here</div>
-          </div>
+        <div class="pb" id="ptab-sources" style="display:none">
+          <div style="font-size:12px;color:var(--ink2);margin-bottom:10px;line-height:1.6">Verified academic sources — CrossRef, OpenAlex &amp; Semantic Scholar (250M+ papers).</div>
+          <div id="sources-list"><div style="font-size:12px;color:var(--ink3);text-align:center;padding:20px 0">Generate a chapter to see sources</div></div>
         </div>
-
       </div>
     </div>
   </div>
@@ -394,344 +466,441 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--i
 </div>
 
 <script>
-// ─── STATE ──────────────────────────────────────────────────
+// ─── STATE ──────────────────────────────────────────────────────
 let clients=[], activeClient=null, activeChapter=null, allChapters=[];
-let jobId=null, pollTimer=null;
-const API = () => window.location.origin;
+let jobId=null, pollTimer=null, scratchContent='';
+const API=()=>window.location.origin;
+const DEGREE_LABEL={dba:'DBA',phd:'PhD',edd:'EdD',masters:'Masters',custom:'Custom'};
+const ST_LABEL={complete:'Complete',draft:'Draft',revised:'Revised',pending_irb:'Pending IRB',not_started:'Not Started'};
+const ST_ICON={complete:'✅',draft:'📝',revised:'✏️',pending_irb:'⏳',not_started:'○'};
 
-// ─── BOOT ───────────────────────────────────────────────────
-window.onload = async () => {
+// ─── BOOT ───────────────────────────────────────────────────────
+window.onload=async()=>{
+  await loadTemplates();
   await loadClients();
-  const m = clients.find(c => c.id === 'mitchell-dba-ulv-001');
-  if (m) selectClient(m.id);
+  const m=clients.find(c=>c.id==='mitchell-dba-ulv-001');
+  if(m) selectClient(m.id);
 };
 
-// ─── CLIENTS ────────────────────────────────────────────────
-async function loadClients() {
-  try {
-    const d = await fetch(API()+'/clients/').then(r=>r.json());
-    clients = d.clients || [];
-    renderSidebar();
-  } catch(e) { console.error(e); }
+// ─── TEMPLATES ──────────────────────────────────────────────────
+let templates={};
+async function loadTemplates(){
+  try{const d=await fetch(API()+'/clients/templates').then(r=>r.json()); templates=d.templates||{};}catch(e){}
+  previewTemplate();
 }
 
-function renderSidebar() {
-  const el = document.getElementById('client-list');
-  if (!clients.length) { el.innerHTML='<div style="padding:6px 10px;font-size:12px;color:var(--ink3)">No clients yet.</div>'; return; }
-  el.innerHTML = clients.map(c => {
-    const chs = parseJ(c.chapter_structure);
-    const dots = chs.map(ch => `<div class="dot ${ch.status==='complete'?'dot-c':ch.status==='pending_irb'?'dot-p':'dot-n'}" title="${ch.chapter||ch.chapter_name||''}"></div>`).join('');
-    return `<div class="client-card ${c.id===activeClient?'on':''}" onclick="selectClient('${c.id}')">
-      <div class="cc-name">${c.name}</div>
-      <div class="cc-meta">${c.degree} · ${c.institution}</div>
-      <div class="cc-dots">${dots}</div>
+function previewTemplate(){
+  const key=document.getElementById('nc-degree')?.value||'dba';
+  const t=templates[key];
+  if(t) document.getElementById('template-preview').innerHTML=t.chapters.map((c,i)=>`<div>${i+1}. ${c}</div>`).join('');
+}
+
+// ─── CLIENTS ────────────────────────────────────────────────────
+async function loadClients(){
+  try{const d=await fetch(API()+'/clients/').then(r=>r.json()); clients=d.clients||[];}catch(e){}
+  renderSidebar();
+}
+
+function renderSidebar(){
+  const el=document.getElementById('client-list');
+  if(!clients.length){el.innerHTML='<div style="padding:6px 10px;font-size:12px;color:var(--ink3)">No clients yet.</div>';return;}
+  el.innerHTML=clients.map(c=>{
+    const chs=parseJ(c.chapter_structure);
+    const dots=chs.map(ch=>`<div class="dot ${ch.status==='complete'?'dot-c':ch.status==='pending_irb'?'dot-p':'dot-n'}" title="${ch.chapter||ch.chapter_name||''}"></div>`).join('');
+    const isMitchell=c.id==='mitchell-dba-ulv-001';
+    return `<div class="client-row ${c.id===activeClient?'on':''}">
+      <div class="client-main" onclick="selectClient('${c.id}')">
+        <div class="client-name">${c.name}</div>
+        <div class="client-meta">${DEGREE_LABEL[c.chapter_template]||c.degree} · ${c.institution}</div>
+        <div class="client-dots">${dots}</div>
+      </div>
+      ${!isMitchell?`<button class="client-del" onclick="confirmDelete('${c.id}','${c.name}')" title="Delete client">×</button>`:''}
     </div>`;
   }).join('');
 }
 
-function parseJ(raw) { if(!raw) return []; try{ return typeof raw==='string'?JSON.parse(raw):raw; }catch{return [];} }
+function parseJ(raw){if(!raw)return[];try{return typeof raw==='string'?JSON.parse(raw):raw;}catch{return[];}}
 
-async function selectClient(id) {
-  activeClient = id;
+async function selectClient(id){
+  activeClient=id;
   renderSidebar();
-  const c = clients.find(x=>x.id===id);
-  if (!c) return;
-  // show dashboard
-  document.getElementById('pg-dash').style.display = 'flex';
-  document.getElementById('pg-chapter').style.display = 'none';
-  document.getElementById('dash-empty').style.display = 'none';
-  const dc = document.getElementById('dash-content');
-  dc.style.display = 'flex';
-  document.getElementById('d-name').textContent = c.name;
-  document.getElementById('d-meta').textContent = `${c.degree} · ${c.field} · ${c.institution}`;
-  document.getElementById('d-topic').textContent = c.topic;
-  document.getElementById('sb-client-name').textContent = c.name;
+  const c=clients.find(x=>x.id===id);
+  if(!c)return;
+  showView('dash');
+  document.getElementById('d-name').textContent=c.name;
+  document.getElementById('d-degree').textContent=`${c.degree} · ${c.field} · ${c.institution}`;
+  document.getElementById('d-topic').textContent=c.topic;
+  document.getElementById('sb-client').textContent=c.name;
+  document.getElementById('scratch-client-name').textContent=c.name;
+  document.getElementById('del-btn').style.display=id==='mitchell-dba-ulv-001'?'none':'';
   await loadChapters(c);
+  await loadScratch(id);
+  // populate chapter select in panel
+  buildChapterSelect();
 }
 
-async function loadChapters(client) {
-  try {
-    const d = await fetch(API()+`/clients/${client.id}/chapters`).then(r=>r.json());
-    allChapters = d.chapters || parseJ(client.chapter_structure);
-  } catch(e) {
-    allChapters = parseJ(client.chapter_structure);
-  }
+async function loadChapters(client){
+  try{
+    const d=await fetch(API()+`/clients/${client.id}/chapters`).then(r=>r.json());
+    allChapters=d.chapters||parseJ(client.chapter_structure)||[];
+  }catch(e){allChapters=parseJ(client.chapter_structure)||[];}
   renderDashChapters();
-  renderStats();
+  updateStats();
 }
 
-function renderDashChapters() {
-  const labels = {complete:'Complete',draft:'Draft',revised:'Revised',pending_irb:'Pending IRB',not_started:'Not Started'};
-  document.getElementById('ch-grid').innerHTML = allChapters.map(ch => {
-    const name = ch.chapter||ch.chapter_name||'';
-    const st = ch.status||'not_started';
+function renderDashChapters(){
+  const el=document.getElementById('ch-grid');
+  el.innerHTML=allChapters.map(ch=>{
+    const name=ch.chapter||ch.chapter_name||'';
+    const st=ch.status||'not_started';
     return `<div class="ch-tile" onclick="openChapter('${name}')">
       <div class="ch-tile-name">${name}</div>
-      <span class="badge b-${st}">${labels[st]||st}</span>
+      <span class="badge b-${st}">${ST_LABEL[st]||st}</span>
       ${ch.notes?`<div class="ch-tile-notes">${ch.notes}</div>`:''}
       ${ch.word_count?`<div class="ch-tile-words">${ch.word_count.toLocaleString()} words</div>`:''}
     </div>`;
-  }).join('');
+  }).join('')+
+  `<div class="ch-tile ch-add" onclick="openModal('modal-ch')">+ Add Chapter</div>`;
 }
 
-function renderStats() {
-  const done = allChapters.filter(c=>['complete','draft','revised'].includes(c.status)).length;
-  const words = allChapters.reduce((s,c)=>s+(c.word_count||0),0);
-  document.getElementById('stat-row').innerHTML = `
-    <div class="stat"><div class="stat-n">${done}/${allChapters.length}</div><div class="stat-l">Chapters done</div></div>
-    <div class="stat"><div class="stat-n">${words>0?words.toLocaleString():'—'}</div><div class="stat-l">Total words</div></div>
-    <div class="stat clickable" onclick="exportFull()"><div class="stat-n" style="font-size:15px">↓ DOCX</div><div class="stat-l">Export all chapters</div></div>
+function updateStats(){
+  const done=allChapters.filter(c=>['complete','draft','revised'].includes(c.status)).length;
+  const words=allChapters.reduce((s,c)=>s+(c.word_count||0),0);
+  document.getElementById('stat-row').innerHTML=`
+    <div class="stat-box"><div class="stat-n">${done}/${allChapters.length}</div><div class="stat-l">Chapters done</div></div>
+    <div class="stat-box"><div class="stat-n">${words>0?words.toLocaleString():'—'}</div><div class="stat-l">Total words</div></div>
+    <div class="stat-box click" onclick="exportFull()"><div class="stat-n" style="font-size:15px">↓ DOCX</div><div class="stat-l">Export all</div></div>
   `;
 }
 
-// ─── CHAPTER WORKSPACE ──────────────────────────────────────
-async function openChapter(name) {
-  activeChapter = name;
-  document.getElementById('pg-dash').style.display = 'none';
-  document.getElementById('pg-chapter').style.display = 'flex';
-  document.getElementById('ed-title').textContent = name;
-  document.getElementById('ed-doc-title').textContent = name;
-
-  // sync chapter select
-  const sel = document.getElementById('p-ch');
-  for (let o of sel.options) if (o.value===name){sel.value=name;break;}
-
-  // render left nav
-  renderChNav(name);
-
-  // clear editor
-  document.getElementById('editor').value = '';
-  document.getElementById('prog-strip').style.display = 'none';
-  document.getElementById('gen-done').style.display = 'none';
-  updateWC();
-
-  // load existing content
-  try {
-    const d = await fetch(API()+`/chapters/${activeClient}/${encodeURIComponent(name)}`).then(r=>r.json());
-    if (d.content) { document.getElementById('editor').value = d.content; updateWC(); }
-    if (d.sources) {
-      let srcs = d.sources;
-      if (typeof srcs === 'string') { try{srcs=JSON.parse(srcs);}catch{srcs=[];} }
-      if (srcs.length) renderSources(srcs);
-    }
-  } catch(e) {}
+function buildChapterSelect(){
+  const sel=document.getElementById('p-chapter');
+  sel.innerHTML=allChapters.map(ch=>{
+    const name=ch.chapter||ch.chapter_name||'';
+    return `<option value="${name}">${name}</option>`;
+  }).join('')+
+  `<option value="Literature Review Section">Extra Lit Review Section</option>
+   <option value="Custom Section">Custom Section</option>`;
+  if(activeChapter) sel.value=activeChapter;
 }
 
-function renderChNav(active) {
-  const labels = {complete:'✅',draft:'📝',revised:'✏️',pending_irb:'⏳',not_started:'○'};
-  document.getElementById('ch-nav-list').innerHTML = allChapters.map(ch => {
-    const name = ch.chapter||ch.chapter_name||'';
-    const st = ch.status||'not_started';
+// ─── SCRATCHPAD ─────────────────────────────────────────────────
+async function loadScratch(clientId){
+  try{
+    const d=await fetch(API()+`/scratchpad/${clientId}`).then(r=>r.json());
+    scratchContent=d.content||'';
+    document.getElementById('scratch-editor').value=scratchContent;
+    if(d.ai_summary){
+      document.getElementById('ai-summary-text').textContent=d.ai_summary;
+      document.getElementById('ai-summary-card').style.display='';
+      document.getElementById('scratch-empty-hint').style.display='none';
+    }
+    // show hint in generate tab if scratchpad has content
+    document.getElementById('scratch-used-hint').style.display=scratchContent.trim().length>50?'':'none';
+  }catch(e){}
+}
+
+async function saveScratch(){
+  const content=document.getElementById('scratch-editor').value;
+  scratchContent=content;
+  document.getElementById('scratch-used-hint').style.display=content.trim().length>50?'':'none';
+  try{
+    await fetch(API()+'/scratchpad/save',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({client_id:activeClient,content})});
+    const el=document.getElementById('scratch-saved');
+    el.textContent='✓ Saved'; setTimeout(()=>el.textContent='',2000);
+  }catch(e){toast('Save error: '+e.message);}
+}
+
+async function summarizeScratch(){
+  const content=document.getElementById('scratch-editor').value.trim();
+  if(!content){toast('Add some notes first');return;}
+  await saveScratch();
+  const btn=document.getElementById('summarize-btn');
+  btn.disabled=true; btn.textContent='Analyzing…';
+  try{
+    const d=await fetch(API()+'/scratchpad/summarize',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({client_id:activeClient})}).then(r=>r.json());
+    if(d.summary){
+      document.getElementById('ai-summary-text').textContent=d.summary;
+      document.getElementById('ai-summary-card').style.display='';
+    }
+    if(d.key_points?.length){
+      document.getElementById('ai-key-points').innerHTML=d.key_points.map(p=>`<li>${p}</li>`).join('');
+      document.getElementById('ai-points-card').style.display='';
+    }
+    document.getElementById('scratch-empty-hint').style.display='none';
+    toast('✓ AI analysis complete');
+  }catch(e){toast('Error: '+e.message);}
+  finally{btn.disabled=false; btn.textContent='🤖 Analyze with AI';}
+}
+
+// ─── DASHBOARD TABS ─────────────────────────────────────────────
+function showDashTab(name,btn){
+  ['chapters','scratchpad'].forEach(n=>document.getElementById('dtab-'+n).style.display=n===name?'':'none');
+  document.querySelectorAll('.dtab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+// ─── CHAPTER WORKSPACE ──────────────────────────────────────────
+async function openChapter(name){
+  activeChapter=name;
+  showView('chapter');
+  document.getElementById('ed-chapter-name').textContent=name;
+  document.getElementById('ed-doc-title').textContent=name;
+  const sel=document.getElementById('p-chapter');
+  if(sel) sel.value=name;
+  renderChNav(name);
+  document.getElementById('editor').value='';
+  document.getElementById('prog-strip').style.display='none';
+  document.getElementById('gen-done').style.display='none';
+  updateWordCount();
+  try{
+    const d=await fetch(API()+`/chapters/${activeClient}/${encodeURIComponent(name)}`).then(r=>r.json());
+    if(d.content){document.getElementById('editor').value=d.content;updateWordCount();}
+    if(d.sources){let s=d.sources;if(typeof s==='string'){try{s=JSON.parse(s);}catch{s=[];}}if(s.length)renderSources(s);}
+  }catch(e){}
+}
+
+function renderChNav(active){
+  document.getElementById('ch-nav-scroll').innerHTML=allChapters.map(ch=>{
+    const name=ch.chapter||ch.chapter_name||'';
+    const st=ch.status||'not_started';
     return `<div class="ch-nav-item ${name===active?'on':''}" onclick="openChapter('${name}')">
       <div class="ch-nav-name">${name}</div>
-      <div class="ch-nav-status"><span class="badge b-${st}" style="font-size:10px">${labels[st]||'○'} ${st.replace(/_/g,' ')}</span></div>
+      <div class="ch-nav-badge"><span class="badge b-${st}">${ST_ICON[st]||'○'} ${ST_LABEL[st]||st}</span></div>
     </div>`;
   }).join('');
 }
 
-function goBack() {
-  document.getElementById('pg-dash').style.display = 'flex';
-  document.getElementById('pg-chapter').style.display = 'none';
-  if (activeClient) {
-    const c = clients.find(x=>x.id===activeClient);
-    if (c) loadChapters(c);
-  }
+function goBack(){
+  showView('dash');
+  const c=clients.find(x=>x.id===activeClient);
+  if(c) loadChapters(c);
 }
 
-// ─── TABS ────────────────────────────────────────────────────
-function showTab(name, btn) {
-  ['gen','feedback','sources'].forEach(n=>{
-    document.getElementById('tab-'+n).style.display = n===name?'':'none';
-  });
+// ─── VIEWS ──────────────────────────────────────────────────────
+function showView(name){
+  document.getElementById('view-empty').style.display='none';
+  document.getElementById('view-dash').style.display='none';
+  document.getElementById('view-chapter').style.display='none';
+  if(name==='dash') document.getElementById('view-dash').style.display='flex';
+  else if(name==='chapter') document.getElementById('view-chapter').style.display='flex';
+  else document.getElementById('view-empty').style.display='flex';
+}
+
+// ─── PANEL TABS ─────────────────────────────────────────────────
+function showPTab(name,btn){
+  ['gen','feedback','sources'].forEach(n=>document.getElementById('ptab-'+n).style.display=n===name?'':'none');
   document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
 }
 
-// ─── EDITOR ─────────────────────────────────────────────────
-function onType() { updateWC(); }
-function updateWC() {
-  const t = document.getElementById('editor').value||'';
-  const w = t.trim() ? t.trim().split(/\s+/).length : 0;
-  document.getElementById('sb-words').textContent = w.toLocaleString()+' words';
+// ─── EDITOR ─────────────────────────────────────────────────────
+function onEditorInput(){updateWordCount();}
+function updateWordCount(){
+  const t=document.getElementById('editor').value||'';
+  const w=t.trim()?t.trim().split(/\s+/).length:0;
+  document.getElementById('sb-words').textContent=w.toLocaleString()+' words';
 }
 
-// ─── GENERATE ────────────────────────────────────────────────
-async function generateChapter() {
-  if (!activeClient) { toast('Select a client first'); return; }
-  const chName = document.getElementById('p-ch').value || activeChapter;
-  if (!chName) { toast('Select a chapter'); return; }
-
-  if (chName !== activeChapter) {
-    activeChapter = chName;
-    document.getElementById('ed-title').textContent = chName;
-    document.getElementById('ed-doc-title').textContent = chName;
+// ─── GENERATE ───────────────────────────────────────────────────
+async function generateChapter(){
+  if(!activeClient){toast('Select a client first');return;}
+  const chName=document.getElementById('p-chapter').value||activeChapter;
+  if(!chName){toast('Select a chapter');return;}
+  if(chName!==activeChapter){
+    activeChapter=chName;
+    document.getElementById('ed-chapter-name').textContent=chName;
+    document.getElementById('ed-doc-title').textContent=chName;
     renderChNav(chName);
   }
-
   setGenBtns(true);
-  document.getElementById('prog-strip').style.display = 'block';
-  document.getElementById('gen-done').style.display = 'none';
-  setStatus('queued','Queued…',5);
-
-  try {
-    const d = await fetch(API()+'/chapters/generate', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        client_id: activeClient,
-        chapter_name: chName,
-        additional_instructions: document.getElementById('p-inst').value.trim()||null,
-        existing_draft: document.getElementById('p-draft').value.trim()||null
-      })
+  document.getElementById('prog-strip').style.display='block';
+  document.getElementById('gen-done').style.display='none';
+  setStatus('queued','In queue…',5);
+  try{
+    const d=await fetch(API()+'/chapters/generate',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({client_id:activeClient,chapter_name:chName,
+        additional_instructions:document.getElementById('p-inst').value.trim()||null,
+        existing_draft:document.getElementById('p-draft').value.trim()||null})
     }).then(r=>r.json());
-    if (!d.job_id) throw new Error(d.detail||'No job ID');
-    jobId = d.job_id;
-    if (pollTimer) clearInterval(pollTimer);
-    pollTimer = setInterval(poll, 2500);
-  } catch(e) {
-    setStatus('failed','Error: '+e.message, 0);
-    setGenBtns(false);
-  }
+    if(!d.job_id) throw new Error(d.detail||'No job ID');
+    jobId=d.job_id;
+    if(pollTimer)clearInterval(pollTimer);
+    pollTimer=setInterval(poll,2500);
+  }catch(e){setStatus('failed','Error: '+e.message,0);setGenBtns(false);}
 }
 
-async function poll() {
-  if (!jobId) return;
-  try {
-    const j = await fetch(API()+'/chapters/job/'+jobId).then(r=>r.json());
-    const msgs = {queued:'In queue…',researching:'Searching CrossRef · OpenAlex · Semantic Scholar…',writing:'Writing with Gemini 2.5 Flash…',complete:'Done!',failed:j.error||'Failed'};
-    const pcts = {queued:8,researching:42,writing:78,complete:100,failed:0};
-    setStatus(j.status, msgs[j.status]||j.status, pcts[j.status]||0);
-    if (j.source_count) document.getElementById('prog-detail').textContent = `${j.source_count} verified academic sources found`;
-
-    if (j.status==='complete') {
+async function poll(){
+  if(!jobId)return;
+  try{
+    const j=await fetch(API()+'/chapters/job/'+jobId).then(r=>r.json());
+    const msgs={queued:'In queue…',researching:'Searching CrossRef · OpenAlex · Semantic Scholar…',writing:'Writing with Gemini 2.5 Flash…',complete:'Done!',failed:j.error||'Failed'};
+    const pcts={queued:8,researching:42,writing:76,complete:100,failed:0};
+    setStatus(j.status,msgs[j.status]||j.status,pcts[j.status]||0);
+    if(j.source_count) document.getElementById('prog-det').textContent=`${j.source_count} verified academic sources found`;
+    if(j.status==='complete'){
       clearInterval(pollTimer);
-      document.getElementById('editor').value = j.content||'';
-      updateWC();
-      document.getElementById('gen-done').style.display = '';
-      document.getElementById('gen-stats-row').innerHTML = `
-        <div class="gs-box"><div class="gs-n">${(j.word_count||0).toLocaleString()}</div><div class="gs-l">Words</div></div>
-        <div class="gs-box"><div class="gs-n">${j.source_count||0}</div><div class="gs-l">Sources</div></div>
+      document.getElementById('editor').value=j.content||'';
+      updateWordCount();
+      document.getElementById('gen-done').style.display='';
+      document.getElementById('gen-stats').innerHTML=`
+        <div class="gsb"><div class="gsb-n">${(j.word_count||0).toLocaleString()}</div><div class="gsb-l">Words</div></div>
+        <div class="gsb"><div class="gsb-n">${j.source_count||0}</div><div class="gsb-l">Sources</div></div>
       `;
-      if (j.sources && j.sources.length) renderSources(j.sources);
+      if(j.sources?.length) renderSources(j.sources);
       setGenBtns(false);
       toast(`✓ ${activeChapter} — ${(j.word_count||0).toLocaleString()} words`);
-      const c = clients.find(x=>x.id===activeClient);
-      if (c) { await loadChapters(c); renderChNav(activeChapter); }
-    } else if (j.status==='failed') {
-      clearInterval(pollTimer);
-      setGenBtns(false);
-      toast('Generation failed: '+(j.error||'unknown'));
+      const c=clients.find(x=>x.id===activeClient);
+      if(c){await loadChapters(c);renderChNav(activeChapter);}
+    }else if(j.status==='failed'){
+      clearInterval(pollTimer);setGenBtns(false);
+      toast('Failed: '+(j.error||'unknown'));
     }
-  } catch(e) { console.error(e); }
+  }catch(e){console.error(e);}
 }
 
-function setStatus(st, msg, pct) {
-  const badge = document.getElementById('prog-badge');
-  const cls = {queued:'b-not_started',researching:'b-pending_irb',writing:'b-draft',complete:'b-complete',failed:'b-revised'};
-  badge.className = 'badge '+(cls[st]||'');
-  badge.textContent = st.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
-  document.getElementById('prog-msg').textContent = msg;
-  document.getElementById('prog-fill').style.width = pct+'%';
-  document.getElementById('sb-status').textContent = st==='complete'?'Ready':msg;
-  document.getElementById('sb-live').className = 'sb-live'+(st==='complete'?'':' busy');
+function setStatus(st,msg,pct){
+  const badge=document.getElementById('prog-badge');
+  const cls={queued:'b-q',researching:'b-r',writing:'b-w',complete:'b-done',failed:'b-fail'};
+  badge.className='badge '+(cls[st]||'b-q');
+  badge.textContent=st.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+  document.getElementById('prog-msg').textContent=msg;
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('sb-status').textContent=st==='complete'?'Ready':msg;
+  document.getElementById('sb-dot').className='sb-dot'+(st==='complete'?'':' busy');
 }
 
-function setGenBtns(loading) {
-  ['gen-btn-top','p-gen-btn'].forEach(id => {
-    const b = document.getElementById(id);
-    b.disabled = loading;
-    b.textContent = loading ? 'Generating…' : (id==='gen-btn-top'?'✨ Generate':'✨ Generate Chapter');
+function setGenBtns(loading){
+  ['gen-btn-top','p-gen-btn'].forEach(id=>{
+    const b=document.getElementById(id);
+    if(!b)return;
+    b.disabled=loading;
+    b.textContent=loading?'Generating…':(id==='gen-btn-top'?'✨ Generate':'✨ Generate Chapter');
   });
 }
 
-function renderSources(srcs) {
-  document.getElementById('sources-body').innerHTML = srcs.length
-    ? `<div style="font-size:11px;color:var(--ink2);margin-bottom:8px">${srcs.length} verified sources</div>`
-      + srcs.map((s,i)=>`<div class="src-item"><span class="src-num">[${i+1}]</span>${s}</div>`).join('')
-    : '<div style="font-size:12px;color:var(--ink3);text-align:center;padding:16px 0">No sources yet</div>';
+function renderSources(srcs){
+  document.getElementById('sources-list').innerHTML=srcs.length
+    ?`<div style="font-size:11px;color:var(--ink2);margin-bottom:8px">${srcs.length} verified sources</div>`
+      +srcs.map((s,i)=>`<div class="src-item"><span class="src-num">[${i+1}]</span>${s}</div>`).join('')
+    :'<div style="font-size:12px;color:var(--ink3);text-align:center;padding:16px 0">No sources yet</div>';
 }
 
-// ─── FEEDBACK / REVISE ───────────────────────────────────────
-async function reviseChapter() {
-  const fb = document.getElementById('p-feedback').value.trim();
-  if (!fb) { toast('Paste professor feedback first'); return; }
-  if (!activeClient || !activeChapter) { toast('Open a chapter first'); return; }
-
-  const btn = document.getElementById('p-revise-btn');
-  btn.disabled=true; btn.textContent='Revising…';
-
-  try {
-    const d = await fetch(API()+`/chapters/${activeClient}/${encodeURIComponent(activeChapter)}`).then(r=>r.json());
-    if (!d.id) { toast('Save a draft first before revising'); btn.disabled=false; btn.textContent='🔄 Revise Based on Feedback'; return; }
-    const result = await fetch(API()+'/chapters/revise', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({client_id:activeClient, chapter_id:d.id, professor_feedback:fb})
+// ─── FEEDBACK ───────────────────────────────────────────────────
+async function reviseChapter(){
+  const fb=document.getElementById('p-feedback').value.trim();
+  if(!fb){toast('Paste professor feedback first');return;}
+  if(!activeClient||!activeChapter){toast('Open a chapter first');return;}
+  const btn=document.getElementById('p-revise-btn');
+  btn.disabled=true;btn.textContent='Revising…';
+  try{
+    const d=await fetch(API()+`/chapters/${activeClient}/${encodeURIComponent(activeChapter)}`).then(r=>r.json());
+    if(!d.id){toast('Save a draft first');btn.disabled=false;btn.textContent='🔄 Revise Based on Feedback';return;}
+    const r=await fetch(API()+'/chapters/revise',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({client_id:activeClient,chapter_id:d.id,professor_feedback:fb})
     }).then(r=>r.json());
-    document.getElementById('editor').value = result.content||'';
-    updateWC();
-    toast(`✓ Revised — ${(result.word_count||0).toLocaleString()} words`);
-  } catch(e) {
-    toast('Revision error: '+e.message);
-  } finally {
-    btn.disabled=false; btn.textContent='🔄 Revise Based on Feedback';
-  }
+    document.getElementById('editor').value=r.content||'';
+    updateWordCount();
+    toast(`✓ Revised — ${(r.word_count||0).toLocaleString()} words`);
+  }catch(e){toast('Error: '+e.message);}
+  finally{btn.disabled=false;btn.textContent='🔄 Revise Based on Feedback';}
 }
 
-// ─── SAVE / EXPORT ───────────────────────────────────────────
-async function saveDraft() {
-  if (!activeClient||!activeChapter) { toast('No chapter open'); return; }
-  try {
-    await fetch(API()+'/chapters/save', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({client_id:activeClient, chapter_name:activeChapter, content:document.getElementById('editor').value})
-    });
+// ─── SAVE / EXPORT ──────────────────────────────────────────────
+async function saveDraft(){
+  if(!activeClient||!activeChapter){toast('No chapter open');return;}
+  try{
+    await fetch(API()+'/chapters/save',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({client_id:activeClient,chapter_name:activeChapter,content:document.getElementById('editor').value})});
     toast('✓ Draft saved');
-  } catch(e) { toast('Save failed: '+e.message); }
+  }catch(e){toast('Error: '+e.message);}
 }
 
-function exportChapter() {
-  if (!activeClient||!activeChapter) { toast('No chapter open'); return; }
+function exportChapter(){
+  if(!activeClient||!activeChapter){toast('No chapter open');return;}
   window.open(API()+`/chapters/${activeClient}/export/${encodeURIComponent(activeChapter)}`,'_blank');
 }
 
-function exportFull() {
-  if (!activeClient) { toast('Select a client first'); return; }
+function exportFull(){
+  if(!activeClient){toast('Select a client first');return;}
   window.open(API()+`/chapters/${activeClient}/export/full`,'_blank');
 }
 
-// ─── ADD CLIENT ──────────────────────────────────────────────
-function openModal() { document.getElementById('modal-add').classList.add('on'); }
-function closeModal() { document.getElementById('modal-add').classList.remove('on'); }
+// ─── CLIENTS CRUD ───────────────────────────────────────────────
+function openModal(id){document.getElementById(id).classList.add('on');}
+function closeModal(id){document.getElementById(id).classList.remove('on');}
 
-async function addClient() {
+async function addClient(){
   const name=document.getElementById('nc-name').value.trim();
   const inst=document.getElementById('nc-inst').value.trim();
   const topic=document.getElementById('nc-topic').value.trim();
-  if (!name||!inst||!topic) { toast('Name, institution and topic are required'); return; }
-  try {
-    const d = await fetch(API()+'/clients/', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        name, institution:inst, topic,
-        degree: document.getElementById('nc-degree').value,
-        field: document.getElementById('nc-field').value,
-        citation_style: document.getElementById('nc-citation').value,
-        advisor: document.getElementById('nc-advisor').value.trim()||null,
-        formatting_notes: document.getElementById('nc-fmt').value.trim()||null,
-        quality_target: 75
-      })
+  if(!name||!inst||!topic){toast('Name, institution and topic are required');return;}
+  try{
+    const d=await fetch(API()+'/clients/',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name,institution:inst,topic,
+        degree:document.getElementById('nc-degree').selectedOptions[0].text.split('—')[0].trim(),
+        field:document.getElementById('nc-field').value.trim(),
+        citation_style:document.getElementById('nc-citation').value,
+        advisor:document.getElementById('nc-advisor').value.trim()||null,
+        formatting_notes:document.getElementById('nc-fmt').value.trim()||null,
+        chapter_template:document.getElementById('nc-degree').value,
+        quality_target:75})
     }).then(r=>r.json());
-    closeModal();
+    closeModal('modal-add');
     toast(`✓ ${name} added`);
+    // clear form
+    ['nc-name','nc-field','nc-inst','nc-topic','nc-advisor','nc-fmt'].forEach(id=>document.getElementById(id).value='');
     await loadClients();
     selectClient(d.client_id);
-  } catch(e) { toast('Error: '+e.message); }
+  }catch(e){toast('Error: '+e.message);}
 }
 
-// ─── UTILS ───────────────────────────────────────────────────
-function toast(msg, dur=2800) {
+async function addChapter(){
+  const name=document.getElementById('new-ch-name').value.trim();
+  if(!name){toast('Enter a chapter name');return;}
+  if(!activeClient){toast('Select a client first');return;}
+  try{
+    await fetch(API()+`/clients/${activeClient}/chapters/add`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({client_id:activeClient,chapter_name:name})
+    });
+    closeModal('modal-ch');
+    document.getElementById('new-ch-name').value='';
+    toast(`✓ "${name}" added`);
+    const c=clients.find(x=>x.id===activeClient);
+    if(c) await loadChapters(c);
+    buildChapterSelect();
+  }catch(e){toast('Error: '+e.message);}
+}
+
+function confirmDelete(id,name){
+  if(confirm(`Delete client "${name}" and all their chapters? This cannot be undone.`)) deleteClient(id,name);
+}
+
+async function deleteClient(id,name){
+  try{
+    await fetch(API()+`/clients/${id}`,{method:'DELETE'});
+    toast(`Deleted ${name}`);
+    if(activeClient===id){activeClient=null;showView('empty');}
+    await loadClients();
+  }catch(e){toast('Error: '+e.message);}
+}
+
+async function deleteCurrentClient(){
+  const c=clients.find(x=>x.id===activeClient);
+  if(c) confirmDelete(c.id,c.name);
+}
+
+// ─── UTILS ──────────────────────────────────────────────────────
+function toast(msg,dur=2800){
   const el=document.getElementById('toast');
-  el.textContent=msg; el.classList.add('on');
-  setTimeout(()=>el.classList.remove('on'), dur);
+  el.textContent=msg;el.classList.add('on');
+  setTimeout(()=>el.classList.remove('on'),dur);
 }
 </script>
 </body>

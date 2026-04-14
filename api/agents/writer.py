@@ -168,3 +168,27 @@ Write in academic third person.
     )
     content = response.text or ""
     return {"content": content, "word_count": len(content.split()), "model_used": "gemini-2.5-flash"}
+
+async def write_chapter_with_scratchpad(
+    topic: str, degree: str, field: str, chapter_type: str,
+    research_context: str, scratchpad_content: str = "",
+    scratchpad_summary: str = "", additional_instructions: str = "",
+    existing_draft: str = "", professor_feedback: str = "",
+    citation_style: str = "APA 7th", institution: str = "",
+    custom_formatting: str = ""
+) -> dict:
+    """Same as write_chapter but injects scratchpad context."""
+    combined_instructions = additional_instructions or ""
+    if scratchpad_summary:
+        combined_instructions += f"\n\nKey themes and ideas from the researcher's notes: {scratchpad_summary}"
+    if scratchpad_content and len(scratchpad_content) > 50:
+        combined_instructions += f"\n\nResearcher's raw notes to incorporate where relevant:\n{scratchpad_content[:2000]}"
+
+    return await write_chapter(
+        topic=topic, degree=degree, field=field, chapter_type=chapter_type,
+        research_context=research_context,
+        additional_instructions=combined_instructions.strip(),
+        existing_draft=existing_draft, professor_feedback=professor_feedback,
+        citation_style=citation_style, institution=institution,
+        custom_formatting=custom_formatting
+    )
