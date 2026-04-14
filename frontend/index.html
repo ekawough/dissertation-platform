@@ -4,234 +4,222 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dissertation Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f5f4f0;--surface:#fff;--surface2:#f0efe9;--surface3:#e8e6de;
-  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.15);
-  --ink:#1c1b18;--ink2:#6b6960;--ink3:#9e9b90;
-  --blue:#2d6be4;--blue-dim:rgba(45,107,228,0.08);--blue-text:#1d4ed8;
-  --green:#16a34a;--green-dim:rgba(22,163,74,0.08);
-  --amber:#d97706;--amber-dim:rgba(217,119,6,0.1);
-  --red:#dc2626;--red-dim:rgba(220,38,38,0.08);
-  --purple:#7c3aed;--purple-dim:rgba(124,58,237,0.08);
-  --sidebar:240px;--r:10px;--r-sm:6px;
+  --bg:#f4f3ef;--white:#ffffff;--s2:#eeede8;--s3:#e5e4dd;
+  --border:#e0dfd8;--border2:#c8c7be;
+  --text:#1a1915;--text2:#6b6a62;--text3:#9e9d94;
+  --blue:#2563eb;--blue-bg:#eff6ff;--blue-dark:#1d4ed8;
+  --green:#15803d;--green-bg:#f0fdf4;
+  --amber:#b45309;--amber-bg:#fffbeb;
+  --red:#dc2626;--red-bg:#fef2f2;
+  --purple:#7c3aed;--purple-bg:#f5f3ff;
+  --sidebar:236px;
 }
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;font-size:14px;line-height:1.6}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);height:100vh;display:flex;overflow:hidden;font-size:14px}
 
 /* SIDEBAR */
-.sidebar{width:var(--sidebar);height:100vh;position:fixed;left:0;top:0;bottom:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;z-index:100}
-.brand{padding:18px 16px 14px;border-bottom:1px solid var(--border)}
-.brand-name{font-size:15px;font-weight:700;letter-spacing:-.3px}
-.brand-sub{font-size:11px;color:var(--ink3);margin-top:2px}
-.nav{padding:10px 8px}
-.nav-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);padding:8px 8px 4px}
-.nav-btn{width:100%;padding:7px 10px;border-radius:var(--r-sm);border:none;background:none;color:var(--ink2);font-size:13px;font-family:inherit;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;transition:all .12s}
-.nav-btn:hover{background:var(--surface2);color:var(--ink)}
-.nav-btn.active{background:var(--blue-dim);color:var(--blue-text);font-weight:500}
-.nav-btn .ni{width:18px;text-align:center;font-size:14px;flex-shrink:0}
-.sidebar-footer{margin-top:auto;padding:12px 16px;font-size:10px;color:var(--ink3);border-top:1px solid var(--border);line-height:1.7}
-
-/* CLIENT LIST in sidebar */
-.client-list{padding:4px 8px 8px}
-.client-item{padding:7px 10px;border-radius:var(--r-sm);cursor:pointer;transition:all .12s;border:1px solid transparent;margin-bottom:3px}
-.client-item:hover{background:var(--surface2)}
-.client-item.active{background:var(--blue-dim);border-color:rgba(45,107,228,0.2)}
-.client-name{font-size:13px;font-weight:500;color:var(--ink)}
-.client-meta{font-size:11px;color:var(--ink3);margin-top:1px}
-.client-progress{display:flex;gap:2px;margin-top:5px}
-.cp-dot{width:8px;height:8px;border-radius:50%}
-.cp-complete{background:var(--green)}
-.cp-pending{background:var(--amber)}
-.cp-not-started{background:var(--surface3);border:1px solid var(--border2)}
+.sidebar{width:var(--sidebar);height:100vh;background:var(--white);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
+.brand{padding:16px 14px 12px;border-bottom:1px solid var(--border)}
+.brand-name{font-size:14px;font-weight:700;letter-spacing:-.3px}
+.brand-sub{font-size:11px;color:var(--text3);margin-top:1px}
+.nav-section{padding:8px 8px 4px}
+.nav-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);padding:6px 6px 4px}
+.client-card{margin:2px 0;padding:8px 10px;border-radius:8px;cursor:pointer;border:1.5px solid transparent;transition:all .12s}
+.client-card:hover{background:var(--s2)}
+.client-card.active{background:var(--blue-bg);border-color:rgba(37,99,235,.2)}
+.client-name{font-size:13px;font-weight:600;color:var(--text)}
+.client-meta{font-size:11px;color:var(--text3);margin-top:1px}
+.client-dots{display:flex;gap:3px;margin-top:5px}
+.dot{width:7px;height:7px;border-radius:50%}
+.dot-complete{background:var(--green)}
+.dot-pending{background:var(--amber)}
+.dot-none{background:var(--s3);border:1px solid var(--border2)}
+.add-client-btn{margin:6px 8px;padding:7px 10px;border:1.5px dashed var(--border2);border-radius:8px;background:none;color:var(--text3);font-size:12px;font-family:inherit;cursor:pointer;width:calc(100% - 16px);transition:all .12s}
+.add-client-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-bg)}
+.sidebar-footer{margin-top:auto;padding:10px 14px;font-size:10px;color:var(--text3);border-top:1px solid var(--border);line-height:1.8}
 
 /* MAIN */
-.main{margin-left:var(--sidebar);flex:1;display:flex;flex-direction:column;min-height:100vh}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 
-/* TOP BAR */
-.topbar{height:52px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:12px;flex-shrink:0;position:sticky;top:0;z-index:50}
-.topbar-title{font-size:15px;font-weight:600;letter-spacing:-.2px;flex:1}
-.topbar-sub{font-size:12px;color:var(--ink3)}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:0 14px;height:34px;border-radius:var(--r-sm);border:1px solid var(--border2);background:none;color:var(--ink2);font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .12s;white-space:nowrap}
-.btn:hover{background:var(--surface2);color:var(--ink)}
-.btn:active{transform:scale(.98)}
+/* VIEWS */
+#view-dashboard{display:flex;flex-direction:column;flex:1;overflow-y:auto}
+#view-chapter{display:none;flex:1;overflow:hidden}
+
+/* DASHBOARD */
+.dash-header{padding:24px 28px 16px;border-bottom:1px solid var(--border);background:var(--white)}
+.dash-title{font-size:22px;font-weight:700;letter-spacing:-.4px}
+.dash-meta{font-size:13px;color:var(--text2);margin-top:3px}
+.dash-topic{font-size:13px;color:var(--text3);font-style:italic;margin-top:2px}
+.dash-body{padding:20px 28px;flex:1}
+.section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-bottom:12px}
+.chapter-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.chapter-tile{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;transition:all .15s}
+.chapter-tile:hover{border-color:var(--blue);box-shadow:0 2px 8px rgba(37,99,235,.1)}
+.ct-name{font-size:13px;font-weight:600;margin-bottom:6px}
+.ct-badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.st-complete{background:var(--green-bg);color:var(--green)}
+.st-draft{background:var(--blue-bg);color:var(--blue-dark)}
+.st-revised{background:var(--purple-bg);color:var(--purple)}
+.st-pending_irb{background:var(--amber-bg);color:var(--amber)}
+.st-not_started{background:var(--s2);color:var(--text3)}
+.ct-notes{font-size:11px;color:var(--text3);margin-top:6px;line-height:1.4}
+.stats-row{display:flex;gap:10px}
+.stat{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1}
+.stat-n{font-size:20px;font-weight:700}
+.stat-l{font-size:11px;color:var(--text3);margin-top:2px}
+
+/* CHAPTER WORKSPACE - 3 column layout */
+.chapter-layout{display:flex;height:100%;overflow:hidden}
+
+/* LEFT: chapter list */
+.ch-list{width:200px;border-right:1px solid var(--border);background:var(--white);overflow-y:auto;flex-shrink:0}
+.ch-list-header{padding:12px 14px 8px;border-bottom:1px solid var(--border)}
+.ch-list-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text3)}
+.ch-list-back{background:none;border:none;color:var(--blue);font-size:12px;font-family:inherit;cursor:pointer;padding:0;margin-bottom:4px;display:flex;align-items:center;gap:3px}
+.ch-list-item{padding:10px 14px;cursor:pointer;border-left:3px solid transparent;transition:all .1s}
+.ch-list-item:hover{background:var(--s2)}
+.ch-list-item.active{background:var(--blue-bg);border-left-color:var(--blue)}
+.ch-list-name{font-size:12px;font-weight:500;line-height:1.3}
+.ch-list-badge{margin-top:3px}
+
+/* MIDDLE: editor */
+.editor-pane{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--white)}
+.editor-topbar{padding:10px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-shrink:0}
+.editor-chapter-title{font-size:14px;font-weight:600;flex:1}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:0 12px;height:30px;border-radius:6px;border:1px solid var(--border2);background:var(--white);color:var(--text2);font-size:12px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .12s;white-space:nowrap}
+.btn:hover{background:var(--s2);color:var(--text)}
 .btn-primary{background:var(--blue);color:#fff;border-color:var(--blue)}
 .btn-primary:hover{opacity:.88;background:var(--blue)}
-.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none}
-.btn-sm{height:28px;padding:0 10px;font-size:12px}
-.btn-ghost{border-color:transparent}
-.btn-ghost:hover{background:var(--surface2)}
-.btn-danger{color:var(--red);border-color:var(--red-dim)}
-.btn-danger:hover{background:var(--red-dim)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed}
+.btn-sm{height:26px;padding:0 9px;font-size:11px}
 
-/* PAGE */
-.page{display:none;flex:1;overflow-y:auto}
-.page.active{display:block}
-.page-body{padding:24px;max-width:1100px}
-
-/* CARDS */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:14px}
-.card-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--ink3);margin-bottom:14px}
-.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.card-head-title{font-size:14px;font-weight:600}
-
-/* CHAPTER TRACKER */
-.chapter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
-.chapter-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;cursor:pointer;transition:all .15s;position:relative}
-.chapter-card:hover{border-color:var(--blue);box-shadow:0 2px 12px rgba(45,107,228,.08)}
-.chapter-card.active-chapter{border-color:var(--blue);background:var(--blue-dim)}
-.ch-name{font-size:13px;font-weight:600;margin-bottom:4px}
-.ch-status{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px}
-.st-complete{background:var(--green-dim);color:var(--green)}
-.st-draft{background:var(--blue-dim);color:var(--blue-text)}
-.st-pending_irb{background:var(--amber-dim);color:var(--amber)}
-.st-not_started{background:var(--surface2);color:var(--ink3)}
-.st-revised{background:var(--purple-dim);color:var(--purple)}
-.ch-meta{font-size:11px;color:var(--ink3);margin-top:6px}
-.ch-words{font-size:11px;color:var(--ink3)}
-
-/* CHAPTER WORKSPACE */
-.workspace{display:grid;grid-template-columns:1fr 320px;gap:0;height:calc(100vh - 52px);overflow:hidden}
-.editor-area{overflow-y:auto;padding:28px 32px;border-right:1px solid var(--border)}
-.editor-title{font-size:20px;font-weight:700;letter-spacing:-.4px;margin-bottom:4px}
-.editor-meta{font-size:12px;color:var(--ink3);margin-bottom:20px;display:flex;gap:12px;align-items:center}
-.editor-doc{font-family:'Lora',Georgia,serif;font-size:16px;line-height:1.85;color:var(--ink);white-space:pre-wrap;min-height:400px;outline:none;border:none;width:100%;background:transparent;resize:none;padding:0}
-.editor-doc::placeholder{color:var(--ink3);font-style:italic;font-family:'Lora',serif}
-.editor-placeholder{color:var(--ink3);font-style:italic;font-family:'Lora',serif;font-size:15px;line-height:1.9;padding:16px 0}
-
-/* RIGHT PANEL */
-.right-panel{overflow-y:auto;background:var(--surface);display:flex;flex-direction:column}
-.panel-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0}
-.ptab{flex:1;padding:10px 6px;border:none;background:none;font-size:12px;font-weight:500;color:var(--ink3);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .12s}
-.ptab.active{color:var(--blue-text);border-bottom-color:var(--blue)}
-.panel-body{padding:16px;flex:1;overflow-y:auto}
-.panel-section{margin-bottom:16px}
-.p-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--ink3);margin-bottom:6px}
-.p-input,.p-select,.p-textarea{width:100%;padding:8px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);color:var(--ink);font-size:13px;font-family:inherit;outline:none;transition:border .15s}
-.p-input:focus,.p-textarea:focus,.p-select:focus{border-color:var(--blue)}
-.p-textarea{resize:vertical;min-height:80px}
-.p-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239e9b90'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:24px}
-
-/* PROGRESS BAR */
-.prog-bar{height:3px;background:var(--surface2);border-radius:2px;overflow:hidden;margin:8px 0}
+/* Progress bar area */
+.progress-area{padding:10px 20px;background:var(--blue-bg);border-bottom:1px solid rgba(37,99,235,.15);display:none}
+.prog-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.badge{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.b-q{background:var(--s2);color:var(--text3)}
+.b-r{background:var(--amber-bg);color:var(--amber)}
+.b-w{background:var(--blue-bg);color:var(--blue-dark)}
+.b-done{background:var(--green-bg);color:var(--green)}
+.b-fail{background:var(--red-bg);color:var(--red)}
+.prog-msg{font-size:12px;color:var(--text2)}
+.prog-bar{height:3px;background:rgba(37,99,235,.2);border-radius:2px;overflow:hidden}
 .prog-fill{height:100%;background:var(--blue);border-radius:2px;transition:width .5s ease}
-.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
-.b-q{background:var(--surface2);color:var(--ink3)}
-.b-r{background:var(--amber-dim);color:var(--amber)}
-.b-w{background:var(--blue-dim);color:var(--blue-text)}
-.b-done{background:var(--green-dim);color:var(--green)}
-.b-fail{background:var(--red-dim);color:var(--red)}
+.prog-detail{font-size:11px;color:var(--text3);margin-top:4px}
 
-/* SOURCES */
-.source-item{padding:5px 0;border-bottom:1px solid var(--border);font-size:11px;color:var(--ink2);line-height:1.55}
-.source-item:last-child{border:none}
-.source-num{color:var(--ink3);font-weight:600;margin-right:4px}
+/* Editor itself */
+.editor-scroll{flex:1;overflow-y:auto;padding:24px 28px}
+.editor-textarea{width:100%;min-height:500px;border:none;outline:none;font-family:'Georgia','Times New Roman',serif;font-size:15px;line-height:1.9;color:var(--text);resize:none;background:transparent;padding:0}
+.editor-textarea::placeholder{color:var(--text3);font-style:italic}
 
-/* STATS */
-.stats-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-.stat-box{background:var(--surface2);border-radius:var(--r-sm);padding:8px 12px;flex:1;min-width:70px}
-.stat-n{font-size:18px;font-weight:700;line-height:1.1}
-.stat-l{font-size:10px;color:var(--ink3);margin-top:2px}
-
-/* FORM */
-.field{margin-bottom:12px}
-.field:last-child{margin-bottom:0}
-.f-label{display:block;font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:4px}
-.f-hint{font-size:11px;color:var(--ink3);margin-top:3px}
-.f-input,.f-select,.f-textarea{width:100%;padding:8px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);color:var(--ink);font-size:13px;font-family:inherit;outline:none;transition:border .15s}
-.f-input:focus,.f-textarea:focus,.f-select:focus{border-color:var(--blue)}
-.f-textarea{resize:vertical;min-height:80px}
-.f-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239e9b90'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:24px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-
-/* MODAL */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:500;display:none;align-items:center;justify-content:center}
-.modal-bg.open{display:flex}
-.modal{background:var(--surface);border-radius:14px;width:540px;max-width:95vw;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.18)}
-.modal-head{padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.modal-title{font-size:15px;font-weight:600}
-.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--ink3);padding:2px 6px;border-radius:6px;line-height:1}
-.modal-close:hover{background:var(--surface2)}
-.modal-body{padding:20px;overflow-y:auto}
-.modal-foot{padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end}
-
-/* TOAST */
-.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--ink);color:#fff;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:500;z-index:1000;opacity:0;transition:all .2s;pointer-events:none;white-space:nowrap}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* STATUS BAR */
-.status-bar{height:26px;background:var(--surface);border-top:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:16px;font-size:11px;color:var(--ink3);flex-shrink:0}
-.sb-dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;margin-right:4px}
+/* Statusbar */
+.statusbar{height:24px;border-top:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:16px;font-size:11px;color:var(--text3);flex-shrink:0;background:var(--white)}
+.sb-dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;margin-right:3px}
 .sb-dot.busy{background:var(--amber)}
 
-/* OVERVIEW page */
-.overview-header{background:var(--surface);border-bottom:1px solid var(--border);padding:28px 24px 20px}
-.client-full-name{font-size:22px;font-weight:700;letter-spacing:-.4px}
-.client-full-meta{font-size:13px;color:var(--ink2);margin-top:4px}
-.client-topic{font-size:13px;color:var(--ink3);margin-top:2px;font-style:italic}
+/* RIGHT: AI panel */
+.ai-panel{width:280px;border-left:1px solid var(--border);background:var(--white);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
+.panel-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0}
+.ptab{flex:1;padding:10px 4px;border:none;background:none;font-size:12px;font-weight:500;color:var(--text3);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .12s}
+.ptab.active{color:var(--blue-dark);border-bottom-color:var(--blue)}
+.panel-body{flex:1;overflow-y:auto;padding:14px}
 
-/* Feedback intake */
-.feedback-box{background:var(--amber-dim);border:1px solid rgba(217,119,6,.2);border-radius:var(--r);padding:14px;margin-bottom:14px}
-.feedback-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--amber);margin-bottom:6px}
+/* Panel elements */
+.p-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--text3);margin-bottom:5px}
+.p-select{width:100%;padding:7px 9px;background:var(--s2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:12px;font-family:inherit;outline:none;margin-bottom:10px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239e9d94'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:22px;cursor:pointer}
+.p-textarea{width:100%;padding:7px 9px;background:var(--s2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:12px;font-family:inherit;outline:none;resize:vertical;min-height:70px;transition:border .15s;margin-bottom:10px}
+.p-textarea:focus,.p-select:focus{border-color:var(--blue)}
+.p-btn{width:100%;padding:9px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:opacity .15s;display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:8px}
+.p-btn:hover{opacity:.88}
+.p-btn:disabled{opacity:.4;cursor:not-allowed}
+.p-btn-sec{background:var(--s2);color:var(--text2);border:1px solid var(--border)}
+.p-btn-sec:hover{background:var(--s3);opacity:1}
+.p-divider{height:1px;background:var(--border);margin:10px 0}
+.p-section{margin-bottom:12px}
 
-@media(max-width:768px){
-  :root{--sidebar:0px}
-  .sidebar{display:none}
-  .workspace{grid-template-columns:1fr}
-  .right-panel{display:none}
-}
+/* Feedback box */
+.feedback-notice{background:var(--amber-bg);border:1px solid rgba(180,83,9,.2);border-radius:6px;padding:10px;margin-bottom:10px;font-size:11px;color:var(--amber);line-height:1.5}
+
+/* Sources */
+.source-item{padding:5px 0;border-bottom:1px solid var(--border);font-size:11px;color:var(--text2);line-height:1.5}
+.source-item:last-child{border:none}
+.source-num{color:var(--text3);font-weight:700;margin-right:3px}
+
+/* Results stats */
+.gen-stats{display:flex;gap:6px;margin-top:10px}
+.gs{background:var(--s2);border-radius:6px;padding:6px 10px;flex:1;text-align:center}
+.gs-n{font-size:15px;font-weight:700}
+.gs-l{font-size:10px;color:var(--text3)}
+
+/* Modal */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:100;display:none;align-items:center;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:var(--white);border-radius:12px;width:520px;max-width:95vw;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-size:15px;font-weight:600}
+.modal-x{background:none;border:none;font-size:18px;cursor:pointer;color:var(--text3);padding:2px 6px;border-radius:4px;line-height:1}
+.modal-x:hover{background:var(--s2)}
+.modal-body{padding:18px 20px;overflow-y:auto}
+.modal-foot{padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end}
+.field{margin-bottom:12px}
+.field:last-child{margin-bottom:0}
+.f-label{display:block;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px}
+.f-input,.f-select,.f-textarea{width:100%;padding:8px 10px;background:var(--s2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;font-family:inherit;outline:none;transition:border .15s}
+.f-input:focus,.f-textarea:focus,.f-select:focus{border-color:var(--blue)}
+.f-textarea{resize:vertical;min-height:70px}
+.f-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239e9d94'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:22px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* Toast */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--text);color:#fff;padding:7px 16px;border-radius:20px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:all .2s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Empty state */
+.empty{text-align:center;padding:40px 20px;color:var(--text3)}
+.empty-icon{font-size:36px;margin-bottom:10px}
+.empty-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
 </style>
 </head>
 <body>
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
-
 <!-- ADD CLIENT MODAL -->
-<div class="modal-bg" id="addClientModal" onclick="if(event.target===this)closeModal('addClientModal')">
+<div class="modal-bg" id="modal-add" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <div class="modal-head">
-      <div class="modal-title">Add New Client</div>
-      <button class="modal-close" onclick="closeModal('addClientModal')">×</button>
+      <div class="modal-title">New Client</div>
+      <button class="modal-x" onclick="closeModal()">×</button>
     </div>
     <div class="modal-body">
       <div class="grid2">
-        <div class="field"><label class="f-label">Client Name *</label><input class="f-input" id="nc-name" placeholder="e.g. Sarah Johnson"></div>
+        <div class="field"><label class="f-label">Name *</label><input class="f-input" id="nc-name" placeholder="e.g. Sarah Johnson"></div>
         <div class="field"><label class="f-label">Degree *</label>
-          <select class="f-select" id="nc-degree">
-            <option>DBA</option><option>PhD</option><option>EdD</option><option>MBA</option><option>MS</option><option>MA</option>
-          </select>
+          <select class="f-select" id="nc-degree"><option>DBA</option><option>PhD</option><option>EdD</option><option>MBA</option><option>MS</option><option>MA</option></select>
         </div>
       </div>
       <div class="grid2">
         <div class="field"><label class="f-label">Field *</label><input class="f-input" id="nc-field" placeholder="e.g. Human Resources"></div>
         <div class="field"><label class="f-label">Citation Style</label>
-          <select class="f-select" id="nc-citation">
-            <option>APA 7th</option><option>MLA 9th</option><option>Chicago 17th</option><option>Harvard</option><option>Vancouver</option><option>IEEE</option>
-          </select>
+          <select class="f-select" id="nc-citation"><option>APA 7th</option><option>MLA 9th</option><option>Chicago 17th</option><option>Harvard</option><option>Vancouver</option><option>IEEE</option></select>
         </div>
       </div>
       <div class="field"><label class="f-label">Institution *</label><input class="f-input" id="nc-institution" placeholder="e.g. University of Southern California"></div>
-      <div class="field"><label class="f-label">Dissertation Topic *</label><input class="f-input" id="nc-topic" placeholder="e.g. The impact of remote work on organizational culture in tech companies"></div>
-      <div class="field"><label class="f-label">Advisor Name</label><input class="f-input" id="nc-advisor" placeholder="e.g. Dr. Smith"></div>
-      <div class="field"><label class="f-label">Quality Target</label>
-        <select class="f-select" id="nc-quality">
-          <option value="75">75% — Work in progress, human-level</option>
-          <option value="85">85% — Solid doctoral quality</option>
-          <option value="95">95% — Near-perfect submission ready</option>
-        </select>
-      </div>
-      <div class="field"><label class="f-label">Formatting Notes <span style="font-weight:400;color:var(--ink3)">(optional)</span></label>
-        <textarea class="f-textarea" id="nc-formatting" placeholder="Any institution-specific formatting requirements..."></textarea>
+      <div class="field"><label class="f-label">Dissertation Topic *</label><input class="f-input" id="nc-topic" placeholder="Full dissertation title or research question"></div>
+      <div class="field"><label class="f-label">Advisor</label><input class="f-input" id="nc-advisor" placeholder="e.g. Professor Zhang"></div>
+      <div class="field"><label class="f-label">Formatting Notes</label>
+        <textarea class="f-textarea" id="nc-fmt" placeholder="Any institution-specific formatting requirements..."></textarea>
       </div>
     </div>
     <div class="modal-foot">
-      <button class="btn btn-ghost" onclick="closeModal('addClientModal')">Cancel</button>
-      <button class="btn btn-primary" onclick="createClient()">Add Client</button>
+      <button class="btn" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="addClient()">Add Client</button>
     </div>
   </div>
 </div>
+
+<div class="toast" id="toast"></div>
 
 <!-- SIDEBAR -->
 <nav class="sidebar">
@@ -239,625 +227,556 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--i
     <div class="brand-name">📚 Dissertation Platform</div>
     <div class="brand-sub">Doctoral Writing Suite</div>
   </div>
-
-  <div class="nav">
+  <div class="nav-section">
     <div class="nav-label">Clients</div>
-    <div class="client-list" id="clientList">
-      <div style="font-size:12px;color:var(--ink3);padding:6px 10px">Loading...</div>
-    </div>
-    <button class="nav-btn" onclick="openModal('addClientModal')" style="border:1px dashed var(--border2);color:var(--ink3);justify-content:center;margin-top:4px">
-      + Add Client
-    </button>
+    <div id="client-list"></div>
+    <button class="add-client-btn" onclick="openModal()">+ Add Client</button>
   </div>
-
-  <div class="nav" style="border-top:1px solid var(--border);margin-top:8px">
-    <div class="nav-label">Platform</div>
-    <button class="nav-btn" onclick="showPage('settings')"><span class="ni">⚙️</span> Settings</button>
-  </div>
-
   <div class="sidebar-footer">
-    Powered by Gemini 2.5 Flash<br>
+    Gemini 2.5 Flash<br>
     CrossRef · OpenAlex · Semantic Scholar<br>
-    <span style="color:var(--green)">●</span> Railway · Supabase · Notion
+    Railway · Supabase · Notion
   </div>
 </nav>
 
 <!-- MAIN -->
 <div class="main">
 
-  <!-- DASHBOARD / CLIENT OVERVIEW PAGE -->
-  <div class="page active" id="page-overview">
-    <div id="overview-header" class="overview-header" style="display:none">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
-        <div>
-          <div class="client-full-name" id="ov-name">Select a client</div>
-          <div class="client-full-meta" id="ov-meta"></div>
-          <div class="client-topic" id="ov-topic"></div>
-        </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-sm" onclick="exportFull()" id="export-full-btn" style="display:none">↓ Full Dissertation</button>
-        </div>
-      </div>
+  <!-- DASHBOARD VIEW -->
+  <div id="view-dashboard">
+    <div class="dash-header">
+      <div id="dash-title" class="dash-title">Select a client</div>
+      <div id="dash-meta" class="dash-meta"></div>
+      <div id="dash-topic" class="dash-topic"></div>
     </div>
-
-    <div class="page-body">
-      <div id="no-client-msg" style="text-align:center;padding:60px 20px;color:var(--ink3)">
-        <div style="font-size:40px;margin-bottom:12px">📚</div>
-        <div style="font-size:16px;font-weight:600;color:var(--ink);margin-bottom:6px">Select a client to get started</div>
-        <div style="font-size:13px">Mitchell is pre-loaded — click his name in the sidebar</div>
+    <div class="dash-body">
+      <div id="dash-empty" class="empty" style="padding:60px 20px">
+        <div class="empty-icon">📚</div>
+        <div class="empty-title">Select a client from the sidebar</div>
+        <div style="font-size:13px;margin-top:4px">Mitchell is pre-loaded — click his name</div>
       </div>
-
-      <div id="client-workspace" style="display:none">
-        <!-- Chapter tracker -->
-        <div class="card">
-          <div class="card-head">
-            <div class="card-head-title">Chapter Progress</div>
-            <div style="font-size:12px;color:var(--ink3)" id="ov-progress-text"></div>
-          </div>
-          <div class="chapter-grid" id="chapterGrid"></div>
-        </div>
-
-        <!-- Quick stats -->
-        <div class="card">
-          <div class="card-title">Dissertation Stats</div>
-          <div class="stats-row" id="ov-stats">
-            <div class="stat-box"><div class="stat-n" id="stat-chapters">0/6</div><div class="stat-l">Chapters</div></div>
-            <div class="stat-box"><div class="stat-n" id="stat-words">0</div><div class="stat-l">Total Words</div></div>
-            <div class="stat-box"><div class="stat-n" id="stat-sources">—</div><div class="stat-l">Sources Used</div></div>
-          </div>
+      <div id="dash-content" style="display:none">
+        <div class="section-title">CHAPTER PROGRESS</div>
+        <div class="chapter-grid" id="chapter-grid"></div>
+        <div class="section-title">STATS</div>
+        <div class="stats-row">
+          <div class="stat"><div class="stat-n" id="stat-ch">0/6</div><div class="stat-l">Chapters</div></div>
+          <div class="stat"><div class="stat-n" id="stat-words">—</div><div class="stat-l">Total Words</div></div>
+          <div class="stat"><div class="stat-n" id="stat-src">—</div><div class="stat-l">Sources Used</div></div>
+          <div class="stat" style="cursor:pointer" onclick="exportFull()"><div class="stat-n" style="font-size:14px">↓ DOCX</div><div class="stat-l">Full Dissertation</div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- CHAPTER WORKSPACE PAGE -->
-  <div class="page" id="page-chapter">
-    <div style="display:flex;align-items:center;gap:10px;padding:0 20px;height:52px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50">
-      <button class="btn btn-ghost btn-sm" onclick="showPage('overview')">← Back</button>
-      <div style="font-size:14px;font-weight:600;flex:1" id="ch-topbar-title">Chapter</div>
-      <div style="display:flex;gap:6px">
-        <button class="btn btn-sm" onclick="saveCurrentDraft()">💾 Save Draft</button>
-        <button class="btn btn-sm" onclick="exportCurrentChapter()">↓ DOCX</button>
-        <button class="btn btn-primary btn-sm" id="gen-chapter-btn" onclick="generateChapter()">✨ Generate</button>
-      </div>
-    </div>
+  <!-- CHAPTER WORKSPACE VIEW -->
+  <div id="view-chapter">
+    <div class="chapter-layout">
 
-    <div class="workspace">
-      <!-- EDITOR -->
-      <div class="editor-area">
-        <div class="editor-title" id="ch-editor-title">Chapter</div>
-        <div class="editor-meta">
-          <span id="ch-editor-meta"></span>
-          <span id="ch-word-count" style="color:var(--ink3)">0 words</span>
-          <span class="badge b-q" id="ch-status-badge">Not started</span>
+      <!-- LEFT: chapter nav -->
+      <div class="ch-list">
+        <div class="ch-list-header">
+          <button class="ch-list-back" onclick="backToDash()">← Back</button>
+          <div class="ch-list-title">Chapters</div>
+        </div>
+        <div id="ch-list-items"></div>
+      </div>
+
+      <!-- MIDDLE: editor -->
+      <div class="editor-pane">
+        <div class="editor-topbar">
+          <span class="editor-chapter-title" id="editor-title">Chapter</span>
+          <button class="btn btn-sm" onclick="saveDraft()">💾 Save</button>
+          <button class="btn btn-sm" onclick="exportChapter()">↓ DOCX</button>
+          <button class="btn btn-sm btn-primary" id="gen-btn" onclick="generateChapter()">✨ Generate</button>
         </div>
 
-        <div id="ch-progress-area" style="display:none;margin-bottom:16px">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-            <span class="badge b-q" id="ch-prog-badge">Queued</span>
-            <span style="font-size:12px;color:var(--ink2)" id="ch-prog-msg">Starting...</span>
+        <!-- Progress -->
+        <div class="progress-area" id="prog-area">
+          <div class="prog-row">
+            <span class="badge b-q" id="prog-badge">Queued</span>
+            <span class="prog-msg" id="prog-msg">Starting…</span>
           </div>
-          <div class="prog-bar"><div class="prog-fill" id="ch-prog-fill" style="width:5%"></div></div>
-          <div style="font-size:11px;color:var(--ink3);margin-top:4px" id="ch-prog-detail"></div>
+          <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:5%"></div></div>
+          <div class="prog-detail" id="prog-detail"></div>
         </div>
 
-        <textarea class="editor-doc" id="chapterEditor"
-          placeholder="Generated chapter content will appear here. You can also type or paste directly and save your draft."
-          oninput="updateWordCount()"
-        ></textarea>
+        <!-- Actual editable textarea -->
+        <div class="editor-scroll">
+          <textarea
+            class="editor-textarea"
+            id="editor"
+            placeholder="Click Generate to write this chapter, or paste existing text here and hit Save Draft..."
+            oninput="onEditorInput()"
+            spellcheck="true"
+          ></textarea>
+        </div>
+
+        <div class="statusbar">
+          <span><span class="sb-dot" id="sb-dot"></span><span id="sb-status">Ready</span></span>
+          <span id="sb-words">0 words</span>
+          <span style="margin-left:auto" id="sb-chapter"></span>
+          <span>Gemini 2.5 Flash</span>
+        </div>
       </div>
 
-      <!-- RIGHT PANEL -->
-      <div class="right-panel">
+      <!-- RIGHT: AI panel -->
+      <div class="ai-panel">
         <div class="panel-tabs">
-          <button class="ptab active" onclick="panelTab('generate',this)">Generate</button>
-          <button class="ptab" onclick="panelTab('feedback',this)">Feedback</button>
-          <button class="ptab" onclick="panelTab('sources',this)">Sources</button>
+          <button class="ptab active" onclick="showTab('generate',this)">Generate</button>
+          <button class="ptab" onclick="showTab('feedback',this)">Feedback</button>
+          <button class="ptab" onclick="showTab('sources',this)">Sources</button>
         </div>
 
         <!-- GENERATE TAB -->
-        <div class="panel-body" id="ptab-generate">
-          <div class="panel-section">
-            <div class="p-label">Chapter</div>
-            <select class="p-select" id="panel-chapter-select" onchange="switchChapterFromPanel()">
+        <div class="panel-body" id="tab-generate">
+          <div class="p-section">
+            <div class="p-label">Chapter to generate</div>
+            <select class="p-select" id="p-chapter">
               <option value="Abstract">Abstract</option>
               <option value="Chapter I: Introduction">Chapter I: Introduction</option>
               <option value="Chapter II: Literature Review">Chapter II: Literature Review</option>
               <option value="Chapter III: Methodology">Chapter III: Methodology</option>
               <option value="Chapter IV: Results">Chapter IV: Results</option>
               <option value="Chapter V: Discussion">Chapter V: Discussion</option>
-              <option value="Literature Review Section">Additional Lit Review Section</option>
+              <option value="Literature Review Section">Extra Lit Review Section</option>
               <option value="Custom Section">Custom Section</option>
             </select>
           </div>
-
-          <div class="panel-section">
-            <div class="p-label">Additional Instructions <span style="font-weight:400;color:var(--ink3)">(optional)</span></div>
-            <textarea class="p-textarea" id="panel-instructions" rows="3" placeholder="e.g. Focus on quantitative methodology. Include Meyer & Allen three-component model. Emphasize turnover in tech sector."></textarea>
+          <div class="p-section">
+            <div class="p-label">Instructions <span style="font-weight:400;color:var(--text3)">(optional)</span></div>
+            <textarea class="p-textarea" id="p-instructions" placeholder="e.g. Focus heavily on Meyer & Allen three-component model. Include at least 15 sources. Emphasize HR context in healthcare."></textarea>
           </div>
-
-          <div class="panel-section">
-            <div class="p-label">Existing Draft to Improve <span style="font-weight:400;color:var(--ink3)">(optional)</span></div>
-            <textarea class="p-textarea" id="panel-existing-draft" rows="3" placeholder="Paste existing draft here if you want the AI to improve it rather than start from scratch..."></textarea>
+          <div class="p-section">
+            <div class="p-label">Existing draft to improve <span style="font-weight:400;color:var(--text3)">(optional)</span></div>
+            <textarea class="p-textarea" id="p-draft" placeholder="Paste an existing draft here if you want the AI to improve it rather than start fresh..."></textarea>
           </div>
-
-          <button class="btn btn-primary" style="width:100%;justify-content:center;height:38px" id="panel-gen-btn" onclick="generateChapter()">
-            ✨ Generate Chapter
-          </button>
-
-          <div id="gen-result-stats" style="display:none;margin-top:12px">
-            <div class="stats-row" id="gen-stats-row"></div>
+          <button class="p-btn" id="p-gen-btn" onclick="generateChapter()">✨ Generate Chapter</button>
+          <div id="gen-result" style="display:none">
+            <div class="gen-stats" id="gen-stats"></div>
+            <button class="p-btn p-btn-sec" style="margin-top:8px" onclick="generateChapter()">↺ Regenerate</button>
           </div>
         </div>
 
         <!-- FEEDBACK TAB -->
-        <div class="panel-body" id="ptab-feedback" style="display:none">
-          <div class="feedback-box">
-            <div class="feedback-label">⚡ Professor Feedback</div>
-            <div style="font-size:12px;color:var(--ink2)">Paste professor feedback below — the AI will revise this chapter to address every point.</div>
+        <div class="panel-body" id="tab-feedback" style="display:none">
+          <div class="feedback-notice">
+            ⚡ Paste professor feedback below. The AI will revise the current chapter draft to address every point raised.
           </div>
-          <div class="panel-section">
+          <div class="p-section">
             <div class="p-label">Professor Feedback</div>
-            <textarea class="p-textarea" id="panel-feedback" rows="8" placeholder="Paste the exact feedback from the professor here...&#10;&#10;e.g. 'The literature review needs more empirical studies on turnover intentions. The methodology section lacks detail on sampling procedures. References are not consistently in APA format.'"></textarea>
+            <textarea class="p-textarea" id="p-feedback" rows="10" style="min-height:180px"
+              placeholder="Paste the exact feedback from the professor here...&#10;&#10;Examples:&#10;• The literature review needs more empirical studies on turnover intentions&#10;• Methodology section lacks detail on sampling procedures&#10;• References are not consistently in APA 7th format&#10;• The problem statement needs to be more specific"></textarea>
           </div>
-          <button class="btn btn-primary" style="width:100%;justify-content:center;height:38px" onclick="reviseWithFeedback()">
-            🔄 Revise Chapter
-          </button>
-          <div style="font-size:11px;color:var(--ink3);margin-top:8px;text-align:center">AI will revise the current draft to address all feedback points</div>
+          <button class="p-btn" id="p-revise-btn" onclick="reviseChapter()">🔄 Revise with Feedback</button>
+          <div style="font-size:11px;color:var(--text3);text-align:center;margin-top:6px">
+            The AI will address every point and update the editor
+          </div>
         </div>
 
         <!-- SOURCES TAB -->
-        <div class="panel-body" id="ptab-sources" style="display:none">
-          <div style="font-size:12px;color:var(--ink2);margin-bottom:10px">Academic sources used for this chapter — verified via CrossRef, OpenAlex, Semantic Scholar.</div>
-          <div id="panel-sources-list">
-            <div style="font-size:12px;color:var(--ink3);text-align:center;padding:20px">Generate a chapter to see sources here.</div>
+        <div class="panel-body" id="tab-sources" style="display:none">
+          <div style="font-size:12px;color:var(--text2);margin-bottom:10px;line-height:1.5">
+            Academic sources verified against 250M+ papers via CrossRef, OpenAlex, and Semantic Scholar.
+          </div>
+          <div id="sources-list">
+            <div class="empty" style="padding:20px 0">
+              <div style="font-size:11px">Generate a chapter to see sources here</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="status-bar">
-      <div><span class="sb-dot" id="sb-dot"></span><span id="sb-status">Ready</span></div>
-      <div id="sb-words">0 words</div>
-      <div style="margin-left:auto" id="sb-client"></div>
-      <div>Gemini 2.5 Flash</div>
     </div>
   </div>
-
-  <!-- SETTINGS PAGE -->
-  <div class="page" id="page-settings">
-    <div class="topbar">
-      <div class="topbar-title">Settings</div>
-    </div>
-    <div class="page-body">
-      <div class="card">
-        <div class="card-title">API Connection</div>
-        <div class="field">
-          <label class="f-label">API Base URL</label>
-          <input class="f-input" id="s-api" placeholder="Leave blank if on same domain">
-          <div class="f-hint">Only needed if running the frontend separately from the backend.</div>
-        </div>
-        <button class="btn btn-primary" onclick="saveSettings()" style="margin-top:4px">Save</button>
-        <span id="s-msg" style="font-size:13px;color:var(--green);margin-left:10px"></span>
-      </div>
-      <div class="card">
-        <div class="card-title">About</div>
-        <p style="font-size:13px;color:var(--ink2);line-height:1.7">
-          Dissertation Platform — multi-client doctoral writing suite.<br>
-          Powered by Gemini 2.5 Flash with verified citations from CrossRef, OpenAlex, and Semantic Scholar.<br>
-          Persisted in Supabase · Logged to Notion · Deployed on Railway.
-        </p>
-      </div>
-    </div>
-  </div>
-
 </div>
 
 <script>
-// ─────────────────────────────────────────────────
-// STATE
-// ─────────────────────────────────────────────────
-let currentClientId = null;
-let currentChapterName = null;
-let currentJobId = null;
-let pollTimer = null;
+// ─── STATE ─────────────────────────────────────────────────────────────────
 let clients = [];
+let activeClientId = null;
+let activeChapter = null;
+let activeChapters = [];
+let jobId = null;
+let pollTimer = null;
+let lastSources = [];
 
-const api = () => (localStorage.getItem('dp_api') || '').replace(/\/$/, '') || window.location.origin;
+const api = () => window.location.origin;
 
-// ─────────────────────────────────────────────────
-// NAV
-// ─────────────────────────────────────────────────
-function showPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + name)?.classList.add('active');
-}
+// ─── INIT ────────────────────────────────────────────────────────────────
+window.onload = async () => {
+  await loadClients();
+  // auto-select Mitchell
+  const m = clients.find(c => c.id === 'mitchell-dba-ulv-001');
+  if (m) selectClient(m.id);
+};
 
-function panelTab(name, btn) {
-  document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  ['generate','feedback','sources'].forEach(n => {
-    const el = document.getElementById('ptab-'+n);
-    if (el) el.style.display = n === name ? '' : 'none';
-  });
-}
-
-function openModal(id) { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-
-// ─────────────────────────────────────────────────
-// CLIENTS
-// ─────────────────────────────────────────────────
+// ─── CLIENTS ─────────────────────────────────────────────────────────────
 async function loadClients() {
   try {
     const r = await fetch(api() + '/clients/');
-    const data = await r.json();
-    clients = data.clients || [];
+    const d = await r.json();
+    clients = d.clients || [];
     renderClientList();
-  } catch(e) {
-    console.error('Load clients error:', e);
-  }
+  } catch(e) { console.error(e); }
 }
 
 function renderClientList() {
-  const el = document.getElementById('clientList');
-  if (!clients.length) {
-    el.innerHTML = '<div style="font-size:12px;color:var(--ink3);padding:6px 10px">No clients yet.</div>';
-    return;
-  }
+  const el = document.getElementById('client-list');
+  if (!clients.length) { el.innerHTML = '<div style="padding:6px 10px;font-size:12px;color:var(--text3)">No clients yet.</div>'; return; }
   el.innerHTML = clients.map(c => {
-    const chapters = parseChapters(c.chapter_structure);
-    const complete = chapters.filter(ch => ch.status === 'complete').length;
-    const dots = chapters.map(ch => `<div class="cp-dot cp-${ch.status === 'complete' ? 'complete' : ch.status === 'pending_irb' ? 'pending' : 'not-started'}"></div>`).join('');
-    return `<div class="client-item ${c.id === currentClientId ? 'active' : ''}" onclick="selectClient('${c.id}')">
+    const chs = parseChapters(c.chapter_structure);
+    const dots = chs.map(ch => {
+      const cls = ch.status === 'complete' ? 'dot-complete' : ch.status === 'pending_irb' ? 'dot-pending' : 'dot-none';
+      return `<div class="dot ${cls}" title="${ch.chapter}"></div>`;
+    }).join('');
+    return `<div class="client-card ${c.id === activeClientId ? 'active' : ''}" onclick="selectClient('${c.id}')">
       <div class="client-name">${c.name}</div>
       <div class="client-meta">${c.degree} · ${c.institution}</div>
-      <div class="client-progress" title="${complete}/${chapters.length} chapters complete">${dots}</div>
+      <div class="client-dots">${dots}</div>
     </div>`;
   }).join('');
 }
 
 function parseChapters(raw) {
   if (!raw) return [];
-  try {
-    return typeof raw === 'string' ? JSON.parse(raw) : raw;
-  } catch { return []; }
+  try { return typeof raw === 'string' ? JSON.parse(raw) : raw; } catch { return []; }
 }
 
-async function selectClient(clientId) {
-  currentClientId = clientId;
-  const client = clients.find(c => c.id === clientId);
-  if (!client) return;
-
-  // Update sidebar
+async function selectClient(id) {
+  activeClientId = id;
   renderClientList();
-
-  // Update overview header
-  document.getElementById('overview-header').style.display = '';
-  document.getElementById('no-client-msg').style.display = 'none';
-  document.getElementById('client-workspace').style.display = '';
-  document.getElementById('export-full-btn').style.display = '';
-  document.getElementById('ov-name').textContent = client.name;
-  document.getElementById('ov-meta').textContent = `${client.degree} · ${client.field} · ${client.institution}`;
-  document.getElementById('ov-topic').textContent = client.topic;
-  document.getElementById('sb-client').textContent = client.name;
-
-  showPage('overview');
-  await loadClientChapters(clientId, client);
+  showDash();
+  const client = clients.find(c => c.id === id);
+  if (!client) return;
+  document.getElementById('dash-title').textContent = client.name;
+  document.getElementById('dash-meta').textContent = `${client.degree} · ${client.field} · ${client.institution}`;
+  document.getElementById('dash-topic').textContent = client.topic;
+  document.getElementById('dash-empty').style.display = 'none';
+  document.getElementById('dash-content').style.display = '';
+  await loadChapters(id, client);
 }
 
-async function loadClientChapters(clientId, client) {
+async function loadChapters(clientId, client) {
   try {
-    const r = await fetch(api() + '/clients/' + clientId + '/chapters');
-    const data = await r.json();
-    const chapters = data.chapters || parseChapters(client.chapter_structure);
-    renderChapterGrid(chapters, clientId);
-
-    // Stats
-    const complete = chapters.filter(ch => ['complete','draft','revised'].includes(ch.status)).length;
-    const totalWords = chapters.reduce((sum, ch) => sum + (ch.word_count || 0), 0);
-    document.getElementById('stat-chapters').textContent = `${complete}/${chapters.length}`;
-    document.getElementById('stat-words').textContent = totalWords > 0 ? totalWords.toLocaleString() : '—';
-    document.getElementById('ov-progress-text').textContent = `${complete} of ${chapters.length} chapters done`;
+    const r = await fetch(api() + `/clients/${clientId}/chapters`);
+    const d = await r.json();
+    activeChapters = d.chapters || parseChapters(client?.chapter_structure) || [];
+    renderChapterGrid();
+    updateStats();
   } catch(e) {
-    console.error('Load chapters error:', e);
+    activeChapters = parseChapters(client?.chapter_structure) || [];
+    renderChapterGrid();
   }
 }
 
-function renderChapterGrid(chapters, clientId) {
-  const el = document.getElementById('chapterGrid');
-  const statusLabel = {
-    complete: 'Complete', draft: 'Draft', revised: 'Revised',
-    pending_irb: 'Pending IRB', not_started: 'Not Started', ''  : 'Not Started'
-  };
-  el.innerHTML = chapters.map(ch => `
-    <div class="chapter-card" onclick="openChapter('${clientId}', '${ch.chapter || ch.chapter_name}')">
-      <div class="ch-name">${ch.chapter || ch.chapter_name}</div>
-      <div style="margin-top:6px">
-        <span class="ch-status st-${ch.status || 'not_started'}">${statusLabel[ch.status || ''] || 'Not Started'}</span>
-      </div>
-      <div class="ch-meta">${ch.notes || ''}</div>
-      ${ch.word_count ? `<div class="ch-words">${ch.word_count.toLocaleString()} words</div>` : ''}
-    </div>
-  `).join('');
+function renderChapterGrid() {
+  const labels = { complete:'Complete', draft:'Draft', revised:'Revised', pending_irb:'Pending IRB', not_started:'Not Started' };
+  document.getElementById('chapter-grid').innerHTML = activeChapters.map(ch => {
+    const name = ch.chapter || ch.chapter_name || '';
+    const status = ch.status || 'not_started';
+    return `<div class="chapter-tile" onclick="openChapter('${name}')">
+      <div class="ct-name">${name}</div>
+      <div><span class="ct-badge st-${status}">${labels[status] || status}</span></div>
+      <div class="ct-notes">${ch.notes || ''}</div>
+      ${ch.word_count ? `<div style="font-size:11px;color:var(--text3);margin-top:4px">${ch.word_count.toLocaleString()} words</div>` : ''}
+    </div>`;
+  }).join('');
 }
 
-async function openChapter(clientId, chapterName) {
-  currentClientId = clientId;
-  currentChapterName = chapterName;
-  const client = clients.find(c => c.id === clientId);
-
-  document.getElementById('ch-topbar-title').textContent = `${client?.name || ''} — ${chapterName}`;
-  document.getElementById('ch-editor-title').textContent = chapterName;
-  document.getElementById('ch-editor-meta').textContent = `${client?.degree || ''} · ${client?.institution || ''}`;
-  document.getElementById('sb-client').textContent = client?.name || '';
-
-  // Set chapter select
-  const sel = document.getElementById('panel-chapter-select');
-  for (let opt of sel.options) {
-    if (opt.value === chapterName) { sel.value = chapterName; break; }
-  }
-
-  // Load existing content
-  try {
-    const r = await fetch(api() + `/chapters/${clientId}/${encodeURIComponent(chapterName)}`);
-    const data = await r.json();
-    document.getElementById('chapterEditor').value = data.content || '';
-    updateWordCount();
-    updateChapterBadge(data.status || 'not_started');
-    if (data.sources && data.sources.length) {
-      renderSources(data.sources);
-    }
-  } catch(e) {
-    document.getElementById('chapterEditor').value = '';
-  }
-
-  document.getElementById('ch-progress-area').style.display = 'none';
-  showPage('chapter');
+function updateStats() {
+  const done = activeChapters.filter(c => ['complete','draft','revised'].includes(c.status)).length;
+  const words = activeChapters.reduce((s, c) => s + (c.word_count || 0), 0);
+  document.getElementById('stat-ch').textContent = `${done}/${activeChapters.length}`;
+  document.getElementById('stat-words').textContent = words > 0 ? words.toLocaleString() : '—';
 }
 
-function switchChapterFromPanel() {
-  const sel = document.getElementById('panel-chapter-select');
-  currentChapterName = sel.value;
-  document.getElementById('ch-topbar-title').textContent = `${clients.find(c=>c.id===currentClientId)?.name||''} — ${currentChapterName}`;
-  document.getElementById('ch-editor-title').textContent = currentChapterName;
-  document.getElementById('chapterEditor').value = '';
+// ─── CHAPTER WORKSPACE ───────────────────────────────────────────────────
+async function openChapter(chapterName) {
+  activeChapter = chapterName;
+  showChapter();
+  document.getElementById('editor-title').textContent = chapterName;
+  document.getElementById('sb-chapter').textContent = clients.find(c=>c.id===activeClientId)?.name || '';
+
+  // set chapter select to match
+  const sel = document.getElementById('p-chapter');
+  for (let o of sel.options) if (o.value === chapterName) { sel.value = chapterName; break; }
+
+  // render left nav
+  renderChapterNav(chapterName);
+
+  // load existing content
+  const editor = document.getElementById('editor');
+  editor.value = '';
+  document.getElementById('prog-area').style.display = 'none';
+  document.getElementById('gen-result').style.display = 'none';
   updateWordCount();
+
+  try {
+    const r = await fetch(api() + `/chapters/${activeClientId}/${encodeURIComponent(chapterName)}`);
+    const d = await r.json();
+    if (d.content) {
+      editor.value = d.content;
+      updateWordCount();
+      if (d.sources && d.sources.length) renderSources(JSON.parse(typeof d.sources === 'string' ? d.sources : JSON.stringify(d.sources)));
+    }
+  } catch(e) {}
 }
 
-// ─────────────────────────────────────────────────
-// GENERATE
-// ─────────────────────────────────────────────────
+function renderChapterNav(active) {
+  const labels = { complete:'✅', draft:'📝', revised:'✏️', pending_irb:'⏳', not_started:'○' };
+  document.getElementById('ch-list-items').innerHTML = activeChapters.map(ch => {
+    const name = ch.chapter || ch.chapter_name || '';
+    const status = ch.status || 'not_started';
+    return `<div class="ch-list-item ${name === active ? 'active' : ''}" onclick="openChapter('${name}')">
+      <div class="ch-list-name">${name}</div>
+      <div class="ch-list-badge"><span class="ct-badge st-${status}" style="font-size:10px">${labels[status]||'○'} ${status.replace(/_/g,' ')}</span></div>
+    </div>`;
+  }).join('');
+}
+
+function showDash() {
+  document.getElementById('view-dashboard').style.display = 'flex';
+  document.getElementById('view-chapter').style.display = 'none';
+}
+function showChapter() {
+  document.getElementById('view-dashboard').style.display = 'none';
+  document.getElementById('view-chapter').style.display = 'flex';
+}
+function backToDash() {
+  showDash();
+  if (activeClientId) selectClient(activeClientId);
+}
+
+// ─── TABS ─────────────────────────────────────────────────────────────────
+function showTab(name, btn) {
+  ['generate','feedback','sources'].forEach(n => {
+    document.getElementById('tab-'+n).style.display = n===name ? '' : 'none';
+  });
+  document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ─── EDITOR ───────────────────────────────────────────────────────────────
+function onEditorInput() { updateWordCount(); }
+
+function updateWordCount() {
+  const text = document.getElementById('editor').value || '';
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  document.getElementById('sb-words').textContent = words.toLocaleString() + ' words';
+}
+
+// ─── GENERATE ─────────────────────────────────────────────────────────────
 async function generateChapter() {
-  if (!currentClientId) { toast('Select a client first'); return; }
-  const chapterName = document.getElementById('panel-chapter-select').value || currentChapterName;
+  if (!activeClientId) { toast('Select a client first'); return; }
+  const chapterName = document.getElementById('p-chapter').value || activeChapter;
   if (!chapterName) { toast('Select a chapter'); return; }
 
-  const btn = document.getElementById('panel-gen-btn');
-  const btn2 = document.getElementById('gen-chapter-btn');
-  btn.disabled = true; btn.textContent = 'Generating…';
-  if(btn2) { btn2.disabled = true; btn2.textContent = 'Generating…'; }
+  // switch to that chapter in workspace if different
+  if (chapterName !== activeChapter) {
+    activeChapter = chapterName;
+    document.getElementById('editor-title').textContent = chapterName;
+    renderChapterNav(chapterName);
+  }
 
-  document.getElementById('ch-progress-area').style.display = 'block';
-  setGenStatus('queued', 'Queued…', 5);
-  document.getElementById('gen-result-stats').style.display = 'none';
+  const genBtn = document.getElementById('gen-btn');
+  const pBtn = document.getElementById('p-gen-btn');
+  genBtn.disabled = true; pBtn.disabled = true;
+  genBtn.textContent = 'Generating…'; pBtn.textContent = 'Generating…';
+
+  document.getElementById('prog-area').style.display = 'block';
+  document.getElementById('gen-result').style.display = 'none';
+  setStatus('queued', 'Queued…', 5);
 
   const payload = {
-    client_id: currentClientId,
+    client_id: activeClientId,
     chapter_name: chapterName,
-    additional_instructions: document.getElementById('panel-instructions').value.trim() || null,
-    existing_draft: document.getElementById('panel-existing-draft').value.trim() || null
+    additional_instructions: document.getElementById('p-instructions').value.trim() || null,
+    existing_draft: document.getElementById('p-draft').value.trim() || null
   };
 
   try {
     const r = await fetch(api() + '/chapters/generate', {
       method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
     });
-    const data = await r.json();
-    if (!data.job_id) throw new Error(data.detail || 'No job ID');
-    currentJobId = data.job_id;
+    const d = await r.json();
+    if (!d.job_id) throw new Error(d.detail || 'No job ID');
+    jobId = d.job_id;
     if (pollTimer) clearInterval(pollTimer);
-    pollTimer = setInterval(pollGenJob, 2500);
+    pollTimer = setInterval(pollJob, 2500);
   } catch(e) {
-    setGenStatus('failed', 'Error: ' + e.message, 0);
-    resetGenBtn();
+    setStatus('failed', 'Error: ' + e.message, 0);
+    resetBtns();
   }
 }
 
-async function pollGenJob() {
-  if (!currentJobId) return;
+async function pollJob() {
+  if (!jobId) return;
   try {
-    const r = await fetch(api() + '/chapters/job/' + currentJobId);
+    const r = await fetch(api() + '/chapters/job/' + jobId);
     const job = await r.json();
     const msgs = {
-      queued:'In queue…', researching:'Searching CrossRef · OpenAlex · Semantic Scholar…',
-      writing:'Writing chapter with Gemini 2.5 Flash…', complete:'Done!',
-      failed: job.error || 'Generation failed'
+      queued: 'In queue…',
+      researching: 'Searching CrossRef · OpenAlex · Semantic Scholar…',
+      writing: 'Writing chapter with Gemini 2.5 Flash…',
+      complete: 'Done!',
+      failed: job.error || 'Failed'
     };
-    const pcts = {queued:5,researching:35,writing:70,complete:100,failed:0};
-    setGenStatus(job.status, msgs[job.status]||job.status, pcts[job.status]||0);
-    if (job.source_count) {
-      document.getElementById('ch-prog-detail').textContent = `${job.source_count} verified sources found`;
-    }
+    const pcts = { queued:8, researching:40, writing:75, complete:100, failed:0 };
+    setStatus(job.status, msgs[job.status]||job.status, pcts[job.status]||0);
+    if (job.source_count) document.getElementById('prog-detail').textContent = `${job.source_count} verified academic sources found`;
+
     if (job.status === 'complete') {
       clearInterval(pollTimer);
-      document.getElementById('chapterEditor').value = job.content || '';
+      // put content into editor
+      document.getElementById('editor').value = job.content || '';
       updateWordCount();
-      updateChapterBadge('draft');
-      if (job.sources?.length) renderSources(job.sources);
-      document.getElementById('gen-result-stats').style.display = 'block';
-      document.getElementById('gen-stats-row').innerHTML = `
-        <div class="stat-box"><div class="stat-n">${(job.word_count||0).toLocaleString()}</div><div class="stat-l">Words</div></div>
-        <div class="stat-box"><div class="stat-n">${job.source_count||0}</div><div class="stat-l">Sources</div></div>
+      // show stats
+      document.getElementById('gen-result').style.display = '';
+      document.getElementById('gen-stats').innerHTML = `
+        <div class="gs"><div class="gs-n">${(job.word_count||0).toLocaleString()}</div><div class="gs-l">Words</div></div>
+        <div class="gs"><div class="gs-n">${job.source_count||0}</div><div class="gs-l">Sources</div></div>
       `;
-      resetGenBtn();
-      toast(`✓ ${currentChapterName} generated — ${(job.word_count||0).toLocaleString()} words`);
-      // Refresh client chapters list
-      if (currentClientId) {
-        const client = clients.find(c=>c.id===currentClientId);
-        if (client) await loadClientChapters(currentClientId, client);
+      // sources tab
+      if (job.sources) {
+        const srcs = Array.isArray(job.sources) ? job.sources : [];
+        renderSources(srcs);
+        lastSources = srcs;
+      }
+      resetBtns();
+      toast(`✓ ${activeChapter} — ${(job.word_count||0).toLocaleString()} words generated`);
+      // refresh chapter list
+      if (activeClientId) {
+        const cl = clients.find(c=>c.id===activeClientId);
+        if (cl) await loadChapters(activeClientId, cl);
+        renderChapterNav(activeChapter);
       }
     } else if (job.status === 'failed') {
       clearInterval(pollTimer);
-      resetGenBtn();
+      resetBtns();
       toast('Generation failed: ' + (job.error||'unknown error'));
     }
   } catch(e) { console.error(e); }
 }
 
-function setGenStatus(status, msg, pct) {
-  const badge = document.getElementById('ch-prog-badge');
-  const cls = {queued:'b-q',researching:'b-r',writing:'b-w',complete:'b-done',failed:'b-fail'};
+function setStatus(status, msg, pct) {
+  const badge = document.getElementById('prog-badge');
+  const cls = { queued:'b-q', researching:'b-r', writing:'b-w', complete:'b-done', failed:'b-fail' };
   badge.className = 'badge ' + (cls[status]||'b-q');
-  badge.textContent = status.charAt(0).toUpperCase()+status.slice(1);
-  document.getElementById('ch-prog-msg').textContent = msg;
-  document.getElementById('ch-prog-fill').style.width = pct + '%';
-  document.getElementById('sb-status').textContent = msg;
-  document.getElementById('sb-dot').className = 'sb-dot' + (status==='complete'?'':' busy');
+  badge.textContent = status.replace(/_/g,' ').replace(/\b\w/g, c=>c.toUpperCase());
+  document.getElementById('prog-msg').textContent = msg;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('sb-status').textContent = status === 'complete' ? 'Ready' : msg;
+  document.getElementById('sb-dot').className = 'sb-dot' + (status === 'complete' ? '' : ' busy');
 }
 
-function resetGenBtn() {
-  const btn = document.getElementById('panel-gen-btn');
-  const btn2 = document.getElementById('gen-chapter-btn');
-  btn.disabled = false; btn.textContent = '✨ Generate Chapter';
-  if(btn2) { btn2.disabled = false; btn2.textContent = '✨ Generate'; }
-}
-
-function updateChapterBadge(status) {
-  const badge = document.getElementById('ch-status-badge');
-  const cls = {complete:'b-done',draft:'b-w',revised:'b-done',pending_irb:'b-r',not_started:'b-q'};
-  const label = {complete:'Complete',draft:'Draft',revised:'Revised',pending_irb:'Pending IRB',not_started:'Not Started'};
-  badge.className = 'badge ' + (cls[status]||'b-q');
-  badge.textContent = label[status]||status;
+function resetBtns() {
+  const g = document.getElementById('gen-btn');
+  const p = document.getElementById('p-gen-btn');
+  g.disabled = false; g.textContent = '✨ Generate';
+  p.disabled = false; p.textContent = '✨ Generate Chapter';
 }
 
 function renderSources(sources) {
-  document.getElementById('panel-sources-list').innerHTML =
-    `<div style="font-size:11px;color:var(--ink2);margin-bottom:8px">${sources.length} sources verified</div>` +
-    sources.map((s,i) => `<div class="source-item"><span class="source-num">[${i+1}]</span>${s}</div>`).join('');
+  document.getElementById('sources-list').innerHTML = sources.length
+    ? `<div style="font-size:11px;color:var(--text2);margin-bottom:8px">${sources.length} verified sources</div>`
+      + sources.map((s,i) => `<div class="source-item"><span class="source-num">[${i+1}]</span>${s}</div>`).join('')
+    : '<div style="font-size:11px;color:var(--text3);text-align:center;padding:12px 0">No sources yet</div>';
 }
 
-// ─────────────────────────────────────────────────
-// REVISE WITH FEEDBACK
-// ─────────────────────────────────────────────────
-async function reviseWithFeedback() {
-  const feedback = document.getElementById('panel-feedback').value.trim();
-  if (!feedback) { toast('Enter professor feedback first'); return; }
-  if (!currentClientId || !currentChapterName) { toast('No chapter selected'); return; }
+// ─── FEEDBACK / REVISE ────────────────────────────────────────────────────
+async function reviseChapter() {
+  const feedback = document.getElementById('p-feedback').value.trim();
+  if (!feedback) { toast('Paste professor feedback first'); return; }
+  if (!activeClientId || !activeChapter) { toast('Open a chapter first'); return; }
 
-  // Need chapter_id — get from current content
-  toast('Revising chapter with professor feedback…');
+  const btn = document.getElementById('p-revise-btn');
+  btn.disabled = true; btn.textContent = 'Revising…';
+
   try {
-    const r = await fetch(api() + `/chapters/${currentClientId}/${encodeURIComponent(currentChapterName)}`);
-    const data = await r.json();
-    const chapterId = data.id;
-    if (!chapterId) { toast('Save the chapter first before revising'); return; }
-
-    const revRes = await fetch(api() + '/chapters/revise', {
-      method: 'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({client_id: currentClientId, chapter_id: chapterId, professor_feedback: feedback})
+    // get chapter id
+    const r = await fetch(api() + `/chapters/${activeClientId}/${encodeURIComponent(activeChapter)}`);
+    const d = await r.json();
+    if (!d.id) {
+      toast('Save the chapter first before revising');
+      btn.disabled = false; btn.textContent = '🔄 Revise with Feedback';
+      return;
+    }
+    // revise
+    const rr = await fetch(api() + '/chapters/revise', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ client_id: activeClientId, chapter_id: d.id, professor_feedback: feedback })
     });
-    const revData = await revRes.json();
-    document.getElementById('chapterEditor').value = revData.content || '';
+    const result = await rr.json();
+    document.getElementById('editor').value = result.content || '';
     updateWordCount();
-    updateChapterBadge('revised');
-    toast(`✓ Revised — ${(revData.word_count||0).toLocaleString()} words`);
+    toast(`✓ Revised — ${(result.word_count||0).toLocaleString()} words`);
   } catch(e) {
     toast('Revision error: ' + e.message);
+  } finally {
+    btn.disabled = false; btn.textContent = '🔄 Revise with Feedback';
   }
 }
 
-// ─────────────────────────────────────────────────
-// SAVE / EXPORT
-// ─────────────────────────────────────────────────
-async function saveCurrentDraft() {
-  if (!currentClientId || !currentChapterName) { toast('No chapter open'); return; }
-  const content = document.getElementById('chapterEditor').value;
+// ─── SAVE / EXPORT ────────────────────────────────────────────────────────
+async function saveDraft() {
+  if (!activeClientId || !activeChapter) { toast('No chapter open'); return; }
+  const content = document.getElementById('editor').value;
   try {
     await fetch(api() + '/chapters/save', {
-      method: 'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({client_id: currentClientId, chapter_name: currentChapterName, content})
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ client_id: activeClientId, chapter_name: activeChapter, content })
     });
     toast('✓ Draft saved');
-    updateChapterBadge('draft');
-  } catch(e) { toast('Save error: ' + e.message); }
+  } catch(e) { toast('Save failed: ' + e.message); }
 }
 
-function exportCurrentChapter() {
-  if (!currentClientId || !currentChapterName) { toast('No chapter selected'); return; }
-  window.open(api() + `/chapters/${currentClientId}/export/${encodeURIComponent(currentChapterName)}`, '_blank');
+function exportChapter() {
+  if (!activeClientId || !activeChapter) { toast('No chapter open'); return; }
+  window.open(api() + `/chapters/${activeClientId}/export/${encodeURIComponent(activeChapter)}`, '_blank');
 }
 
 function exportFull() {
-  if (!currentClientId) { toast('Select a client first'); return; }
-  window.open(api() + `/chapters/${currentClientId}/export/full`, '_blank');
+  if (!activeClientId) { toast('Select a client first'); return; }
+  window.open(api() + `/chapters/${activeClientId}/export/full`, '_blank');
 }
 
-// ─────────────────────────────────────────────────
-// CREATE CLIENT
-// ─────────────────────────────────────────────────
-async function createClient() {
+// ─── ADD CLIENT ───────────────────────────────────────────────────────────
+function openModal() { document.getElementById('modal-add').classList.add('open'); }
+function closeModal() { document.getElementById('modal-add').classList.remove('open'); }
+
+async function addClient() {
   const name = document.getElementById('nc-name').value.trim();
   const institution = document.getElementById('nc-institution').value.trim();
   const topic = document.getElementById('nc-topic').value.trim();
-  if (!name || !institution || !topic) { toast('Name, institution, and topic are required'); return; }
-
+  if (!name || !institution || !topic) { toast('Name, institution and topic are required'); return; }
   try {
     const r = await fetch(api() + '/clients/', {
-      method: 'POST', headers:{'Content-Type':'application/json'},
+      method: 'POST', headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
-        name,
+        name, institution, topic,
         degree: document.getElementById('nc-degree').value,
         field: document.getElementById('nc-field').value,
-        institution,
-        topic,
         advisor: document.getElementById('nc-advisor').value.trim() || null,
         citation_style: document.getElementById('nc-citation').value,
-        quality_target: parseInt(document.getElementById('nc-quality').value),
-        formatting_notes: document.getElementById('nc-formatting').value.trim() || null
+        formatting_notes: document.getElementById('nc-fmt').value.trim() || null,
+        quality_target: 75
       })
     });
-    const data = await r.json();
-    closeModal('addClientModal');
+    const d = await r.json();
+    closeModal();
     toast(`✓ ${name} added`);
     await loadClients();
-    await selectClient(data.client_id);
+    selectClient(d.client_id);
   } catch(e) { toast('Error: ' + e.message); }
 }
 
-// ─────────────────────────────────────────────────
-// UTILS
-// ─────────────────────────────────────────────────
-function updateWordCount() {
-  const text = document.getElementById('chapterEditor').value || '';
-  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-  document.getElementById('ch-word-count').textContent = words.toLocaleString() + ' words';
-  document.getElementById('sb-words').textContent = words.toLocaleString() + ' words';
-}
-
-function saveSettings() {
-  localStorage.setItem('dp_api', document.getElementById('s-api').value.trim().replace(/\/$/, ''));
-  const msg = document.getElementById('s-msg');
-  msg.textContent = '✓ Saved'; setTimeout(() => msg.textContent = '', 2500);
-}
-
+// ─── UTILS ────────────────────────────────────────────────────────────────
 function toast(msg, dur=2800) {
   const el = document.getElementById('toast');
   el.textContent = msg; el.classList.add('show');
   setTimeout(() => el.classList.remove('show'), dur);
 }
-
-// ─────────────────────────────────────────────────
-// INIT
-// ─────────────────────────────────────────────────
-window.onload = async () => {
-  const savedApi = localStorage.getItem('dp_api');
-  if (savedApi) document.getElementById('s-api').value = savedApi;
-  await loadClients();
-  // Auto-select Mitchell
-  const mitchell = clients.find(c => c.id === 'mitchell-dba-ulv-001');
-  if (mitchell) await selectClient(mitchell.id);
-};
 </script>
 </body>
 </html>
