@@ -4,183 +4,176 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dissertation Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f4f3ef;--white:#ffffff;--s2:#eeede8;--s3:#e5e4dd;
-  --border:#e0dfd8;--border2:#c8c7be;
-  --text:#1a1915;--text2:#6b6a62;--text3:#9e9d94;
-  --blue:#2563eb;--blue-bg:#eff6ff;--blue-dark:#1d4ed8;
-  --green:#15803d;--green-bg:#f0fdf4;
-  --amber:#b45309;--amber-bg:#fffbeb;
-  --red:#dc2626;--red-bg:#fef2f2;
-  --purple:#7c3aed;--purple-bg:#f5f3ff;
-  --sidebar:236px;
+  --bg:#faf9f6;--surface:#fff;--s2:#f3f2ee;--s3:#eae9e3;
+  --border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.13);
+  --ink:#1c1b18;--ink2:#6b6960;--ink3:#9e9d94;
+  --blue:#2563eb;--blue-bg:rgba(37,99,235,0.07);--blue-text:#1d4ed8;
+  --green:#15803d;--green-bg:rgba(21,128,61,0.07);
+  --amber:#b45309;--amber-bg:rgba(180,83,9,0.08);
+  --red:#dc2626;--red-bg:rgba(220,38,38,0.07);
+  --purple:#7c3aed;--purple-bg:rgba(124,58,237,0.07);
+  --sidebar:248px;--panel:288px;
 }
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);height:100vh;display:flex;overflow:hidden;font-size:14px}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);display:flex;font-size:14px;line-height:1.5}
 
-/* SIDEBAR */
-.sidebar{width:var(--sidebar);height:100vh;background:var(--white);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
-.brand{padding:16px 14px 12px;border-bottom:1px solid var(--border)}
+/* ── SIDEBAR ─────────────────────────────────────── */
+.sidebar{width:var(--sidebar);height:100vh;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden}
+.brand{padding:18px 16px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.brand-icon{width:32px;height:32px;background:var(--ink);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--bg);font-size:16px;flex-shrink:0}
 .brand-name{font-size:14px;font-weight:700;letter-spacing:-.3px}
-.brand-sub{font-size:11px;color:var(--text3);margin-top:1px}
-.nav-section{padding:8px 8px 4px}
-.nav-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);padding:6px 6px 4px}
-.client-card{margin:2px 0;padding:8px 10px;border-radius:8px;cursor:pointer;border:1.5px solid transparent;transition:all .12s}
+.brand-sub{font-size:11px;color:var(--ink3)}
+.sb-nav{flex:1;overflow-y:auto;padding:10px 8px}
+.sb-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);padding:8px 8px 5px}
+.client-card{padding:9px 10px;border-radius:8px;cursor:pointer;border:1.5px solid transparent;margin-bottom:3px;transition:all .12s}
 .client-card:hover{background:var(--s2)}
-.client-card.active{background:var(--blue-bg);border-color:rgba(37,99,235,.2)}
-.client-name{font-size:13px;font-weight:600;color:var(--text)}
-.client-meta{font-size:11px;color:var(--text3);margin-top:1px}
-.client-dots{display:flex;gap:3px;margin-top:5px}
+.client-card.on{background:var(--blue-bg);border-color:rgba(37,99,235,0.18)}
+.cc-name{font-size:13px;font-weight:600}
+.cc-meta{font-size:11px;color:var(--ink3);margin-top:1px}
+.cc-dots{display:flex;gap:3px;margin-top:5px}
 .dot{width:7px;height:7px;border-radius:50%}
-.dot-complete{background:var(--green)}
-.dot-pending{background:var(--amber)}
-.dot-none{background:var(--s3);border:1px solid var(--border2)}
-.add-client-btn{margin:6px 8px;padding:7px 10px;border:1.5px dashed var(--border2);border-radius:8px;background:none;color:var(--text3);font-size:12px;font-family:inherit;cursor:pointer;width:calc(100% - 16px);transition:all .12s}
-.add-client-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-bg)}
-.sidebar-footer{margin-top:auto;padding:10px 14px;font-size:10px;color:var(--text3);border-top:1px solid var(--border);line-height:1.8}
+.dot-c{background:var(--green)}
+.dot-p{background:var(--amber)}
+.dot-n{background:var(--s3);border:1px solid var(--border2)}
+.add-btn{width:100%;padding:8px 10px;border:1.5px dashed var(--border2);border-radius:8px;background:none;color:var(--ink3);font-size:12px;font-family:inherit;cursor:pointer;margin-top:4px;transition:all .12s;text-align:center}
+.add-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-bg)}
+.sb-footer{padding:10px 16px;font-size:10px;color:var(--ink3);border-top:1px solid var(--border);line-height:1.8;flex-shrink:0}
 
-/* MAIN */
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+/* ── MAIN ─────────────────────────────────────────── */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 
-/* VIEWS */
-#view-dashboard{display:flex;flex-direction:column;flex:1;overflow-y:auto}
-#view-chapter{display:none;flex:1;overflow:hidden}
+/* ── DASHBOARD ─────────────────────────────────────── */
+#pg-dash{display:flex;flex-direction:column;flex:1;overflow:hidden}
+.dash-hero{padding:24px 28px 18px;border-bottom:1px solid var(--border);background:var(--surface);flex-shrink:0}
+.dash-name{font-size:24px;font-weight:700;letter-spacing:-.5px}
+.dash-meta{font-size:13px;color:var(--ink2);margin-top:3px}
+.dash-topic{font-size:13px;color:var(--ink3);font-style:italic;margin-top:2px}
+.dash-actions{display:flex;gap:8px;margin-top:14px}
+.dash-body{flex:1;overflow-y:auto;padding:24px 28px}
+.section-head{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);margin-bottom:12px}
+.ch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
+.ch-tile{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;transition:all .15s;position:relative}
+.ch-tile:hover{border-color:var(--blue);box-shadow:0 2px 12px rgba(37,99,235,.1);transform:translateY(-1px)}
+.ch-tile-name{font-size:13px;font-weight:600;margin-bottom:7px;line-height:1.3}
+.ch-tile-notes{font-size:11px;color:var(--ink3);margin-top:6px;line-height:1.4}
+.ch-tile-words{font-size:11px;color:var(--ink3);margin-top:4px}
+.stat-row{display:flex;gap:10px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 18px;flex:1;cursor:default}
+.stat.clickable{cursor:pointer;transition:all .12s}
+.stat.clickable:hover{border-color:var(--blue);background:var(--blue-bg)}
+.stat-n{font-size:20px;font-weight:700;line-height:1}
+.stat-l{font-size:11px;color:var(--ink3);margin-top:3px}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:60px;text-align:center}
+.empty-icon{font-size:48px;margin-bottom:16px}
+.empty-title{font-size:18px;font-weight:700;letter-spacing:-.3px;margin-bottom:6px}
+.empty-sub{font-size:13px;color:var(--ink3)}
 
-/* DASHBOARD */
-.dash-header{padding:24px 28px 16px;border-bottom:1px solid var(--border);background:var(--white)}
-.dash-title{font-size:22px;font-weight:700;letter-spacing:-.4px}
-.dash-meta{font-size:13px;color:var(--text2);margin-top:3px}
-.dash-topic{font-size:13px;color:var(--text3);font-style:italic;margin-top:2px}
-.dash-body{padding:20px 28px;flex:1}
-.section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-bottom:12px}
-.chapter-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
-.chapter-tile{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;transition:all .15s}
-.chapter-tile:hover{border-color:var(--blue);box-shadow:0 2px 8px rgba(37,99,235,.1)}
-.ct-name{font-size:13px;font-weight:600;margin-bottom:6px}
-.ct-badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
-.st-complete{background:var(--green-bg);color:var(--green)}
-.st-draft{background:var(--blue-bg);color:var(--blue-dark)}
-.st-revised{background:var(--purple-bg);color:var(--purple)}
-.st-pending_irb{background:var(--amber-bg);color:var(--amber)}
-.st-not_started{background:var(--s2);color:var(--text3)}
-.ct-notes{font-size:11px;color:var(--text3);margin-top:6px;line-height:1.4}
-.stats-row{display:flex;gap:10px}
-.stat{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:12px 16px;flex:1}
-.stat-n{font-size:20px;font-weight:700}
-.stat-l{font-size:11px;color:var(--text3);margin-top:2px}
+/* ── CHAPTER WORKSPACE ──────────────────────────────── */
+#pg-chapter{display:none;flex:1;overflow:hidden}
+.ws-layout{display:flex;height:100%;overflow:hidden}
 
-/* CHAPTER WORKSPACE - 3 column layout */
-.chapter-layout{display:flex;height:100%;overflow:hidden}
+/* Chapter list column */
+.ch-nav{width:196px;border-right:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
+.ch-nav-head{padding:12px 14px;border-bottom:1px solid var(--border);flex-shrink:0}
+.back-btn{background:none;border:none;color:var(--blue);font-size:12px;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:3px;margin-bottom:4px;padding:0}
+.back-btn:hover{opacity:.75}
+.ch-nav-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)}
+.ch-nav-list{flex:1;overflow-y:auto}
+.ch-nav-item{padding:10px 14px;cursor:pointer;border-left:3px solid transparent;transition:all .1s}
+.ch-nav-item:hover{background:var(--s2)}
+.ch-nav-item.on{background:var(--blue-bg);border-left-color:var(--blue)}
+.ch-nav-name{font-size:12px;font-weight:500;line-height:1.35;color:var(--ink)}
+.ch-nav-status{margin-top:3px}
 
-/* LEFT: chapter list */
-.ch-list{width:200px;border-right:1px solid var(--border);background:var(--white);overflow-y:auto;flex-shrink:0}
-.ch-list-header{padding:12px 14px 8px;border-bottom:1px solid var(--border)}
-.ch-list-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text3)}
-.ch-list-back{background:none;border:none;color:var(--blue);font-size:12px;font-family:inherit;cursor:pointer;padding:0;margin-bottom:4px;display:flex;align-items:center;gap:3px}
-.ch-list-item{padding:10px 14px;cursor:pointer;border-left:3px solid transparent;transition:all .1s}
-.ch-list-item:hover{background:var(--s2)}
-.ch-list-item.active{background:var(--blue-bg);border-left-color:var(--blue)}
-.ch-list-name{font-size:12px;font-weight:500;line-height:1.3}
-.ch-list-badge{margin-top:3px}
+/* Editor column */
+.ed-col{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.ed-topbar{height:46px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:0 18px;flex-shrink:0;background:var(--surface)}
+.ed-title{font-size:14px;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ed-scroll{flex:1;overflow-y:auto;padding:28px 32px;background:var(--bg)}
+.ed-inner{max-width:700px;margin:0 auto}
+.ed-doc-title{font-size:20px;font-weight:700;letter-spacing:-.4px;margin-bottom:16px;color:var(--ink)}
+.editor{width:100%;min-height:520px;border:none;outline:none;font-family:'Lora',Georgia,serif;font-size:16px;line-height:1.9;color:var(--ink);resize:none;background:transparent;padding:0}
+.editor::placeholder{color:var(--ink3);font-style:italic;font-size:15px}
+.ed-statusbar{height:26px;border-top:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:14px;font-size:11px;color:var(--ink3);flex-shrink:0;background:var(--surface)}
+.sb-live{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;margin-right:3px}
+.sb-live.busy{background:var(--amber)}
 
-/* MIDDLE: editor */
-.editor-pane{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--white)}
-.editor-topbar{padding:10px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-shrink:0}
-.editor-chapter-title{font-size:14px;font-weight:600;flex:1}
-.btn{display:inline-flex;align-items:center;gap:5px;padding:0 12px;height:30px;border-radius:6px;border:1px solid var(--border2);background:var(--white);color:var(--text2);font-size:12px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .12s;white-space:nowrap}
-.btn:hover{background:var(--s2);color:var(--text)}
+/* Progress bar */
+.prog-strip{padding:9px 18px;background:var(--blue-bg);border-bottom:1px solid rgba(37,99,235,.12);display:none;flex-shrink:0}
+.prog-row{display:flex;align-items:center;gap:7px;margin-bottom:4px}
+.prog-bar{height:2px;background:rgba(37,99,235,.15);border-radius:1px;overflow:hidden}
+.prog-fill{height:100%;background:var(--blue);border-radius:1px;transition:width .5s}
+.prog-detail{font-size:11px;color:var(--ink3);margin-top:3px}
+
+/* AI Panel */
+.ai-panel{width:var(--panel);border-left:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
+.panel-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0}
+.ptab{flex:1;padding:11px 4px;border:none;background:none;font-size:12px;font-weight:500;color:var(--ink3);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .12s}
+.ptab.on{color:var(--blue-text);border-bottom-color:var(--blue)}
+.pb{flex:1;overflow-y:auto;padding:16px}
+
+/* Panel elements */
+.pl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--ink3);margin-bottom:5px;display:block}
+.ps{width:100%;padding:7px 9px 7px 10px;background:var(--s2);border:1px solid var(--border);border-radius:6px;color:var(--ink);font-size:12px;font-family:inherit;outline:none;margin-bottom:10px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239e9d94'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:22px;cursor:pointer}
+.pt{width:100%;padding:8px 10px;background:var(--s2);border:1px solid var(--border);border-radius:6px;color:var(--ink);font-size:12px;font-family:inherit;outline:none;resize:vertical;margin-bottom:10px;transition:border .15s}
+.pt:focus,.ps:focus{border-color:var(--blue)}
+.pa{width:100%;padding:9px 12px;background:var(--blue);color:#fff;border:none;border-radius:7px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:opacity .15s;display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:8px}
+.pa:hover{opacity:.87}
+.pa:disabled{opacity:.4;cursor:not-allowed}
+.pa-sec{background:var(--s2);color:var(--ink2);border:1px solid var(--border2)}
+.pa-sec:hover{background:var(--s3);opacity:1}
+.p-sec{margin-bottom:14px}
+.p-divider{height:1px;background:var(--border);margin:10px 0}
+.feedback-notice{background:var(--amber-bg);border:1px solid rgba(180,83,9,.18);border-radius:7px;padding:10px 12px;margin-bottom:12px;font-size:11px;color:var(--amber);line-height:1.6}
+.src-item{padding:5px 0;border-bottom:1px solid var(--border);font-size:11px;color:var(--ink2);line-height:1.5}
+.src-item:last-child{border:none}
+.src-num{color:var(--ink3);font-weight:700;margin-right:3px}
+.gen-stats{display:flex;gap:6px;margin:8px 0}
+.gs-box{background:var(--s2);border-radius:6px;padding:7px 10px;flex:1;text-align:center}
+.gs-n{font-size:16px;font-weight:700}
+.gs-l{font-size:10px;color:var(--ink3)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:0 12px;height:30px;border-radius:6px;border:1px solid var(--border2);background:var(--surface);color:var(--ink2);font-size:12px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .12s;white-space:nowrap}
+.btn:hover{background:var(--s2);color:var(--ink)}
 .btn-primary{background:var(--blue);color:#fff;border-color:var(--blue)}
-.btn-primary:hover{opacity:.88;background:var(--blue)}
+.btn-primary:hover{opacity:.87;background:var(--blue)}
 .btn-primary:disabled{opacity:.4;cursor:not-allowed}
 .btn-sm{height:26px;padding:0 9px;font-size:11px}
 
-/* Progress bar area */
-.progress-area{padding:10px 20px;background:var(--blue-bg);border-bottom:1px solid rgba(37,99,235,.15);display:none}
-.prog-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
-.badge{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
-.b-q{background:var(--s2);color:var(--text3)}
-.b-r{background:var(--amber-bg);color:var(--amber)}
-.b-w{background:var(--blue-bg);color:var(--blue-dark)}
-.b-done{background:var(--green-bg);color:var(--green)}
-.b-fail{background:var(--red-bg);color:var(--red)}
-.prog-msg{font-size:12px;color:var(--text2)}
-.prog-bar{height:3px;background:rgba(37,99,235,.2);border-radius:2px;overflow:hidden}
-.prog-fill{height:100%;background:var(--blue);border-radius:2px;transition:width .5s ease}
-.prog-detail{font-size:11px;color:var(--text3);margin-top:4px}
-
-/* Editor itself */
-.editor-scroll{flex:1;overflow-y:auto;padding:24px 28px}
-.editor-textarea{width:100%;min-height:500px;border:none;outline:none;font-family:'Georgia','Times New Roman',serif;font-size:15px;line-height:1.9;color:var(--text);resize:none;background:transparent;padding:0}
-.editor-textarea::placeholder{color:var(--text3);font-style:italic}
-
-/* Statusbar */
-.statusbar{height:24px;border-top:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:16px;font-size:11px;color:var(--text3);flex-shrink:0;background:var(--white)}
-.sb-dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;margin-right:3px}
-.sb-dot.busy{background:var(--amber)}
-
-/* RIGHT: AI panel */
-.ai-panel{width:280px;border-left:1px solid var(--border);background:var(--white);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
-.panel-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0}
-.ptab{flex:1;padding:10px 4px;border:none;background:none;font-size:12px;font-weight:500;color:var(--text3);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .12s}
-.ptab.active{color:var(--blue-dark);border-bottom-color:var(--blue)}
-.panel-body{flex:1;overflow-y:auto;padding:14px}
-
-/* Panel elements */
-.p-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--text3);margin-bottom:5px}
-.p-select{width:100%;padding:7px 9px;background:var(--s2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:12px;font-family:inherit;outline:none;margin-bottom:10px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239e9d94'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:22px;cursor:pointer}
-.p-textarea{width:100%;padding:7px 9px;background:var(--s2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:12px;font-family:inherit;outline:none;resize:vertical;min-height:70px;transition:border .15s;margin-bottom:10px}
-.p-textarea:focus,.p-select:focus{border-color:var(--blue)}
-.p-btn{width:100%;padding:9px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:opacity .15s;display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:8px}
-.p-btn:hover{opacity:.88}
-.p-btn:disabled{opacity:.4;cursor:not-allowed}
-.p-btn-sec{background:var(--s2);color:var(--text2);border:1px solid var(--border)}
-.p-btn-sec:hover{background:var(--s3);opacity:1}
-.p-divider{height:1px;background:var(--border);margin:10px 0}
-.p-section{margin-bottom:12px}
-
-/* Feedback box */
-.feedback-notice{background:var(--amber-bg);border:1px solid rgba(180,83,9,.2);border-radius:6px;padding:10px;margin-bottom:10px;font-size:11px;color:var(--amber);line-height:1.5}
-
-/* Sources */
-.source-item{padding:5px 0;border-bottom:1px solid var(--border);font-size:11px;color:var(--text2);line-height:1.5}
-.source-item:last-child{border:none}
-.source-num{color:var(--text3);font-weight:700;margin-right:3px}
-
-/* Results stats */
-.gen-stats{display:flex;gap:6px;margin-top:10px}
-.gs{background:var(--s2);border-radius:6px;padding:6px 10px;flex:1;text-align:center}
-.gs-n{font-size:15px;font-weight:700}
-.gs-l{font-size:10px;color:var(--text3)}
+/* Badges */
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.b-complete{background:var(--green-bg);color:var(--green)}
+.b-draft{background:var(--blue-bg);color:var(--blue-text)}
+.b-revised{background:var(--purple-bg);color:var(--purple)}
+.b-pending_irb{background:var(--amber-bg);color:var(--amber)}
+.b-not_started{background:var(--s2);color:var(--ink3)}
 
 /* Modal */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:100;display:none;align-items:center;justify-content:center}
-.modal-bg.open{display:flex}
-.modal{background:var(--white);border-radius:12px;width:520px;max-width:95vw;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:200;display:none;align-items:center;justify-content:center}
+.modal-bg.on{display:flex}
+.modal{background:var(--surface);border-radius:12px;width:520px;max-width:95vw;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.18)}
 .modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .modal-title{font-size:15px;font-weight:600}
-.modal-x{background:none;border:none;font-size:18px;cursor:pointer;color:var(--text3);padding:2px 6px;border-radius:4px;line-height:1}
+.modal-x{background:none;border:none;font-size:20px;cursor:pointer;color:var(--ink3);line-height:1;padding:0 4px;border-radius:4px}
 .modal-x:hover{background:var(--s2)}
 .modal-body{padding:18px 20px;overflow-y:auto}
 .modal-foot{padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end}
-.field{margin-bottom:12px}
-.field:last-child{margin-bottom:0}
-.f-label{display:block;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px}
-.f-input,.f-select,.f-textarea{width:100%;padding:8px 10px;background:var(--s2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;font-family:inherit;outline:none;transition:border .15s}
-.f-input:focus,.f-textarea:focus,.f-select:focus{border-color:var(--blue)}
-.f-textarea{resize:vertical;min-height:70px}
-.f-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239e9d94'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:22px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.f{margin-bottom:12px}.f:last-child{margin-bottom:0}
+.fl{display:block;font-size:11px;font-weight:600;color:var(--ink2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px}
+.fi,.fs,.ft{width:100%;padding:8px 10px;background:var(--s2);border:1px solid var(--border);border-radius:6px;color:var(--ink);font-size:13px;font-family:inherit;outline:none;transition:border .15s}
+.fi:focus,.ft:focus,.fs:focus{border-color:var(--blue)}
+.ft{resize:vertical;min-height:64px}
+.fs{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239e9d94'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:22px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
 /* Toast */
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--text);color:#fff;padding:7px 16px;border-radius:20px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:all .2s;pointer-events:none;white-space:nowrap}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* Empty state */
-.empty{text-align:center;padding:40px 20px;color:var(--text3)}
-.empty-icon{font-size:36px;margin-bottom:10px}
-.empty-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--ink);color:#fff;padding:7px 18px;border-radius:20px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:all .2s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
@@ -189,27 +182,27 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 <div class="modal-bg" id="modal-add" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <div class="modal-head">
-      <div class="modal-title">New Client</div>
+      <div class="modal-title">Add New Client</div>
       <button class="modal-x" onclick="closeModal()">×</button>
     </div>
     <div class="modal-body">
-      <div class="grid2">
-        <div class="field"><label class="f-label">Name *</label><input class="f-input" id="nc-name" placeholder="e.g. Sarah Johnson"></div>
-        <div class="field"><label class="f-label">Degree *</label>
-          <select class="f-select" id="nc-degree"><option>DBA</option><option>PhD</option><option>EdD</option><option>MBA</option><option>MS</option><option>MA</option></select>
+      <div class="g2">
+        <div class="f"><label class="fl">Full Name *</label><input class="fi" id="nc-name" placeholder="e.g. Sarah Johnson"></div>
+        <div class="f"><label class="fl">Degree *</label>
+          <select class="fs" id="nc-degree"><option>DBA</option><option>PhD</option><option>EdD</option><option>MBA</option><option>MS</option><option>MA</option></select>
         </div>
       </div>
-      <div class="grid2">
-        <div class="field"><label class="f-label">Field *</label><input class="f-input" id="nc-field" placeholder="e.g. Human Resources"></div>
-        <div class="field"><label class="f-label">Citation Style</label>
-          <select class="f-select" id="nc-citation"><option>APA 7th</option><option>MLA 9th</option><option>Chicago 17th</option><option>Harvard</option><option>Vancouver</option><option>IEEE</option></select>
+      <div class="g2">
+        <div class="f"><label class="fl">Field *</label><input class="fi" id="nc-field" placeholder="e.g. Human Resources"></div>
+        <div class="f"><label class="fl">Citation Style</label>
+          <select class="fs" id="nc-citation"><option>APA 7th</option><option>MLA 9th</option><option>Chicago 17th</option><option>Harvard</option><option>Vancouver</option><option>IEEE</option></select>
         </div>
       </div>
-      <div class="field"><label class="f-label">Institution *</label><input class="f-input" id="nc-institution" placeholder="e.g. University of Southern California"></div>
-      <div class="field"><label class="f-label">Dissertation Topic *</label><input class="f-input" id="nc-topic" placeholder="Full dissertation title or research question"></div>
-      <div class="field"><label class="f-label">Advisor</label><input class="f-input" id="nc-advisor" placeholder="e.g. Professor Zhang"></div>
-      <div class="field"><label class="f-label">Formatting Notes</label>
-        <textarea class="f-textarea" id="nc-fmt" placeholder="Any institution-specific formatting requirements..."></textarea>
+      <div class="f"><label class="fl">Institution *</label><input class="fi" id="nc-inst" placeholder="e.g. University of Southern California"></div>
+      <div class="f"><label class="fl">Dissertation Topic *</label><input class="fi" id="nc-topic" placeholder="Full research question or dissertation title"></div>
+      <div class="f"><label class="fl">Advisor</label><input class="fi" id="nc-advisor" placeholder="e.g. Professor Zhang"></div>
+      <div class="f"><label class="fl">Formatting Notes <span style="font-weight:400;color:var(--ink3)">(optional)</span></label>
+        <textarea class="ft" id="nc-fmt" placeholder="Any institution-specific formatting requirements, template notes, etc."></textarea>
       </div>
     </div>
     <div class="modal-foot">
@@ -221,118 +214,121 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 
 <div class="toast" id="toast"></div>
 
-<!-- SIDEBAR -->
+<!-- ── SIDEBAR ───────────────────────────────────── -->
 <nav class="sidebar">
   <div class="brand">
-    <div class="brand-name">📚 Dissertation Platform</div>
-    <div class="brand-sub">Doctoral Writing Suite</div>
+    <div class="brand-icon">📚</div>
+    <div>
+      <div class="brand-name">Dissertation</div>
+      <div class="brand-sub">Doctoral Writing Suite</div>
+    </div>
   </div>
-  <div class="nav-section">
-    <div class="nav-label">Clients</div>
+  <div class="sb-nav">
+    <div class="sb-label">Clients</div>
     <div id="client-list"></div>
-    <button class="add-client-btn" onclick="openModal()">+ Add Client</button>
+    <button class="add-btn" onclick="openModal()">+ Add New Client</button>
   </div>
-  <div class="sidebar-footer">
-    Gemini 2.5 Flash<br>
-    CrossRef · OpenAlex · Semantic Scholar<br>
-    Railway · Supabase · Notion
-  </div>
+  <div class="sb-footer">Gemini 2.5 Flash · Free tier<br>CrossRef · OpenAlex · Semantic Scholar<br>Railway · Supabase · Notion</div>
 </nav>
 
-<!-- MAIN -->
+<!-- ── MAIN ─────────────────────────────────────── -->
 <div class="main">
 
-  <!-- DASHBOARD VIEW -->
-  <div id="view-dashboard">
-    <div class="dash-header">
-      <div id="dash-title" class="dash-title">Select a client</div>
-      <div id="dash-meta" class="dash-meta"></div>
-      <div id="dash-topic" class="dash-topic"></div>
+  <!-- DASHBOARD -->
+  <div id="pg-dash" style="display:flex;flex-direction:column;flex:1;overflow:hidden">
+
+    <!-- empty state -->
+    <div id="dash-empty" class="empty-state">
+      <div class="empty-icon">📚</div>
+      <div class="empty-title">Select a client to get started</div>
+      <div class="empty-sub">Mitchell is pre-loaded — click his name in the sidebar</div>
     </div>
-    <div class="dash-body">
-      <div id="dash-empty" class="empty" style="padding:60px 20px">
-        <div class="empty-icon">📚</div>
-        <div class="empty-title">Select a client from the sidebar</div>
-        <div style="font-size:13px;margin-top:4px">Mitchell is pre-loaded — click his name</div>
-      </div>
-      <div id="dash-content" style="display:none">
-        <div class="section-title">CHAPTER PROGRESS</div>
-        <div class="chapter-grid" id="chapter-grid"></div>
-        <div class="section-title">STATS</div>
-        <div class="stats-row">
-          <div class="stat"><div class="stat-n" id="stat-ch">0/6</div><div class="stat-l">Chapters</div></div>
-          <div class="stat"><div class="stat-n" id="stat-words">—</div><div class="stat-l">Total Words</div></div>
-          <div class="stat"><div class="stat-n" id="stat-src">—</div><div class="stat-l">Sources Used</div></div>
-          <div class="stat" style="cursor:pointer" onclick="exportFull()"><div class="stat-n" style="font-size:14px">↓ DOCX</div><div class="stat-l">Full Dissertation</div></div>
+
+    <!-- client dashboard -->
+    <div id="dash-content" style="display:none;flex:1;overflow:hidden;display:none;flex-direction:column">
+      <div class="dash-hero">
+        <div class="dash-name" id="d-name">—</div>
+        <div class="dash-meta" id="d-meta"></div>
+        <div class="dash-topic" id="d-topic"></div>
+        <div class="dash-actions">
+          <button class="btn btn-primary" onclick="exportFull()">↓ Export Full Dissertation</button>
         </div>
+      </div>
+      <div class="dash-body" style="flex:1;overflow-y:auto">
+        <div class="section-head">CHAPTER PROGRESS</div>
+        <div class="ch-grid" id="ch-grid"></div>
+        <div class="section-head">OVERVIEW</div>
+        <div class="stat-row" id="stat-row"></div>
       </div>
     </div>
   </div>
 
-  <!-- CHAPTER WORKSPACE VIEW -->
-  <div id="view-chapter">
-    <div class="chapter-layout">
+  <!-- CHAPTER WORKSPACE -->
+  <div id="pg-chapter" style="display:none;flex:1;overflow:hidden">
+    <div class="ws-layout">
 
-      <!-- LEFT: chapter nav -->
-      <div class="ch-list">
-        <div class="ch-list-header">
-          <button class="ch-list-back" onclick="backToDash()">← Back</button>
-          <div class="ch-list-title">Chapters</div>
+      <!-- chapter nav -->
+      <div class="ch-nav">
+        <div class="ch-nav-head">
+          <button class="back-btn" onclick="goBack()">← Dashboard</button>
+          <div class="ch-nav-label">Chapters</div>
         </div>
-        <div id="ch-list-items"></div>
+        <div class="ch-nav-list" id="ch-nav-list"></div>
       </div>
 
-      <!-- MIDDLE: editor -->
-      <div class="editor-pane">
-        <div class="editor-topbar">
-          <span class="editor-chapter-title" id="editor-title">Chapter</span>
-          <button class="btn btn-sm" onclick="saveDraft()">💾 Save</button>
+      <!-- editor -->
+      <div class="ed-col">
+        <div class="ed-topbar">
+          <span class="ed-title" id="ed-title">Chapter</span>
+          <button class="btn btn-sm" onclick="saveDraft()">💾 Save Draft</button>
           <button class="btn btn-sm" onclick="exportChapter()">↓ DOCX</button>
-          <button class="btn btn-sm btn-primary" id="gen-btn" onclick="generateChapter()">✨ Generate</button>
+          <button class="btn btn-sm btn-primary" id="gen-btn-top" onclick="generateChapter()">✨ Generate</button>
         </div>
 
-        <!-- Progress -->
-        <div class="progress-area" id="prog-area">
+        <!-- progress strip (hidden until generating) -->
+        <div class="prog-strip" id="prog-strip">
           <div class="prog-row">
-            <span class="badge b-q" id="prog-badge">Queued</span>
-            <span class="prog-msg" id="prog-msg">Starting…</span>
+            <span class="badge" id="prog-badge">Queued</span>
+            <span style="font-size:12px;color:var(--ink2)" id="prog-msg">Starting…</span>
           </div>
           <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:5%"></div></div>
           <div class="prog-detail" id="prog-detail"></div>
         </div>
 
-        <!-- Actual editable textarea -->
-        <div class="editor-scroll">
-          <textarea
-            class="editor-textarea"
-            id="editor"
-            placeholder="Click Generate to write this chapter, or paste existing text here and hit Save Draft..."
-            oninput="onEditorInput()"
-            spellcheck="true"
-          ></textarea>
+        <div class="ed-scroll">
+          <div class="ed-inner">
+            <div class="ed-doc-title" id="ed-doc-title"></div>
+            <textarea
+              class="editor"
+              id="editor"
+              placeholder="Click ✨ Generate to write this chapter with AI, or paste your existing draft here and hit Save Draft to store it."
+              oninput="onType()"
+              spellcheck="true"
+            ></textarea>
+          </div>
         </div>
 
-        <div class="statusbar">
-          <span><span class="sb-dot" id="sb-dot"></span><span id="sb-status">Ready</span></span>
+        <div class="ed-statusbar">
+          <span><span class="sb-live" id="sb-live"></span><span id="sb-status">Ready</span></span>
           <span id="sb-words">0 words</span>
-          <span style="margin-left:auto" id="sb-chapter"></span>
+          <span style="margin-left:auto;color:var(--ink3)" id="sb-client-name"></span>
           <span>Gemini 2.5 Flash</span>
         </div>
       </div>
 
-      <!-- RIGHT: AI panel -->
+      <!-- AI panel -->
       <div class="ai-panel">
         <div class="panel-tabs">
-          <button class="ptab active" onclick="showTab('generate',this)">Generate</button>
+          <button class="ptab on" onclick="showTab('gen',this)">Generate</button>
           <button class="ptab" onclick="showTab('feedback',this)">Feedback</button>
           <button class="ptab" onclick="showTab('sources',this)">Sources</button>
         </div>
 
-        <!-- GENERATE TAB -->
-        <div class="panel-body" id="tab-generate">
-          <div class="p-section">
-            <div class="p-label">Chapter to generate</div>
-            <select class="p-select" id="p-chapter">
+        <!-- GENERATE -->
+        <div class="pb" id="tab-gen">
+          <div class="p-sec">
+            <label class="pl">Chapter</label>
+            <select class="ps" id="p-ch">
               <option value="Abstract">Abstract</option>
               <option value="Chapter I: Introduction">Chapter I: Introduction</option>
               <option value="Chapter II: Literature Review">Chapter II: Literature Review</option>
@@ -343,439 +339,399 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
               <option value="Custom Section">Custom Section</option>
             </select>
           </div>
-          <div class="p-section">
-            <div class="p-label">Instructions <span style="font-weight:400;color:var(--text3)">(optional)</span></div>
-            <textarea class="p-textarea" id="p-instructions" placeholder="e.g. Focus heavily on Meyer & Allen three-component model. Include at least 15 sources. Emphasize HR context in healthcare."></textarea>
+
+          <div class="p-sec">
+            <label class="pl">Instructions <span style="font-weight:400;color:var(--ink3)">(optional)</span></label>
+            <textarea class="pt" id="p-inst" rows="3" placeholder="e.g. Focus on Meyer & Allen three-component model. Include 15+ sources. Emphasize turnover in healthcare HR context."></textarea>
           </div>
-          <div class="p-section">
-            <div class="p-label">Existing draft to improve <span style="font-weight:400;color:var(--text3)">(optional)</span></div>
-            <textarea class="p-textarea" id="p-draft" placeholder="Paste an existing draft here if you want the AI to improve it rather than start fresh..."></textarea>
+
+          <div class="p-sec">
+            <label class="pl">Existing draft to improve <span style="font-weight:400;color:var(--ink3)">(optional)</span></label>
+            <textarea class="pt" id="p-draft" rows="3" placeholder="Paste an existing draft here to improve it rather than start from scratch…"></textarea>
           </div>
-          <button class="p-btn" id="p-gen-btn" onclick="generateChapter()">✨ Generate Chapter</button>
-          <div id="gen-result" style="display:none">
-            <div class="gen-stats" id="gen-stats"></div>
-            <button class="p-btn p-btn-sec" style="margin-top:8px" onclick="generateChapter()">↺ Regenerate</button>
+
+          <button class="pa" id="p-gen-btn" onclick="generateChapter()">✨ Generate Chapter</button>
+
+          <div id="gen-done" style="display:none">
+            <div class="gen-stats" id="gen-stats-row"></div>
+            <button class="pa pa-sec" style="margin-top:6px" onclick="generateChapter()">↺ Regenerate</button>
           </div>
         </div>
 
-        <!-- FEEDBACK TAB -->
-        <div class="panel-body" id="tab-feedback" style="display:none">
+        <!-- FEEDBACK -->
+        <div class="pb" id="tab-feedback" style="display:none">
           <div class="feedback-notice">
-            ⚡ Paste professor feedback below. The AI will revise the current chapter draft to address every point raised.
+            ⚡ <strong>Professor Feedback Mode</strong><br>
+            Paste the professor's exact feedback below. The AI will revise the current chapter draft to address every single point raised.
           </div>
-          <div class="p-section">
-            <div class="p-label">Professor Feedback</div>
-            <textarea class="p-textarea" id="p-feedback" rows="10" style="min-height:180px"
-              placeholder="Paste the exact feedback from the professor here...&#10;&#10;Examples:&#10;• The literature review needs more empirical studies on turnover intentions&#10;• Methodology section lacks detail on sampling procedures&#10;• References are not consistently in APA 7th format&#10;• The problem statement needs to be more specific"></textarea>
+
+          <div class="p-sec">
+            <label class="pl">Professor Feedback</label>
+            <textarea class="pt" id="p-feedback" style="min-height:200px"
+              placeholder="Paste professor feedback here…&#10;&#10;Examples:&#10;— Literature review needs more empirical studies on turnover intentions&#10;— Methodology lacks detail on sampling procedures&#10;— References not consistently in APA 7th format&#10;— Problem statement needs to be more specific&#10;— Introduction section is too brief"></textarea>
           </div>
-          <button class="p-btn" id="p-revise-btn" onclick="reviseChapter()">🔄 Revise with Feedback</button>
-          <div style="font-size:11px;color:var(--text3);text-align:center;margin-top:6px">
-            The AI will address every point and update the editor
+
+          <button class="pa" id="p-revise-btn" onclick="reviseChapter()">🔄 Revise Based on Feedback</button>
+          <div style="font-size:11px;color:var(--ink3);text-align:center;margin-top:6px;line-height:1.5">
+            The AI reads every point and updates the chapter accordingly
           </div>
         </div>
 
-        <!-- SOURCES TAB -->
-        <div class="panel-body" id="tab-sources" style="display:none">
-          <div style="font-size:12px;color:var(--text2);margin-bottom:10px;line-height:1.5">
-            Academic sources verified against 250M+ papers via CrossRef, OpenAlex, and Semantic Scholar.
+        <!-- SOURCES -->
+        <div class="pb" id="tab-sources" style="display:none">
+          <div style="font-size:12px;color:var(--ink2);margin-bottom:10px;line-height:1.6">
+            Academic sources verified against 250M+ papers via CrossRef, OpenAlex &amp; Semantic Scholar.
           </div>
-          <div id="sources-list">
-            <div class="empty" style="padding:20px 0">
-              <div style="font-size:11px">Generate a chapter to see sources here</div>
-            </div>
+          <div id="sources-body">
+            <div style="font-size:12px;color:var(--ink3);text-align:center;padding:20px 0">Generate a chapter to see sources here</div>
           </div>
         </div>
+
       </div>
-
     </div>
   </div>
+
 </div>
 
 <script>
-// ─── STATE ─────────────────────────────────────────────────────────────────
-let clients = [];
-let activeClientId = null;
-let activeChapter = null;
-let activeChapters = [];
-let jobId = null;
-let pollTimer = null;
-let lastSources = [];
+// ─── STATE ──────────────────────────────────────────────────
+let clients=[], activeClient=null, activeChapter=null, allChapters=[];
+let jobId=null, pollTimer=null;
+const API = () => window.location.origin;
 
-const api = () => window.location.origin;
-
-// ─── INIT ────────────────────────────────────────────────────────────────
+// ─── BOOT ───────────────────────────────────────────────────
 window.onload = async () => {
   await loadClients();
-  // auto-select Mitchell
   const m = clients.find(c => c.id === 'mitchell-dba-ulv-001');
   if (m) selectClient(m.id);
 };
 
-// ─── CLIENTS ─────────────────────────────────────────────────────────────
+// ─── CLIENTS ────────────────────────────────────────────────
 async function loadClients() {
   try {
-    const r = await fetch(api() + '/clients/');
-    const d = await r.json();
+    const d = await fetch(API()+'/clients/').then(r=>r.json());
     clients = d.clients || [];
-    renderClientList();
+    renderSidebar();
   } catch(e) { console.error(e); }
 }
 
-function renderClientList() {
+function renderSidebar() {
   const el = document.getElementById('client-list');
-  if (!clients.length) { el.innerHTML = '<div style="padding:6px 10px;font-size:12px;color:var(--text3)">No clients yet.</div>'; return; }
+  if (!clients.length) { el.innerHTML='<div style="padding:6px 10px;font-size:12px;color:var(--ink3)">No clients yet.</div>'; return; }
   el.innerHTML = clients.map(c => {
-    const chs = parseChapters(c.chapter_structure);
-    const dots = chs.map(ch => {
-      const cls = ch.status === 'complete' ? 'dot-complete' : ch.status === 'pending_irb' ? 'dot-pending' : 'dot-none';
-      return `<div class="dot ${cls}" title="${ch.chapter}"></div>`;
-    }).join('');
-    return `<div class="client-card ${c.id === activeClientId ? 'active' : ''}" onclick="selectClient('${c.id}')">
-      <div class="client-name">${c.name}</div>
-      <div class="client-meta">${c.degree} · ${c.institution}</div>
-      <div class="client-dots">${dots}</div>
+    const chs = parseJ(c.chapter_structure);
+    const dots = chs.map(ch => `<div class="dot ${ch.status==='complete'?'dot-c':ch.status==='pending_irb'?'dot-p':'dot-n'}" title="${ch.chapter||ch.chapter_name||''}"></div>`).join('');
+    return `<div class="client-card ${c.id===activeClient?'on':''}" onclick="selectClient('${c.id}')">
+      <div class="cc-name">${c.name}</div>
+      <div class="cc-meta">${c.degree} · ${c.institution}</div>
+      <div class="cc-dots">${dots}</div>
     </div>`;
   }).join('');
 }
 
-function parseChapters(raw) {
-  if (!raw) return [];
-  try { return typeof raw === 'string' ? JSON.parse(raw) : raw; } catch { return []; }
-}
+function parseJ(raw) { if(!raw) return []; try{ return typeof raw==='string'?JSON.parse(raw):raw; }catch{return [];} }
 
 async function selectClient(id) {
-  activeClientId = id;
-  renderClientList();
-  showDash();
-  const client = clients.find(c => c.id === id);
-  if (!client) return;
-  document.getElementById('dash-title').textContent = client.name;
-  document.getElementById('dash-meta').textContent = `${client.degree} · ${client.field} · ${client.institution}`;
-  document.getElementById('dash-topic').textContent = client.topic;
+  activeClient = id;
+  renderSidebar();
+  const c = clients.find(x=>x.id===id);
+  if (!c) return;
+  // show dashboard
+  document.getElementById('pg-dash').style.display = 'flex';
+  document.getElementById('pg-chapter').style.display = 'none';
   document.getElementById('dash-empty').style.display = 'none';
-  document.getElementById('dash-content').style.display = '';
-  await loadChapters(id, client);
+  const dc = document.getElementById('dash-content');
+  dc.style.display = 'flex';
+  document.getElementById('d-name').textContent = c.name;
+  document.getElementById('d-meta').textContent = `${c.degree} · ${c.field} · ${c.institution}`;
+  document.getElementById('d-topic').textContent = c.topic;
+  document.getElementById('sb-client-name').textContent = c.name;
+  await loadChapters(c);
 }
 
-async function loadChapters(clientId, client) {
+async function loadChapters(client) {
   try {
-    const r = await fetch(api() + `/clients/${clientId}/chapters`);
-    const d = await r.json();
-    activeChapters = d.chapters || parseChapters(client?.chapter_structure) || [];
-    renderChapterGrid();
-    updateStats();
+    const d = await fetch(API()+`/clients/${client.id}/chapters`).then(r=>r.json());
+    allChapters = d.chapters || parseJ(client.chapter_structure);
   } catch(e) {
-    activeChapters = parseChapters(client?.chapter_structure) || [];
-    renderChapterGrid();
+    allChapters = parseJ(client.chapter_structure);
   }
+  renderDashChapters();
+  renderStats();
 }
 
-function renderChapterGrid() {
-  const labels = { complete:'Complete', draft:'Draft', revised:'Revised', pending_irb:'Pending IRB', not_started:'Not Started' };
-  document.getElementById('chapter-grid').innerHTML = activeChapters.map(ch => {
-    const name = ch.chapter || ch.chapter_name || '';
-    const status = ch.status || 'not_started';
-    return `<div class="chapter-tile" onclick="openChapter('${name}')">
-      <div class="ct-name">${name}</div>
-      <div><span class="ct-badge st-${status}">${labels[status] || status}</span></div>
-      <div class="ct-notes">${ch.notes || ''}</div>
-      ${ch.word_count ? `<div style="font-size:11px;color:var(--text3);margin-top:4px">${ch.word_count.toLocaleString()} words</div>` : ''}
+function renderDashChapters() {
+  const labels = {complete:'Complete',draft:'Draft',revised:'Revised',pending_irb:'Pending IRB',not_started:'Not Started'};
+  document.getElementById('ch-grid').innerHTML = allChapters.map(ch => {
+    const name = ch.chapter||ch.chapter_name||'';
+    const st = ch.status||'not_started';
+    return `<div class="ch-tile" onclick="openChapter('${name}')">
+      <div class="ch-tile-name">${name}</div>
+      <span class="badge b-${st}">${labels[st]||st}</span>
+      ${ch.notes?`<div class="ch-tile-notes">${ch.notes}</div>`:''}
+      ${ch.word_count?`<div class="ch-tile-words">${ch.word_count.toLocaleString()} words</div>`:''}
     </div>`;
   }).join('');
 }
 
-function updateStats() {
-  const done = activeChapters.filter(c => ['complete','draft','revised'].includes(c.status)).length;
-  const words = activeChapters.reduce((s, c) => s + (c.word_count || 0), 0);
-  document.getElementById('stat-ch').textContent = `${done}/${activeChapters.length}`;
-  document.getElementById('stat-words').textContent = words > 0 ? words.toLocaleString() : '—';
+function renderStats() {
+  const done = allChapters.filter(c=>['complete','draft','revised'].includes(c.status)).length;
+  const words = allChapters.reduce((s,c)=>s+(c.word_count||0),0);
+  document.getElementById('stat-row').innerHTML = `
+    <div class="stat"><div class="stat-n">${done}/${allChapters.length}</div><div class="stat-l">Chapters done</div></div>
+    <div class="stat"><div class="stat-n">${words>0?words.toLocaleString():'—'}</div><div class="stat-l">Total words</div></div>
+    <div class="stat clickable" onclick="exportFull()"><div class="stat-n" style="font-size:15px">↓ DOCX</div><div class="stat-l">Export all chapters</div></div>
+  `;
 }
 
-// ─── CHAPTER WORKSPACE ───────────────────────────────────────────────────
-async function openChapter(chapterName) {
-  activeChapter = chapterName;
-  showChapter();
-  document.getElementById('editor-title').textContent = chapterName;
-  document.getElementById('sb-chapter').textContent = clients.find(c=>c.id===activeClientId)?.name || '';
+// ─── CHAPTER WORKSPACE ──────────────────────────────────────
+async function openChapter(name) {
+  activeChapter = name;
+  document.getElementById('pg-dash').style.display = 'none';
+  document.getElementById('pg-chapter').style.display = 'flex';
+  document.getElementById('ed-title').textContent = name;
+  document.getElementById('ed-doc-title').textContent = name;
 
-  // set chapter select to match
-  const sel = document.getElementById('p-chapter');
-  for (let o of sel.options) if (o.value === chapterName) { sel.value = chapterName; break; }
+  // sync chapter select
+  const sel = document.getElementById('p-ch');
+  for (let o of sel.options) if (o.value===name){sel.value=name;break;}
 
   // render left nav
-  renderChapterNav(chapterName);
+  renderChNav(name);
+
+  // clear editor
+  document.getElementById('editor').value = '';
+  document.getElementById('prog-strip').style.display = 'none';
+  document.getElementById('gen-done').style.display = 'none';
+  updateWC();
 
   // load existing content
-  const editor = document.getElementById('editor');
-  editor.value = '';
-  document.getElementById('prog-area').style.display = 'none';
-  document.getElementById('gen-result').style.display = 'none';
-  updateWordCount();
-
   try {
-    const r = await fetch(api() + `/chapters/${activeClientId}/${encodeURIComponent(chapterName)}`);
-    const d = await r.json();
-    if (d.content) {
-      editor.value = d.content;
-      updateWordCount();
-      if (d.sources && d.sources.length) renderSources(JSON.parse(typeof d.sources === 'string' ? d.sources : JSON.stringify(d.sources)));
+    const d = await fetch(API()+`/chapters/${activeClient}/${encodeURIComponent(name)}`).then(r=>r.json());
+    if (d.content) { document.getElementById('editor').value = d.content; updateWC(); }
+    if (d.sources) {
+      let srcs = d.sources;
+      if (typeof srcs === 'string') { try{srcs=JSON.parse(srcs);}catch{srcs=[];} }
+      if (srcs.length) renderSources(srcs);
     }
   } catch(e) {}
 }
 
-function renderChapterNav(active) {
-  const labels = { complete:'✅', draft:'📝', revised:'✏️', pending_irb:'⏳', not_started:'○' };
-  document.getElementById('ch-list-items').innerHTML = activeChapters.map(ch => {
-    const name = ch.chapter || ch.chapter_name || '';
-    const status = ch.status || 'not_started';
-    return `<div class="ch-list-item ${name === active ? 'active' : ''}" onclick="openChapter('${name}')">
-      <div class="ch-list-name">${name}</div>
-      <div class="ch-list-badge"><span class="ct-badge st-${status}" style="font-size:10px">${labels[status]||'○'} ${status.replace(/_/g,' ')}</span></div>
+function renderChNav(active) {
+  const labels = {complete:'✅',draft:'📝',revised:'✏️',pending_irb:'⏳',not_started:'○'};
+  document.getElementById('ch-nav-list').innerHTML = allChapters.map(ch => {
+    const name = ch.chapter||ch.chapter_name||'';
+    const st = ch.status||'not_started';
+    return `<div class="ch-nav-item ${name===active?'on':''}" onclick="openChapter('${name}')">
+      <div class="ch-nav-name">${name}</div>
+      <div class="ch-nav-status"><span class="badge b-${st}" style="font-size:10px">${labels[st]||'○'} ${st.replace(/_/g,' ')}</span></div>
     </div>`;
   }).join('');
 }
 
-function showDash() {
-  document.getElementById('view-dashboard').style.display = 'flex';
-  document.getElementById('view-chapter').style.display = 'none';
-}
-function showChapter() {
-  document.getElementById('view-dashboard').style.display = 'none';
-  document.getElementById('view-chapter').style.display = 'flex';
-}
-function backToDash() {
-  showDash();
-  if (activeClientId) selectClient(activeClientId);
+function goBack() {
+  document.getElementById('pg-dash').style.display = 'flex';
+  document.getElementById('pg-chapter').style.display = 'none';
+  if (activeClient) {
+    const c = clients.find(x=>x.id===activeClient);
+    if (c) loadChapters(c);
+  }
 }
 
-// ─── TABS ─────────────────────────────────────────────────────────────────
+// ─── TABS ────────────────────────────────────────────────────
 function showTab(name, btn) {
-  ['generate','feedback','sources'].forEach(n => {
-    document.getElementById('tab-'+n).style.display = n===name ? '' : 'none';
+  ['gen','feedback','sources'].forEach(n=>{
+    document.getElementById('tab-'+n).style.display = n===name?'':'none';
   });
-  document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
 }
 
-// ─── EDITOR ───────────────────────────────────────────────────────────────
-function onEditorInput() { updateWordCount(); }
-
-function updateWordCount() {
-  const text = document.getElementById('editor').value || '';
-  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-  document.getElementById('sb-words').textContent = words.toLocaleString() + ' words';
+// ─── EDITOR ─────────────────────────────────────────────────
+function onType() { updateWC(); }
+function updateWC() {
+  const t = document.getElementById('editor').value||'';
+  const w = t.trim() ? t.trim().split(/\s+/).length : 0;
+  document.getElementById('sb-words').textContent = w.toLocaleString()+' words';
 }
 
-// ─── GENERATE ─────────────────────────────────────────────────────────────
+// ─── GENERATE ────────────────────────────────────────────────
 async function generateChapter() {
-  if (!activeClientId) { toast('Select a client first'); return; }
-  const chapterName = document.getElementById('p-chapter').value || activeChapter;
-  if (!chapterName) { toast('Select a chapter'); return; }
+  if (!activeClient) { toast('Select a client first'); return; }
+  const chName = document.getElementById('p-ch').value || activeChapter;
+  if (!chName) { toast('Select a chapter'); return; }
 
-  // switch to that chapter in workspace if different
-  if (chapterName !== activeChapter) {
-    activeChapter = chapterName;
-    document.getElementById('editor-title').textContent = chapterName;
-    renderChapterNav(chapterName);
+  if (chName !== activeChapter) {
+    activeChapter = chName;
+    document.getElementById('ed-title').textContent = chName;
+    document.getElementById('ed-doc-title').textContent = chName;
+    renderChNav(chName);
   }
 
-  const genBtn = document.getElementById('gen-btn');
-  const pBtn = document.getElementById('p-gen-btn');
-  genBtn.disabled = true; pBtn.disabled = true;
-  genBtn.textContent = 'Generating…'; pBtn.textContent = 'Generating…';
-
-  document.getElementById('prog-area').style.display = 'block';
-  document.getElementById('gen-result').style.display = 'none';
-  setStatus('queued', 'Queued…', 5);
-
-  const payload = {
-    client_id: activeClientId,
-    chapter_name: chapterName,
-    additional_instructions: document.getElementById('p-instructions').value.trim() || null,
-    existing_draft: document.getElementById('p-draft').value.trim() || null
-  };
+  setGenBtns(true);
+  document.getElementById('prog-strip').style.display = 'block';
+  document.getElementById('gen-done').style.display = 'none';
+  setStatus('queued','Queued…',5);
 
   try {
-    const r = await fetch(api() + '/chapters/generate', {
-      method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
-    });
-    const d = await r.json();
-    if (!d.job_id) throw new Error(d.detail || 'No job ID');
+    const d = await fetch(API()+'/chapters/generate', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        client_id: activeClient,
+        chapter_name: chName,
+        additional_instructions: document.getElementById('p-inst').value.trim()||null,
+        existing_draft: document.getElementById('p-draft').value.trim()||null
+      })
+    }).then(r=>r.json());
+    if (!d.job_id) throw new Error(d.detail||'No job ID');
     jobId = d.job_id;
     if (pollTimer) clearInterval(pollTimer);
-    pollTimer = setInterval(pollJob, 2500);
+    pollTimer = setInterval(poll, 2500);
   } catch(e) {
-    setStatus('failed', 'Error: ' + e.message, 0);
-    resetBtns();
+    setStatus('failed','Error: '+e.message, 0);
+    setGenBtns(false);
   }
 }
 
-async function pollJob() {
+async function poll() {
   if (!jobId) return;
   try {
-    const r = await fetch(api() + '/chapters/job/' + jobId);
-    const job = await r.json();
-    const msgs = {
-      queued: 'In queue…',
-      researching: 'Searching CrossRef · OpenAlex · Semantic Scholar…',
-      writing: 'Writing chapter with Gemini 2.5 Flash…',
-      complete: 'Done!',
-      failed: job.error || 'Failed'
-    };
-    const pcts = { queued:8, researching:40, writing:75, complete:100, failed:0 };
-    setStatus(job.status, msgs[job.status]||job.status, pcts[job.status]||0);
-    if (job.source_count) document.getElementById('prog-detail').textContent = `${job.source_count} verified academic sources found`;
+    const j = await fetch(API()+'/chapters/job/'+jobId).then(r=>r.json());
+    const msgs = {queued:'In queue…',researching:'Searching CrossRef · OpenAlex · Semantic Scholar…',writing:'Writing with Gemini 2.5 Flash…',complete:'Done!',failed:j.error||'Failed'};
+    const pcts = {queued:8,researching:42,writing:78,complete:100,failed:0};
+    setStatus(j.status, msgs[j.status]||j.status, pcts[j.status]||0);
+    if (j.source_count) document.getElementById('prog-detail').textContent = `${j.source_count} verified academic sources found`;
 
-    if (job.status === 'complete') {
+    if (j.status==='complete') {
       clearInterval(pollTimer);
-      // put content into editor
-      document.getElementById('editor').value = job.content || '';
-      updateWordCount();
-      // show stats
-      document.getElementById('gen-result').style.display = '';
-      document.getElementById('gen-stats').innerHTML = `
-        <div class="gs"><div class="gs-n">${(job.word_count||0).toLocaleString()}</div><div class="gs-l">Words</div></div>
-        <div class="gs"><div class="gs-n">${job.source_count||0}</div><div class="gs-l">Sources</div></div>
+      document.getElementById('editor').value = j.content||'';
+      updateWC();
+      document.getElementById('gen-done').style.display = '';
+      document.getElementById('gen-stats-row').innerHTML = `
+        <div class="gs-box"><div class="gs-n">${(j.word_count||0).toLocaleString()}</div><div class="gs-l">Words</div></div>
+        <div class="gs-box"><div class="gs-n">${j.source_count||0}</div><div class="gs-l">Sources</div></div>
       `;
-      // sources tab
-      if (job.sources) {
-        const srcs = Array.isArray(job.sources) ? job.sources : [];
-        renderSources(srcs);
-        lastSources = srcs;
-      }
-      resetBtns();
-      toast(`✓ ${activeChapter} — ${(job.word_count||0).toLocaleString()} words generated`);
-      // refresh chapter list
-      if (activeClientId) {
-        const cl = clients.find(c=>c.id===activeClientId);
-        if (cl) await loadChapters(activeClientId, cl);
-        renderChapterNav(activeChapter);
-      }
-    } else if (job.status === 'failed') {
+      if (j.sources && j.sources.length) renderSources(j.sources);
+      setGenBtns(false);
+      toast(`✓ ${activeChapter} — ${(j.word_count||0).toLocaleString()} words`);
+      const c = clients.find(x=>x.id===activeClient);
+      if (c) { await loadChapters(c); renderChNav(activeChapter); }
+    } else if (j.status==='failed') {
       clearInterval(pollTimer);
-      resetBtns();
-      toast('Generation failed: ' + (job.error||'unknown error'));
+      setGenBtns(false);
+      toast('Generation failed: '+(j.error||'unknown'));
     }
   } catch(e) { console.error(e); }
 }
 
-function setStatus(status, msg, pct) {
+function setStatus(st, msg, pct) {
   const badge = document.getElementById('prog-badge');
-  const cls = { queued:'b-q', researching:'b-r', writing:'b-w', complete:'b-done', failed:'b-fail' };
-  badge.className = 'badge ' + (cls[status]||'b-q');
-  badge.textContent = status.replace(/_/g,' ').replace(/\b\w/g, c=>c.toUpperCase());
+  const cls = {queued:'b-not_started',researching:'b-pending_irb',writing:'b-draft',complete:'b-complete',failed:'b-revised'};
+  badge.className = 'badge '+(cls[st]||'');
+  badge.textContent = st.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
   document.getElementById('prog-msg').textContent = msg;
-  document.getElementById('prog-fill').style.width = pct + '%';
-  document.getElementById('sb-status').textContent = status === 'complete' ? 'Ready' : msg;
-  document.getElementById('sb-dot').className = 'sb-dot' + (status === 'complete' ? '' : ' busy');
+  document.getElementById('prog-fill').style.width = pct+'%';
+  document.getElementById('sb-status').textContent = st==='complete'?'Ready':msg;
+  document.getElementById('sb-live').className = 'sb-live'+(st==='complete'?'':' busy');
 }
 
-function resetBtns() {
-  const g = document.getElementById('gen-btn');
-  const p = document.getElementById('p-gen-btn');
-  g.disabled = false; g.textContent = '✨ Generate';
-  p.disabled = false; p.textContent = '✨ Generate Chapter';
+function setGenBtns(loading) {
+  ['gen-btn-top','p-gen-btn'].forEach(id => {
+    const b = document.getElementById(id);
+    b.disabled = loading;
+    b.textContent = loading ? 'Generating…' : (id==='gen-btn-top'?'✨ Generate':'✨ Generate Chapter');
+  });
 }
 
-function renderSources(sources) {
-  document.getElementById('sources-list').innerHTML = sources.length
-    ? `<div style="font-size:11px;color:var(--text2);margin-bottom:8px">${sources.length} verified sources</div>`
-      + sources.map((s,i) => `<div class="source-item"><span class="source-num">[${i+1}]</span>${s}</div>`).join('')
-    : '<div style="font-size:11px;color:var(--text3);text-align:center;padding:12px 0">No sources yet</div>';
+function renderSources(srcs) {
+  document.getElementById('sources-body').innerHTML = srcs.length
+    ? `<div style="font-size:11px;color:var(--ink2);margin-bottom:8px">${srcs.length} verified sources</div>`
+      + srcs.map((s,i)=>`<div class="src-item"><span class="src-num">[${i+1}]</span>${s}</div>`).join('')
+    : '<div style="font-size:12px;color:var(--ink3);text-align:center;padding:16px 0">No sources yet</div>';
 }
 
-// ─── FEEDBACK / REVISE ────────────────────────────────────────────────────
+// ─── FEEDBACK / REVISE ───────────────────────────────────────
 async function reviseChapter() {
-  const feedback = document.getElementById('p-feedback').value.trim();
-  if (!feedback) { toast('Paste professor feedback first'); return; }
-  if (!activeClientId || !activeChapter) { toast('Open a chapter first'); return; }
+  const fb = document.getElementById('p-feedback').value.trim();
+  if (!fb) { toast('Paste professor feedback first'); return; }
+  if (!activeClient || !activeChapter) { toast('Open a chapter first'); return; }
 
   const btn = document.getElementById('p-revise-btn');
-  btn.disabled = true; btn.textContent = 'Revising…';
+  btn.disabled=true; btn.textContent='Revising…';
 
   try {
-    // get chapter id
-    const r = await fetch(api() + `/chapters/${activeClientId}/${encodeURIComponent(activeChapter)}`);
-    const d = await r.json();
-    if (!d.id) {
-      toast('Save the chapter first before revising');
-      btn.disabled = false; btn.textContent = '🔄 Revise with Feedback';
-      return;
-    }
-    // revise
-    const rr = await fetch(api() + '/chapters/revise', {
-      method: 'POST', headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ client_id: activeClientId, chapter_id: d.id, professor_feedback: feedback })
-    });
-    const result = await rr.json();
-    document.getElementById('editor').value = result.content || '';
-    updateWordCount();
+    const d = await fetch(API()+`/chapters/${activeClient}/${encodeURIComponent(activeChapter)}`).then(r=>r.json());
+    if (!d.id) { toast('Save a draft first before revising'); btn.disabled=false; btn.textContent='🔄 Revise Based on Feedback'; return; }
+    const result = await fetch(API()+'/chapters/revise', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({client_id:activeClient, chapter_id:d.id, professor_feedback:fb})
+    }).then(r=>r.json());
+    document.getElementById('editor').value = result.content||'';
+    updateWC();
     toast(`✓ Revised — ${(result.word_count||0).toLocaleString()} words`);
   } catch(e) {
-    toast('Revision error: ' + e.message);
+    toast('Revision error: '+e.message);
   } finally {
-    btn.disabled = false; btn.textContent = '🔄 Revise with Feedback';
+    btn.disabled=false; btn.textContent='🔄 Revise Based on Feedback';
   }
 }
 
-// ─── SAVE / EXPORT ────────────────────────────────────────────────────────
+// ─── SAVE / EXPORT ───────────────────────────────────────────
 async function saveDraft() {
-  if (!activeClientId || !activeChapter) { toast('No chapter open'); return; }
-  const content = document.getElementById('editor').value;
+  if (!activeClient||!activeChapter) { toast('No chapter open'); return; }
   try {
-    await fetch(api() + '/chapters/save', {
-      method: 'POST', headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ client_id: activeClientId, chapter_name: activeChapter, content })
+    await fetch(API()+'/chapters/save', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({client_id:activeClient, chapter_name:activeChapter, content:document.getElementById('editor').value})
     });
     toast('✓ Draft saved');
-  } catch(e) { toast('Save failed: ' + e.message); }
+  } catch(e) { toast('Save failed: '+e.message); }
 }
 
 function exportChapter() {
-  if (!activeClientId || !activeChapter) { toast('No chapter open'); return; }
-  window.open(api() + `/chapters/${activeClientId}/export/${encodeURIComponent(activeChapter)}`, '_blank');
+  if (!activeClient||!activeChapter) { toast('No chapter open'); return; }
+  window.open(API()+`/chapters/${activeClient}/export/${encodeURIComponent(activeChapter)}`,'_blank');
 }
 
 function exportFull() {
-  if (!activeClientId) { toast('Select a client first'); return; }
-  window.open(api() + `/chapters/${activeClientId}/export/full`, '_blank');
+  if (!activeClient) { toast('Select a client first'); return; }
+  window.open(API()+`/chapters/${activeClient}/export/full`,'_blank');
 }
 
-// ─── ADD CLIENT ───────────────────────────────────────────────────────────
-function openModal() { document.getElementById('modal-add').classList.add('open'); }
-function closeModal() { document.getElementById('modal-add').classList.remove('open'); }
+// ─── ADD CLIENT ──────────────────────────────────────────────
+function openModal() { document.getElementById('modal-add').classList.add('on'); }
+function closeModal() { document.getElementById('modal-add').classList.remove('on'); }
 
 async function addClient() {
-  const name = document.getElementById('nc-name').value.trim();
-  const institution = document.getElementById('nc-institution').value.trim();
-  const topic = document.getElementById('nc-topic').value.trim();
-  if (!name || !institution || !topic) { toast('Name, institution and topic are required'); return; }
+  const name=document.getElementById('nc-name').value.trim();
+  const inst=document.getElementById('nc-inst').value.trim();
+  const topic=document.getElementById('nc-topic').value.trim();
+  if (!name||!inst||!topic) { toast('Name, institution and topic are required'); return; }
   try {
-    const r = await fetch(api() + '/clients/', {
-      method: 'POST', headers: {'Content-Type':'application/json'},
+    const d = await fetch(API()+'/clients/', {
+      method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
-        name, institution, topic,
+        name, institution:inst, topic,
         degree: document.getElementById('nc-degree').value,
         field: document.getElementById('nc-field').value,
-        advisor: document.getElementById('nc-advisor').value.trim() || null,
         citation_style: document.getElementById('nc-citation').value,
-        formatting_notes: document.getElementById('nc-fmt').value.trim() || null,
+        advisor: document.getElementById('nc-advisor').value.trim()||null,
+        formatting_notes: document.getElementById('nc-fmt').value.trim()||null,
         quality_target: 75
       })
-    });
-    const d = await r.json();
+    }).then(r=>r.json());
     closeModal();
     toast(`✓ ${name} added`);
     await loadClients();
     selectClient(d.client_id);
-  } catch(e) { toast('Error: ' + e.message); }
+  } catch(e) { toast('Error: '+e.message); }
 }
 
-// ─── UTILS ────────────────────────────────────────────────────────────────
+// ─── UTILS ───────────────────────────────────────────────────
 function toast(msg, dur=2800) {
-  const el = document.getElementById('toast');
-  el.textContent = msg; el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), dur);
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('on');
+  setTimeout(()=>el.classList.remove('on'), dur);
 }
 </script>
 </body>
