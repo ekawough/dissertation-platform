@@ -372,6 +372,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);displa
       <button class="dtab on" onclick="showDTab('chapters',this)">Chapters</button>
       <button class="dtab" onclick="showDTab('scratchpad',this)">📓 Scratchpad</button>
       <button class="dtab" onclick="showDTab('documents',this)">📎 Documents</button>
+      <button class="dtab" onclick="showDTab('feedback',this)">⚡ Feedback</button>
     </div>
     <div class="dash-body">
 
@@ -431,6 +432,72 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);displa
         <div class="voice-banner" id="voice-banner">✅ <strong>Voice profile active</strong> — AI has analyzed this client's writing style and will match it when generating chapters.</div>
         <div class="section-lbl">Uploaded Documents</div>
         <div id="docs-list"><div style="font-size:13px;color:var(--i3);padding:8px 0">No documents uploaded yet.</div></div>
+      </div>
+
+      <!-- FEEDBACK TAB -->
+      <div id="dt-feedback" style="display:none">
+        <div style="margin-bottom:16px;font-size:13px;color:var(--i2);line-height:1.6">
+          ⚡ Paste professor feedback once. The AI rewrites <strong>all chapters together</strong> — coherently, as one dissertation — addressing every point. No more going chapter by chapter.
+        </div>
+
+        <!-- Feedback input -->
+        <div style="background:var(--sur);border:1.5px solid var(--bd);border-radius:10px;padding:18px 20px;margin-bottom:16px">
+          <div class="section-lbl">Professor Feedback</div>
+          <textarea id="bulk-feedback-text" style="width:100%;min-height:180px;padding:12px 14px;background:var(--s2);border:1.5px solid var(--bd);border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;color:var(--ink);resize:vertical;outline:none;transition:border .15s;margin-bottom:12px" 
+            placeholder="Paste the professor's feedback here…&#10;&#10;Examples:&#10;• The literature review lacks depth — needs more empirical studies on turnover intentions&#10;• Chapter III methodology section needs more detail on sampling procedures&#10;• References throughout are not consistently in APA 7th format&#10;• The problem statement in Chapter I needs to be more specific&#10;• Chapter V conclusions are too brief and don't tie back to the hypotheses"
+            onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--bd)'"></textarea>
+
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--i3);margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px">Apply to</div>
+              <div style="display:flex;gap:6px">
+                <label style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--i2);cursor:pointer">
+                  <input type="radio" name="fb-scope" value="all" checked id="fb-scope-all"> All chapters with drafts
+                </label>
+                <label style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--i2);cursor:pointer">
+                  <input type="radio" name="fb-scope" value="selected" id="fb-scope-sel"> Selected only
+                </label>
+              </div>
+            </div>
+            <button class="btn btn-primary" id="apply-fb-btn" onclick="applyBulkFeedback()" style="height:38px;padding:0 20px;font-size:13px;margin-left:auto">
+              ⚡ Apply to All Chapters
+            </button>
+          </div>
+        </div>
+
+        <!-- Chapter selector (shown when "selected only") -->
+        <div id="fb-ch-selector" style="display:none;background:var(--sur);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:16px">
+          <div class="section-lbl">Select Chapters</div>
+          <div id="fb-ch-checkboxes" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px"></div>
+        </div>
+
+        <!-- Progress area -->
+        <div id="bulk-progress" style="display:none;background:var(--bdim);border:1px solid rgba(37,99,235,.12);border-radius:10px;padding:16px 18px;margin-bottom:16px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span class="badge" id="bulk-badge">Running</span>
+            <span style="font-size:13px;font-weight:500" id="bulk-msg">Revising chapters…</span>
+            <span style="font-size:12px;color:var(--i3);margin-left:auto" id="bulk-counter">0/0</span>
+          </div>
+          <div style="height:4px;background:rgba(37,99,235,.15);border-radius:2px;overflow:hidden;margin-bottom:8px">
+            <div style="height:100%;background:var(--blue);border-radius:2px;transition:width .5s" id="bulk-prog-fill"></div>
+          </div>
+          <div style="font-size:12px;color:var(--i2)" id="bulk-current">Starting…</div>
+        </div>
+
+        <!-- Results -->
+        <div id="bulk-results" style="display:none">
+          <div class="section-lbl">Results</div>
+          <div id="bulk-results-list"></div>
+        </div>
+
+        <!-- Feedback History -->
+        <div style="margin-top:20px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <div class="section-lbl" style="margin-bottom:0">Feedback History</div>
+            <button class="btn btn-sm" onclick="loadFeedbackLog()">↺ Refresh</button>
+          </div>
+          <div id="feedback-log-list"><div style="font-size:13px;color:var(--i3);padding:6px 0">No feedback history yet.</div></div>
+        </div>
       </div>
 
     </div>
@@ -842,7 +909,9 @@ function showV(name){
 }
 
 function showDTab(name,btn){
-  ['chapters','scratchpad','documents'].forEach(n=>document.getElementById('dt-'+n).style.display=n===name?'':'none');
+  ['chapters','scratchpad','documents','feedback'].forEach(n=>document.getElementById('dt-'+n).style.display=n===name?'':'none');
+  if(name==='documents') loadDocs();
+  if(name==='feedback'){loadFeedbackLog();buildFbChCheckboxes();}
   document.querySelectorAll('.dtab').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
   if(name==='documents') loadDocs();
@@ -1042,6 +1111,151 @@ async function deleteCurrentClient(){const c=clients.find(x=>x.id===activeClient
 // ─── MODALS ──────────────────────────────────────────────────
 function openM(id){document.getElementById(id).classList.add('on');}
 function closeM(id){document.getElementById(id).classList.remove('on');}
+
+// ─── BULK FEEDBACK ──────────────────────────────────────────
+let bulkJobId=null, bulkPollTimer=null;
+
+document.addEventListener('change', e => {
+  if(e.target.name==='fb-scope'){
+    const showSel=e.target.value==='selected';
+    document.getElementById('fb-ch-selector').style.display=showSel?'':'none';
+    if(showSel) buildFbChCheckboxes();
+    const btn=document.getElementById('apply-fb-btn');
+    btn.textContent=showSel?'⚡ Apply to Selected':'⚡ Apply to All Chapters';
+  }
+});
+
+function buildFbChCheckboxes(){
+  const el=document.getElementById('fb-ch-checkboxes');
+  el.innerHTML=allChapters.map(ch=>{
+    const name=ch.chapter||ch.chapter_name||'';
+    const hasContent=ch.word_count>0||ch.status==='complete'||ch.status==='draft'||ch.status==='revised';
+    return `<label style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink);cursor:pointer;padding:6px 10px;background:var(--s2);border-radius:6px;border:1px solid var(--bd)">
+      <input type="checkbox" value="${name}" ${hasContent?'checked':''} style="accent-color:var(--blue)">
+      <span>${name}</span>
+      ${hasContent?'<span class="badge b-draft" style="margin-left:auto">has draft</span>':''}
+    </label>`;
+  }).join('');
+}
+
+async function applyBulkFeedback(){
+  const feedback=document.getElementById('bulk-feedback-text').value.trim();
+  if(!feedback){toast('Paste professor feedback first');return;}
+  if(!activeClient){toast('Select a client first');return;}
+
+  const scope=document.querySelector('input[name="fb-scope"]:checked').value;
+  let chapters=null;
+  if(scope==='selected'){
+    chapters=Array.from(document.querySelectorAll('#fb-ch-checkboxes input:checked')).map(i=>i.value);
+    if(!chapters.length){toast('Select at least one chapter');return;}
+  }
+
+  const btn=document.getElementById('apply-fb-btn');
+  btn.disabled=true;btn.textContent='Running…';
+  document.getElementById('bulk-progress').style.display='';
+  document.getElementById('bulk-results').style.display='none';
+  setBulkStatus('running','Applying feedback to all chapters…',0,0,0,'Starting…');
+
+  try{
+    const d=await fetch(API()+'/feedback/apply',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({client_id:activeClient,feedback,scope,chapters})
+    }).then(r=>r.json());
+
+    if(!d.job_id){toast('Error: '+(d.error||'unknown'));btn.disabled=false;btn.textContent='⚡ Apply to All Chapters';return;}
+    bulkJobId=d.job_id;
+    if(bulkPollTimer)clearInterval(bulkPollTimer);
+    bulkPollTimer=setInterval(pollBulk,3000);
+  }catch(e){
+    toast('Error: '+e.message);
+    btn.disabled=false;btn.textContent='⚡ Apply to All Chapters';
+    document.getElementById('bulk-progress').style.display='none';
+  }
+}
+
+async function pollBulk(){
+  if(!bulkJobId)return;
+  try{
+    const j=await fetch(API()+'/feedback/job/'+bulkJobId).then(r=>r.json());
+    const total=j.total||1;const done=j.done||0;
+    const pct=Math.round((done/total)*100);
+    setBulkStatus(j.status,`Revising ${done} of ${total} chapters…`,pct,done,total,j.current_chapter||'');
+
+    if(j.status==='complete'||j.status==='complete_with_errors'){
+      clearInterval(bulkPollTimer);
+      const btn=document.getElementById('apply-fb-btn');
+      btn.disabled=false;
+      btn.textContent=document.querySelector('input[name="fb-scope"]:checked').value==='selected'?'⚡ Apply to Selected':'⚡ Apply to All Chapters';
+      setBulkStatus('complete','All chapters revised!',100,total,total,'Done');
+      renderBulkResults(j.results||[]);
+      toast(`✓ ${done} chapters revised successfully`);
+      // refresh chapter grid
+      const c=clients.find(x=>x.id===activeClient);if(c)await loadChapters(c);
+      await loadFeedbackLog();
+    }
+  }catch(e){console.error(e);}
+}
+
+function setBulkStatus(status,msg,pct,done,total,current){
+  const badge=document.getElementById('bulk-badge');
+  const cls={running:'b-w',complete:'b-done',complete_with_errors:'b-r',queued:'b-q'};
+  badge.className='badge '+(cls[status]||'b-q');
+  badge.textContent=status==='complete'?'Done':status==='running'?'Revising…':'Queued';
+  document.getElementById('bulk-msg').textContent=msg;
+  document.getElementById('bulk-prog-fill').style.width=pct+'%';
+  document.getElementById('bulk-counter').textContent=total?`${done}/${total}`:'';
+  document.getElementById('bulk-current').textContent=current?`Currently revising: ${current}`:'';
+}
+
+function renderBulkResults(results){
+  const el=document.getElementById('bulk-results');
+  el.style.display='';
+  document.getElementById('bulk-results-list').innerHTML=results.map(r=>{
+    const icon=r.status==='revised'?'✅':r.status==='skipped'?'⏭️':'❌';
+    const info=r.status==='revised'?`${(r.word_count||0).toLocaleString()} words`:r.reason||r.error||'';
+    return `<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--sur);border:1px solid var(--bd);border-radius:7px;margin-bottom:6px;font-size:13px">
+      <span>${icon}</span>
+      <span style="flex:1;font-weight:500">${r.chapter}</span>
+      <span style="color:var(--i3)">${info}</span>
+    </div>`;
+  }).join('');
+}
+
+async function loadFeedbackLog(){
+  if(!activeClient)return;
+  const el=document.getElementById('feedback-log-list');
+  try{
+    const d=await fetch(API()+'/feedback/log/'+activeClient).then(r=>r.json());
+    const entries=d.entries||[];
+    if(!entries.length){el.innerHTML='<div style="font-size:13px;color:var(--i3);padding:6px 0">No feedback history yet.</div>';return;}
+    el.innerHTML=entries.map(e=>{
+      const date=new Date(e.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+      const chs=JSON.parse(e.chapters_affected||'[]');
+      return `<div style="background:var(--sur);border:1px solid var(--bd);border-radius:8px;padding:12px 14px;margin-bottom:8px">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+          <div style="flex:1;min-width:0">
+            <div style="font-size:12px;color:var(--i3);margin-bottom:4px">${date} · ${chs.length} chapters</div>
+            <div style="font-size:13px;color:var(--ink);line-height:1.5">${e.feedback.substring(0,200)}${e.feedback.length>200?'…':''}</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="btn btn-sm btn-edit" onclick="reuseeFeedback(\`${e.feedback.replace(/\`/g,'').replace(/"/g,'')}\`)">Reuse</button>
+            <button class="btn btn-sm btn-danger" onclick="deleteFbEntry('${e.id}')">Del</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }catch(err){el.innerHTML='<div style="font-size:12px;color:var(--red)">Error loading history</div>';}
+}
+
+function reuseeFeedback(text){
+  document.getElementById('bulk-feedback-text').value=text;
+  toast('Feedback loaded — edit if needed then Apply');
+}
+
+async function deleteFbEntry(id){
+  try{await fetch(API()+'/feedback/log/'+id,{method:'DELETE'});await loadFeedbackLog();}
+  catch(e){toast('Error: '+e.message);}
+}
 
 // ─── UTILS ───────────────────────────────────────────────────
 function toast(msg,dur=2800){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('on');setTimeout(()=>el.classList.remove('on'),dur);}
