@@ -320,6 +320,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);displa
     <div class="dash-tabs">
       <button class="dtab on" onclick="showDashTab('chapters',this)">Chapters</button>
       <button class="dtab" onclick="showDashTab('scratchpad',this)">📓 Scratchpad</button>
+      <button class="dtab" onclick="showDashTab('documents',this)">📎 Documents</button>
     </div>
     <div class="dash-body" style="flex:1;overflow-y:auto">
 
@@ -360,6 +361,42 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);displa
               Add notes then click<br><strong>Analyze with AI</strong><br>to extract key dissertation themes
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- DOCUMENTS TAB -->
+      <div id="dtab-documents" style="display:none">
+        <div style="margin-bottom:16px;font-size:13px;color:var(--ink2);line-height:1.6">
+          📎 Upload past essays, writing samples, or any documents for <strong id="docs-client-name"></strong>. The AI extracts their writing style and voice — every chapter will sound like <em>them</em>, not generic AI.
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:10px">
+          <div style="flex:1">
+            <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:8px">Upload Writing Sample or Essay</div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <select id="doc-type" style="padding:7px 22px 7px 9px;background:var(--s2);border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:inherit;outline:none;appearance:none;background-image:url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239e9d94'/%3E%3C/svg%3E);background-repeat:no-repeat;background-position:right 8px center;cursor:pointer">
+                <option value="writing_sample">Past Essay / Writing Sample</option>
+                <option value="professor_feedback">Professor Feedback / Email</option>
+                <option value="research_notes">Research Notes</option>
+                <option value="syllabus">Course Syllabus / Rubric</option>
+                <option value="reference">Reference Material</option>
+              </select>
+              <label style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:0 14px;height:30px;border-radius:6px;border:1px solid var(--blue);background:var(--blue);color:#fff;font-size:12px;font-weight:500;font-family:inherit;transition:opacity .15s">
+                <input type="file" id="doc-upload" style="display:none" accept=".txt,.md,.docx,.pdf,.doc" onchange="uploadDoc(event)">
+                ↑ Choose File
+              </label>
+              <span style="font-size:11px;color:var(--ink3)">.txt, .md, .pdf, .docx</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="voice-active-banner" style="display:none;background:var(--green-dim);border:1px solid rgba(21,128,61,.15);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--green);line-height:1.6">
+          ✅ <strong>Voice profile active</strong> — AI has analyzed this client's writing style and will match it in every chapter generation.
+        </div>
+
+        <div id="docs-list-wrap">
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);margin-bottom:10px">Uploaded Documents</div>
+          <div id="docs-list"><div style="font-size:13px;color:var(--ink3);padding:12px 0">No documents uploaded yet.</div></div>
         </div>
       </div>
 
@@ -532,6 +569,7 @@ async function selectClient(id){
   document.getElementById('d-topic').textContent=c.topic;
   document.getElementById('sb-client').textContent=c.name;
   document.getElementById('scratch-client-name').textContent=c.name;
+  document.getElementById('docs-client-name').textContent=c.name;
   document.getElementById('del-btn').style.display=id==='mitchell-dba-ulv-001'?'none':'';
   await loadChapters(c);
   await loadScratch(id);
@@ -637,7 +675,8 @@ async function summarizeScratch(){
 
 // ─── DASHBOARD TABS ─────────────────────────────────────────────
 function showDashTab(name,btn){
-  ['chapters','scratchpad'].forEach(n=>document.getElementById('dtab-'+n).style.display=n===name?'':'none');
+  ['chapters','scratchpad','documents'].forEach(n=>document.getElementById('dtab-'+n).style.display=n===name?'':'none');
+  if(name==='documents') loadDocsList();
   document.querySelectorAll('.dtab').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
 }
@@ -894,6 +933,63 @@ async function deleteClient(id,name){
 async function deleteCurrentClient(){
   const c=clients.find(x=>x.id===activeClient);
   if(c) confirmDelete(c.id,c.name);
+}
+
+// ─── DOCUMENTS / VAULT ──────────────────────────────────────────
+async function loadDocsList(){
+  if(!activeClient) return;
+  const el=document.getElementById('docs-list');
+  el.innerHTML='<div style="font-size:12px;color:var(--ink3)">Loading…</div>';
+  try{
+    const d=await fetch(API()+'/documents/'+activeClient).then(r=>r.json());
+    const docs=d.documents||[];
+    // check voice banner
+    const hasVoice=docs.some(d=>['writing_sample','professor_feedback'].includes(d.doc_type) && d.extracted_style);
+    document.getElementById('voice-active-banner').style.display=hasVoice?'':'none';
+    if(!docs.length){el.innerHTML='<div style="font-size:13px;color:var(--ink3);padding:12px 0">No documents uploaded yet. Upload past essays to activate voice matching.</div>';return;}
+    const typeLabels={writing_sample:'Past Essay',professor_feedback:'Professor Feedback',research_notes:'Research Notes',syllabus:'Syllabus/Rubric',reference:'Reference'};
+    el.innerHTML=docs.map(doc=>{
+      let styleSum='';
+      try{const s=JSON.parse(doc.extracted_style||'{}');styleSum=s.style_summary||'';}catch{}
+      return `<div style="padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:8px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">📄 ${doc.filename}</div>
+            <div style="font-size:11px;color:var(--ink3);margin-top:2px">${typeLabels[doc.doc_type]||doc.doc_type} · ${(doc.word_count||0).toLocaleString()} words</div>
+            ${styleSum?`<div style="font-size:11px;color:var(--ink2);margin-top:5px;line-height:1.5;font-style:italic">"${styleSum.substring(0,120)}…"</div>`:''}
+          </div>
+          <button onclick="deleteDoc('${doc.id}')" style="padding:4px 8px;border:1px solid var(--red-dim);background:none;border-radius:5px;color:var(--red);font-size:11px;cursor:pointer;flex-shrink:0">Delete</button>
+        </div>
+      </div>`;
+    }).join('');
+  }catch(e){el.innerHTML='<div style="font-size:12px;color:var(--red)">Error loading documents</div>';}
+}
+
+async function uploadDoc(event){
+  const file=event.target.files[0];
+  if(!file){return;}
+  if(!activeClient){toast('Select a client first');return;}
+  const docType=document.getElementById('doc-type').value;
+  toast('Uploading and analyzing writing style…');
+  const form=new FormData();
+  form.append('client_id',activeClient);
+  form.append('doc_type',docType);
+  form.append('file',file);
+  try{
+    const d=await fetch(API()+'/documents/upload',{method:'POST',body:form}).then(r=>r.json());
+    toast(`✓ "${file.name}" uploaded — voice profile updated`);
+    event.target.value='';
+    await loadDocsList();
+  }catch(e){toast('Upload error: '+e.message);}
+}
+
+async function deleteDoc(docId){
+  if(!confirm('Remove this document from the voice profile?')) return;
+  try{
+    await fetch(API()+'/documents/'+docId,{method:'DELETE'});
+    toast('Document removed');
+    await loadDocsList();
+  }catch(e){toast('Error: '+e.message);}
 }
 
 // ─── UTILS ──────────────────────────────────────────────────────
