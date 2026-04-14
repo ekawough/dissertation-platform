@@ -3,596 +3,412 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Dissertation Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f5f4f0;--sur:#fff;--s2:#f0efe9;--s3:#e6e4dc;
-  --bd:rgba(0,0,0,0.07);--bd2:rgba(0,0,0,0.14);
-  --ink:#1c1b18;--i2:#6b6960;--i3:#9e9d94;
-  --blue:#2563eb;--bdim:rgba(37,99,235,0.08);--bt:#1d4ed8;
-  --green:#15803d;--gdim:rgba(21,128,61,0.08);
-  --amber:#b45309;--adim:rgba(180,83,9,0.09);
+  --paper:#faf9f6;--white:#fff;--s1:#f4f3ef;--s2:#ebe9e2;--s3:#dddbd2;
+  --ink:#1a1916;--i2:#5c5b54;--i3:#9b9a93;
+  --blue:#2563eb;--bdim:rgba(37,99,235,0.09);--bt:#1d4ed8;
+  --green:#16a34a;--gdim:rgba(22,163,74,0.09);
+  --amber:#d97706;--adim:rgba(217,119,6,0.09);
   --red:#dc2626;--rdim:rgba(220,38,38,0.08);
-  --purple:#7c3aed;--pdim:rgba(124,58,237,0.08);
-  --sidebar:256px;--panel:290px;
+  --sidebar:230px;--chatw:320px;
 }
 html,body{height:100%;overflow:hidden}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);display:flex;font-size:14px}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);display:flex;font-size:14px}
 
-/* SIDEBAR */
-.sb{width:var(--sidebar);height:100vh;background:var(--sur);border-right:1px solid var(--bd);display:flex;flex-direction:column;flex-shrink:0}
-.sb-brand{padding:14px 14px 12px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:9px}
-.sb-logo{width:30px;height:30px;background:var(--ink);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex-shrink:0}
-.sb-title{font-size:13px;font-weight:700;letter-spacing:-.2px}
-.sb-sub{font-size:10px;color:var(--i3)}
-.sb-scroll{flex:1;overflow-y:auto;padding:8px}
-.sb-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--i3);padding:6px 6px 4px}
-.cc{display:flex;align-items:stretch;border-radius:8px;margin-bottom:3px;border:1.5px solid transparent;transition:all .1s;cursor:pointer}
-.cc:hover{background:var(--s2)}
-.cc.on{background:var(--bdim);border-color:rgba(37,99,235,0.16)}
-.cc-main{flex:1;padding:8px 10px;min-width:0}
-.cc-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cc-meta{font-size:11px;color:var(--i3);margin-top:1px}
-.cc-dots{display:flex;gap:3px;margin-top:4px}
-.dot{width:7px;height:7px;border-radius:50%}
-.dot-c{background:var(--green)}.dot-p{background:var(--amber)}.dot-n{background:var(--s3);border:1px solid var(--bd2)}
-.cc-actions{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:4px 6px 4px 0;opacity:0;transition:opacity .1s}
-.cc:hover .cc-actions{opacity:1}
-.cc-act-btn{background:none;border:1px solid var(--bd2);border-radius:5px;padding:2px 6px;font-size:10px;font-weight:500;font-family:inherit;cursor:pointer;color:var(--i2);white-space:nowrap;transition:all .1s}
-.cc-act-btn:hover{background:var(--blue);border-color:var(--blue);color:#fff}
-.cc-act-btn.del:hover{background:var(--red);border-color:var(--red);color:#fff}
-.sb-add{width:100%;padding:8px 10px;border:1.5px dashed var(--bd2);border-radius:8px;background:none;color:var(--i3);font-size:12px;font-family:inherit;cursor:pointer;margin-top:4px;transition:all .12s}
-.sb-add:hover{border-color:var(--blue);color:var(--blue);background:var(--bdim)}
-.sb-foot{padding:10px 14px;font-size:10px;color:var(--i3);border-top:1px solid var(--bd);line-height:1.8;flex-shrink:0}
+/* ── CLIENT SIDEBAR ─────────────────────────── */
+.csb{width:var(--sidebar);height:100vh;background:var(--white);border-right:1px solid rgba(0,0,0,0.07);display:flex;flex-direction:column;flex-shrink:0}
+.csb-top{padding:14px 14px 10px;border-bottom:1px solid rgba(0,0,0,0.07)}
+.csb-logo{display:flex;align-items:center;gap:8px;margin-bottom:0}
+.csb-icon{width:28px;height:28px;background:var(--ink);border-radius:6px;display:grid;place-items:center;color:var(--paper);font-size:14px;flex-shrink:0}
+.csb-brand{font-size:13px;font-weight:700;letter-spacing:-.2px}
+.csb-list{flex:1;overflow-y:auto;padding:8px}
+.csb-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--i3);padding:6px 8px 4px}
+.client-item{padding:8px 10px;border-radius:8px;cursor:pointer;border:1.5px solid transparent;margin-bottom:2px;transition:all .12s;display:flex;align-items:center;gap:0}
+.client-item:hover{background:var(--s1)}
+.client-item.on{background:var(--bdim);border-color:rgba(37,99,235,0.15)}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-meta{font-size:10px;color:var(--i3);margin-top:1px}
+.ci-dots{display:flex;gap:2px;margin-top:4px}
+.dot{width:6px;height:6px;border-radius:50%}
+.dot-c{background:var(--green)}.dot-p{background:var(--amber)}.dot-n{background:var(--s3);border:1px solid rgba(0,0,0,.15)}
+.ci-btns{display:flex;flex-direction:column;gap:2px;opacity:0;transition:opacity .1s}
+.client-item:hover .ci-btns{opacity:1}
+.ci-btn{background:none;border:none;font-size:11px;cursor:pointer;padding:2px 5px;border-radius:4px;color:var(--i3);font-family:inherit;transition:all .1s}
+.ci-btn:hover{background:var(--blue);color:#fff}
+.ci-btn.d:hover{background:var(--red);color:#fff}
+.csb-add{margin:4px 8px;padding:8px 10px;border:1.5px dashed rgba(0,0,0,.14);border-radius:8px;background:none;color:var(--i3);font-size:12px;font-family:inherit;cursor:pointer;width:calc(100% - 16px);transition:all .12s}
+.csb-add:hover{border-color:var(--blue);color:var(--blue);background:var(--bdim)}
+.csb-foot{padding:8px 14px;font-size:10px;color:var(--i3);border-top:1px solid rgba(0,0,0,.06);line-height:1.8;flex-shrink:0}
 
-/* MAIN */
+/* ── MAIN ─────────────────────────────────────── */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 
-/* VIEWS */
-#v-empty,#v-dash,#v-chapter{display:none}
-#v-empty.show,#v-dash.show,#v-chapter.show{display:flex}
-#v-empty{flex:1;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:40px;background:var(--bg)}
-#v-dash{flex:1;flex-direction:column;overflow:hidden}
-#v-chapter{flex:1;overflow:hidden}
+/* ── TOP BAR ──────────────────────────────────── */
+.topbar{height:48px;background:var(--white);border-bottom:1px solid rgba(0,0,0,.07);display:flex;align-items:center;padding:0 20px;gap:12px;flex-shrink:0}
+.tb-client{font-size:15px;font-weight:600;letter-spacing:-.3px;flex:1}
+.tb-meta{font-size:12px;color:var(--i3)}
+.tb-words{font-size:12px;color:var(--i3);padding:3px 10px;background:var(--s1);border-radius:20px}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:0 12px;height:30px;border-radius:6px;border:1px solid rgba(0,0,0,.14);background:var(--white);color:var(--i2);font-size:12px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .12s;white-space:nowrap}
+.btn:hover{background:var(--s1);color:var(--ink)}
+.btn-blue{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn-blue:hover{opacity:.87;background:var(--blue)}
+.btn-blue:disabled{opacity:.4;cursor:not-allowed}
+.btn-sm{height:26px;padding:0 9px;font-size:11px}
+.btn-ghost{border-color:transparent}.btn-ghost:hover{background:var(--s1)}
 
-/* EMPTY */
-.empty-icon{font-size:48px;margin-bottom:14px}
-.empty-h{font-size:20px;font-weight:700;letter-spacing:-.4px;margin-bottom:6px}
-.empty-s{font-size:13px;color:var(--i3);line-height:1.6}
+/* ── WORKSPACE ────────────────────────────────── */
+.workspace{flex:1;display:flex;overflow:hidden}
 
-/* DASHBOARD */
-.dash-hero{padding:20px 28px 14px;border-bottom:1px solid var(--bd);background:var(--sur);flex-shrink:0}
-.dash-hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.dash-name{font-size:22px;font-weight:700;letter-spacing:-.4px}
-.dash-meta{font-size:13px;color:var(--i2);margin-top:2px}
-.dash-topic{font-size:13px;color:var(--i3);font-style:italic;margin-top:2px;line-height:1.4}
-.hero-btns{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
-.dtabs{display:flex;border-bottom:1px solid var(--bd);background:var(--sur);flex-shrink:0}
-.dtab{padding:10px 18px;border:none;background:none;font-size:13px;font-weight:500;color:var(--i3);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .12s}
-.dtab.on{color:var(--bt);border-bottom-color:var(--blue)}
-.dash-body{flex:1;overflow-y:auto;padding:22px 28px}
+/* ── DOCUMENT AREA ────────────────────────────── */
+.doc-area{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--paper)}
+.doc-scroll{flex:1;overflow-y:auto;padding:40px 0}
+.doc-page{max-width:760px;margin:0 auto;padding:0 40px;position:relative}
+.doc-title-section{margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--s2)}
+.doc-client-name{font-family:'Crimson Pro',Georgia,serif;font-size:28px;font-weight:600;letter-spacing:-.5px;color:var(--ink);margin-bottom:4px}
+.doc-topic{font-family:'Crimson Pro',serif;font-size:16px;color:var(--i2);font-style:italic;line-height:1.5;margin-bottom:8px}
+.doc-degree{font-size:12px;color:var(--i3);letter-spacing:.3px}
 
-/* Chapter grid */
-.ch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-bottom:22px}
-.ch-tile{background:var(--sur);border:1.5px solid var(--bd);border-radius:10px;padding:13px 15px;cursor:pointer;transition:all .15s;position:relative}
-.ch-tile:hover{border-color:var(--blue);box-shadow:0 2px 10px rgba(37,99,235,.1);transform:translateY(-1px)}
-.ch-tile-name{font-size:13px;font-weight:600;margin-bottom:6px;line-height:1.3}
-.ch-tile-notes{font-size:11px;color:var(--i3);margin-top:5px;line-height:1.4}
-.ch-tile-words{font-size:11px;color:var(--i3);margin-top:3px}
-.ch-tile-edit{position:absolute;top:8px;right:8px;background:none;border:1px solid var(--bd2);border-radius:5px;padding:2px 6px;font-size:10px;color:var(--i3);cursor:pointer;opacity:0;transition:opacity .1s;font-family:inherit}
-.ch-tile:hover .ch-tile-edit{opacity:1}
-.ch-tile-edit:hover{background:var(--blue);border-color:var(--blue);color:#fff}
-.ch-add-tile{border-style:dashed;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--i3);font-size:13px;gap:5px;min-height:80px;flex-direction:column;border-radius:10px;border:1.5px dashed var(--bd2);transition:all .15s}
-.ch-add-tile:hover{border-color:var(--blue);color:var(--blue);background:var(--bdim)}
+/* The actual textarea — full doc */
+.doc-editor{width:100%;min-height:600px;border:none;outline:none;font-family:'Crimson Pro',Georgia,serif;font-size:17px;line-height:1.95;color:var(--ink);resize:none;background:transparent;padding:0;-webkit-font-smoothing:antialiased}
+.doc-editor::placeholder{color:var(--i3);font-style:italic;font-size:16px}
 
-/* Stats */
-.stats-row{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
-.sbox{background:var(--sur);border:1px solid var(--bd);border-radius:8px;padding:13px 16px;flex:1;min-width:90px}
-.sbox.click{cursor:pointer;transition:all .12s}
-.sbox.click:hover{border-color:var(--blue);background:var(--bdim)}
-.sbox-n{font-size:20px;font-weight:700;line-height:1}
-.sbox-l{font-size:11px;color:var(--i3);margin-top:3px}
+/* Generating overlay */
+.gen-overlay{position:absolute;inset:0;background:rgba(250,249,246,.85);display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;backdrop-filter:blur(2px)}
+.gen-overlay.show{display:flex}
+.gen-spinner{width:36px;height:36px;border:3px solid var(--s2);border-top-color:var(--blue);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.gen-label{font-size:14px;font-weight:500;color:var(--i2)}
+.gen-sub{font-size:12px;color:var(--i3)}
 
-/* Scratchpad */
-.scratch-layout{display:flex;gap:14px;align-items:flex-start}
-.scratch-left{flex:1}
-.scratch-right{width:270px;flex-shrink:0}
-.scratch-ta{width:100%;min-height:300px;padding:13px 15px;background:var(--sur);border:1.5px solid var(--bd);border-radius:10px;font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;color:var(--ink);resize:vertical;outline:none;transition:border .15s}
+/* ── CHAT SIDEBAR ─────────────────────────────── */
+.chat-sidebar{width:var(--chatw);border-left:1px solid rgba(0,0,0,.07);background:var(--white);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
+.chat-head{padding:12px 16px;border-bottom:1px solid rgba(0,0,0,.07);display:flex;align-items:center;gap:8px}
+.chat-head-title{font-size:13px;font-weight:600;flex:1}
+.chat-tabs{display:flex;border-bottom:1px solid rgba(0,0,0,.07);flex-shrink:0}
+.ctab{flex:1;padding:9px 4px;border:none;background:none;font-size:12px;font-weight:500;color:var(--i3);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .1s}
+.ctab.on{color:var(--bt);border-bottom-color:var(--blue)}
+
+/* Chat messages */
+.chat-msgs{flex:1;overflow-y:auto;padding:12px}
+.msg{margin-bottom:12px}
+.msg-you{display:flex;justify-content:flex-end}
+.msg-ai{display:flex;justify-content:flex-start}
+.msg-bubble{max-width:88%;padding:9px 12px;border-radius:10px;font-size:13px;line-height:1.55}
+.msg-you .msg-bubble{background:var(--blue);color:#fff;border-radius:10px 10px 2px 10px}
+.msg-ai .msg-bubble{background:var(--s1);color:var(--ink);border-radius:10px 10px 10px 2px;border:1px solid rgba(0,0,0,.07)}
+.msg-ai .msg-bubble.thinking{color:var(--i3);font-style:italic}
+.msg-ts{font-size:10px;color:var(--i3);margin-top:3px;text-align:right}
+.msg-you .msg-ts{text-align:right}
+.msg-ai .msg-ts{text-align:left}
+
+/* Quick action chips */
+.chips{padding:8px 12px;display:flex;flex-wrap:wrap;gap:5px;border-top:1px solid rgba(0,0,0,.06)}
+.chip{padding:4px 10px;border:1px solid rgba(0,0,0,.12);border-radius:20px;font-size:11px;color:var(--i2);cursor:pointer;background:var(--white);font-family:inherit;transition:all .1s;white-space:nowrap}
+.chip:hover{border-color:var(--blue);color:var(--blue);background:var(--bdim)}
+
+/* Chat input */
+.chat-input-area{padding:10px 12px;border-top:1px solid rgba(0,0,0,.07);flex-shrink:0}
+.chat-input-row{display:flex;gap:7px;align-items:flex-end}
+.chat-input{flex:1;padding:9px 12px;background:var(--s1);border:1.5px solid rgba(0,0,0,.09);border-radius:10px;font-size:13px;font-family:inherit;outline:none;resize:none;line-height:1.5;max-height:120px;transition:border .15s;color:var(--ink)}
+.chat-input:focus{border-color:var(--blue);background:var(--white)}
+.chat-input::placeholder{color:var(--i3)}
+.send-btn{width:34px;height:34px;background:var(--blue);border:none;border-radius:8px;cursor:pointer;display:grid;place-items:center;flex-shrink:0;transition:opacity .15s}
+.send-btn:hover{opacity:.85}
+.send-btn:disabled{opacity:.4;cursor:not-allowed}
+.send-btn svg{width:16px;height:16px;fill:#fff}
+
+/* ── PANELS in chat sidebar ── */
+.cpanel{flex:1;overflow-y:auto;padding:14px}
+.section-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--i3);margin-bottom:8px}
+.scratch-ta{width:100%;min-height:200px;padding:10px 12px;background:var(--s1);border:1.5px solid rgba(0,0,0,.09);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.65;color:var(--ink);resize:vertical;outline:none;transition:border .15s;margin-bottom:8px}
 .scratch-ta:focus{border-color:var(--blue)}
 .scratch-ta::placeholder{color:var(--i3)}
-.ai-card{background:var(--sur);border:1px solid var(--bd);border-radius:10px;padding:13px 15px;margin-bottom:10px}
-.ai-card-t{font-size:12px;font-weight:600;margin-bottom:8px}
-.ai-summary{font-size:12px;color:var(--i2);line-height:1.65}
-.kp-list{list-style:none}
-.kp-list li{font-size:12px;color:var(--i2);padding:4px 0;border-bottom:1px solid var(--bd);display:flex;gap:6px;line-height:1.45}
-.kp-list li:last-child{border:none}
-.kp-list li::before{content:'→';color:var(--blue);flex-shrink:0}
+.ai-sum-card{background:var(--s1);border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px;color:var(--i2);line-height:1.65}
+.kp{font-size:12px;color:var(--i2);padding:4px 0;display:flex;gap:6px;border-bottom:1px solid rgba(0,0,0,.06)}
+.kp::before{content:'→';color:var(--blue);flex-shrink:0}
+.kp:last-child{border:none}
 
 /* Docs */
-.doc-upload-bar{background:var(--sur);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.doc-row{padding:12px 14px;background:var(--sur);border:1px solid var(--bd);border-radius:8px;margin-bottom:8px}
-.doc-row-top{display:flex;align-items:center;gap:10px;justify-content:space-between}
-.doc-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
-.doc-meta{font-size:11px;color:var(--i3);margin-top:2px}
-.doc-style{font-size:11px;color:var(--i2);margin-top:5px;line-height:1.5;font-style:italic}
-.voice-banner{background:var(--gdim);border:1px solid rgba(21,128,61,.15);border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:var(--green);line-height:1.6;display:none}
-
-/* CHAPTER WORKSPACE */
-.ws{display:flex;height:100%;overflow:hidden}
-.ch-nav{width:196px;border-right:1px solid var(--bd);background:var(--sur);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
-.ch-nav-head{padding:10px 12px;border-bottom:1px solid var(--bd);flex-shrink:0}
-.back-btn{background:none;border:none;color:var(--blue);font-size:12px;font-family:inherit;cursor:pointer;padding:0;display:flex;align-items:center;gap:3px;margin-bottom:4px}
-.back-btn:hover{opacity:.75}
-.ch-nav-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--i3)}
-.ch-nav-list{flex:1;overflow-y:auto}
-.ch-nav-item{padding:9px 12px;cursor:pointer;border-left:3px solid transparent;transition:all .1s}
-.ch-nav-item:hover{background:var(--s2)}
-.ch-nav-item.on{background:var(--bdim);border-left-color:var(--blue)}
-.ch-nav-name{font-size:12px;font-weight:500;line-height:1.35}
-.ch-nav-badge{margin-top:3px}
-
-/* Editor */
-.ed-col{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;background:var(--bg)}
-.ed-bar{height:46px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:6px;padding:0 16px;background:var(--sur);flex-shrink:0}
-.ed-ch-title{font-size:14px;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.prog-strip{padding:8px 16px;background:var(--bdim);border-bottom:1px solid rgba(37,99,235,.12);display:none;flex-shrink:0}
-.prog-row{display:flex;align-items:center;gap:7px;margin-bottom:4px}
-.pbar{height:2px;background:rgba(37,99,235,.15);border-radius:1px;overflow:hidden}
-.pfill{height:100%;background:var(--blue);border-radius:1px;transition:width .5s}
-.prog-det{font-size:11px;color:var(--i3);margin-top:3px}
-.ed-scroll{flex:1;overflow-y:auto;padding:28px 32px}
-.ed-wrap{max-width:700px;margin:0 auto}
-.ed-doc-title{font-size:18px;font-weight:700;letter-spacing:-.3px;margin-bottom:16px;font-family:'Lora',serif}
-.editor{width:100%;min-height:480px;border:none;outline:none;font-family:'Lora',Georgia,serif;font-size:16px;line-height:1.9;color:var(--ink);resize:none;background:transparent;padding:0}
-.editor::placeholder{color:var(--i3);font-style:italic;font-size:15px}
-.ed-status{height:25px;border-top:1px solid var(--bd);display:flex;align-items:center;padding:0 16px;gap:14px;font-size:11px;color:var(--i3);flex-shrink:0;background:var(--sur)}
-.sb-live{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;margin-right:3px}
-.sb-live.busy{background:var(--amber)}
-
-/* AI Panel */
-.ai-panel{width:var(--panel);border-left:1px solid var(--bd);background:var(--sur);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
-.ptabs{display:flex;border-bottom:1px solid var(--bd);flex-shrink:0}
-.ptab{flex:1;padding:10px 4px;border:none;background:none;font-size:12px;font-weight:500;color:var(--i3);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .1s}
-.ptab.on{color:var(--bt);border-bottom-color:var(--blue)}
-.pb{flex:1;overflow-y:auto;padding:14px}
-.pl{display:block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--i3);margin-bottom:5px}
-.ps{width:100%;padding:7px 22px 7px 9px;background:var(--s2);border:1px solid var(--bd);border-radius:6px;color:var(--ink);font-size:12px;font-family:inherit;outline:none;margin-bottom:10px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239e9d94'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;cursor:pointer}
-.pt{width:100%;padding:8px 10px;background:var(--s2);border:1px solid var(--bd);border-radius:6px;color:var(--ink);font-size:12px;font-family:inherit;outline:none;resize:vertical;margin-bottom:10px;transition:border .15s}
-.pt:focus,.ps:focus{border-color:var(--blue)}
-.pa{width:100%;padding:9px 12px;background:var(--blue);color:#fff;border:none;border-radius:7px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;transition:opacity .15s;display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:8px}
-.pa:hover{opacity:.87}.pa:disabled{opacity:.4;cursor:not-allowed}
-.pa-sec{background:var(--s2);color:var(--i2);border:1px solid var(--bd2)}.pa-sec:hover{background:var(--s3);opacity:1}
-.psec{margin-bottom:12px}
-.fb-notice{background:var(--adim);border:1px solid rgba(180,83,9,.16);border-radius:7px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:var(--amber);line-height:1.6}
-.src-item{padding:5px 0;border-bottom:1px solid var(--bd);font-size:11px;color:var(--i2);line-height:1.5}
-.src-item:last-child{border:none}
-.src-num{color:var(--i3);font-weight:700;margin-right:3px}
-.gstats{display:flex;gap:6px;margin:8px 0}
-.gsb{background:var(--s2);border-radius:6px;padding:7px 10px;flex:1;text-align:center}
-.gsb-n{font-size:16px;font-weight:700}.gsb-l{font-size:10px;color:var(--i3)}
-.scratch-hint{background:var(--gdim);border:1px solid rgba(21,128,61,.14);border-radius:6px;padding:8px 10px;font-size:11px;color:var(--green);margin-bottom:10px;line-height:1.5}
-
-/* Buttons */
-.btn{display:inline-flex;align-items:center;gap:5px;padding:0 12px;height:30px;border-radius:6px;border:1px solid var(--bd2);background:var(--sur);color:var(--i2);font-size:12px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .12s;white-space:nowrap}
-.btn:hover{background:var(--s2);color:var(--ink)}
-.btn-primary{background:var(--blue);color:#fff;border-color:var(--blue)}
-.btn-primary:hover{opacity:.87;background:var(--blue)}
-.btn-primary:disabled{opacity:.4;cursor:not-allowed}
-.btn-sm{height:26px;padding:0 9px;font-size:11px}
-.btn-danger{color:var(--red);border-color:rgba(220,38,38,.25)}.btn-danger:hover{background:var(--rdim)}
-.btn-edit{color:var(--blue);border-color:rgba(37,99,235,.25)}.btn-edit:hover{background:var(--bdim)}
-
-/* Badges */
-.badge{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600}
-.b-complete{background:var(--gdim);color:var(--green)}
-.b-draft{background:var(--bdim);color:var(--bt)}
-.b-revised{background:var(--pdim);color:var(--purple)}
-.b-pending_irb{background:var(--adim);color:var(--amber)}
-.b-not_started{background:var(--s2);color:var(--i3)}
-.b-q{background:var(--s2);color:var(--i3)}.b-r{background:var(--adim);color:var(--amber)}
-.b-w{background:var(--bdim);color:var(--bt)}.b-done{background:var(--gdim);color:var(--green)}
-.b-fail{background:var(--rdim);color:var(--red)}
+.doc-upload-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.doc-type-sel{padding:6px 20px 6px 8px;background:var(--s1);border:1px solid rgba(0,0,0,.1);border-radius:6px;font-size:12px;font-family:inherit;outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%239b9a93'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 6px center;cursor:pointer}
+.upload-lbl{cursor:pointer;display:inline-flex;align-items:center;gap:4px;padding:0 10px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.14);background:var(--white);color:var(--i2);font-size:12px;font-weight:500;font-family:inherit;transition:all .12s}
+.upload-lbl:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.doc-item{padding:9px 12px;background:var(--s1);border-radius:7px;margin-bottom:6px}
+.doc-item-name{font-size:12px;font-weight:600;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc-item-meta{font-size:10px;color:var(--i3)}
+.doc-item-style{font-size:11px;color:var(--i2);margin-top:4px;font-style:italic;line-height:1.45}
+.voice-badge{background:var(--gdim);border:1px solid rgba(22,163,74,.15);border-radius:6px;padding:6px 10px;font-size:11px;color:var(--green);margin-bottom:10px;line-height:1.5;display:none}
 
 /* Modal */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200;display:none;align-items:center;justify-content:center}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:200;display:none;align-items:center;justify-content:center}
 .modal-bg.on{display:flex}
-.modal{background:var(--sur);border-radius:13px;width:560px;max-width:96vw;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.2)}
-.modal.sm{width:420px}
-.mh{padding:16px 20px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
-.mh-title{font-size:15px;font-weight:600}
+.modal{background:var(--white);border-radius:12px;width:540px;max-width:96vw;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal.sm{width:400px}
+.mh{padding:15px 18px;border-bottom:1px solid rgba(0,0,0,.07);display:flex;align-items:center;justify-content:space-between}
+.mh-t{font-size:14px;font-weight:600}
 .mx{background:none;border:none;font-size:20px;cursor:pointer;color:var(--i3);line-height:1;padding:0 4px;border-radius:4px}
-.mx:hover{background:var(--s2)}
-.mb{padding:18px 20px;overflow-y:auto;flex:1}
-.mf{padding:12px 20px;border-top:1px solid var(--bd);display:flex;gap:8px;justify-content:flex-end}
-.f{margin-bottom:12px}.f:last-child{margin-bottom:0}
+.mx:hover{background:var(--s1)}
+.mb{padding:16px 18px;overflow-y:auto;flex:1}
+.mf{padding:12px 18px;border-top:1px solid rgba(0,0,0,.07);display:flex;gap:7px;justify-content:flex-end}
+.f{margin-bottom:11px}.f:last-child{margin-bottom:0}
 .fl{display:block;font-size:11px;font-weight:600;color:var(--i2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px}
-.fi,.fs,.ft{width:100%;padding:8px 10px;background:var(--s2);border:1px solid var(--bd);border-radius:6px;color:var(--ink);font-size:13px;font-family:inherit;outline:none;transition:border .15s}
+.fi,.fs,.ft{width:100%;padding:8px 10px;background:var(--s1);border:1px solid rgba(0,0,0,.1);border-radius:6px;color:var(--ink);font-size:13px;font-family:inherit;outline:none;transition:border .15s}
 .fi:focus,.ft:focus,.fs:focus{border-color:var(--blue)}
-.ft{resize:vertical;min-height:64px}
-.fs{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239e9d94'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:22px}
+.ft{resize:vertical;min-height:60px}
+.fs{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239b9a93'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:22px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.tmpl-preview{background:var(--s2);border-radius:6px;padding:10px 12px;font-size:12px;color:var(--i2);line-height:1.8;margin-top:6px}
-.section-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--i3);margin-bottom:10px}
+.tmpl-prev{background:var(--s1);border-radius:6px;padding:8px 10px;font-size:12px;color:var(--i2);line-height:1.8;margin-top:5px}
+
+/* badge */
+.badge{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600}
+.b-c{background:var(--gdim);color:var(--green)}.b-d{background:var(--bdim);color:var(--bt)}
+.b-p{background:var(--adim);color:var(--amber)}.b-n{background:var(--s1);color:var(--i3)}
 
 /* Toast */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--ink);color:#fff;padding:7px 18px;border-radius:20px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:all .2s;pointer-events:none;white-space:nowrap}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--ink);color:#fff;padding:7px 18px;border-radius:20px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:all .2s;pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* empty */
+.empty-state{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:40px;gap:12px}
+.empty-icon{font-size:52px}
+.empty-h{font-family:'Crimson Pro',serif;font-size:26px;font-weight:600;letter-spacing:-.5px}
+.empty-s{font-size:13px;color:var(--i3);line-height:1.6}
+
+/* Generating state for chat */
+.typing-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--i3);animation:blink 1.4s infinite both}
+.typing-dot:nth-child(2){animation-delay:.2s}
+.typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
 </style>
 </head>
 <body>
 
-<!-- ── MODALS ── -->
-
-<!-- Add Client -->
+<!-- ── ADD CLIENT MODAL ── -->
 <div class="modal-bg" id="m-add" onclick="if(event.target===this)closeM('m-add')">
   <div class="modal">
-    <div class="mh"><div class="mh-title">Add New Client</div><button class="mx" onclick="closeM('m-add')">×</button></div>
+    <div class="mh"><div class="mh-t">Add New Client</div><button class="mx" onclick="closeM('m-add')">×</button></div>
     <div class="mb">
       <div class="g2">
-        <div class="f"><label class="fl">Full Name *</label><input class="fi" id="a-name" placeholder="e.g. Sarah Johnson"></div>
+        <div class="f"><label class="fl">Name *</label><input class="fi" id="a-name" placeholder="e.g. Sarah Johnson"></div>
         <div class="f"><label class="fl">Degree *</label>
-          <select class="fs" id="a-degree" onchange="previewTmpl('a-degree','a-tmpl-preview')">
-            <option value="dba">DBA — Doctor of Business Admin</option>
-            <option value="phd">PhD — Doctor of Philosophy</option>
-            <option value="edd">EdD — Doctor of Education</option>
-            <option value="masters">Masters (MS / MA / MBA)</option>
-            <option value="custom">Custom Structure</option>
+          <select class="fs" id="a-deg" onchange="prevTmpl()">
+            <option value="dba">DBA</option><option value="phd">PhD</option>
+            <option value="edd">EdD</option><option value="masters">Masters</option><option value="custom">Custom</option>
           </select>
         </div>
       </div>
       <div class="g2">
-        <div class="f"><label class="fl">Field / Discipline *</label><input class="fi" id="a-field" placeholder="e.g. Human Resources"></div>
+        <div class="f"><label class="fl">Field *</label><input class="fi" id="a-field" placeholder="e.g. Human Resources"></div>
         <div class="f"><label class="fl">Citation Style</label>
-          <select class="fs" id="a-citation"><option>APA 7th</option><option>MLA 9th</option><option>Chicago 17th</option><option>Harvard</option><option>Vancouver</option><option>IEEE</option></select>
+          <select class="fs" id="a-cite"><option>APA 7th</option><option>MLA 9th</option><option>Chicago 17th</option><option>Harvard</option></select>
         </div>
       </div>
-      <div class="f"><label class="fl">Institution *</label><input class="fi" id="a-inst" placeholder="e.g. University of Southern California"></div>
-      <div class="f"><label class="fl">Dissertation Topic *</label><input class="fi" id="a-topic" placeholder="Full research question or dissertation title"></div>
-      <div class="f"><label class="fl">Advisor</label><input class="fi" id="a-advisor" placeholder="e.g. Professor Zhang"></div>
-      <div class="f"><label class="fl">Chapter Structure</label><div class="tmpl-preview" id="a-tmpl-preview"></div></div>
-      <div class="f"><label class="fl">Formatting Notes <span style="font-weight:400;color:var(--i3)">(optional)</span></label><textarea class="ft" id="a-fmt" placeholder="Any institution-specific formatting requirements..."></textarea></div>
+      <div class="f"><label class="fl">Institution *</label><input class="fi" id="a-inst" placeholder="e.g. University of La Verne"></div>
+      <div class="f"><label class="fl">Dissertation Topic *</label><input class="fi" id="a-topic" placeholder="Full research question or title"></div>
+      <div class="f"><label class="fl">Advisor</label><input class="fi" id="a-adv" placeholder="e.g. Professor Zhang"></div>
+      <div class="f"><label class="fl">Chapter Structure</label><div class="tmpl-prev" id="a-tmpl-prev"></div></div>
     </div>
-    <div class="mf"><button class="btn" onclick="closeM('m-add')">Cancel</button><button class="btn btn-primary" onclick="addClient()">Add Client</button></div>
+    <div class="mf"><button class="btn" onclick="closeM('m-add')">Cancel</button><button class="btn btn-blue" onclick="addClient()">Add Client</button></div>
   </div>
 </div>
 
-<!-- Edit Client -->
+<!-- ── EDIT CLIENT MODAL ── -->
 <div class="modal-bg" id="m-edit" onclick="if(event.target===this)closeM('m-edit')">
   <div class="modal">
-    <div class="mh"><div class="mh-title">Edit Client Profile</div><button class="mx" onclick="closeM('m-edit')">×</button></div>
+    <div class="mh"><div class="mh-t">Edit Client</div><button class="mx" onclick="closeM('m-edit')">×</button></div>
     <div class="mb">
       <div class="g2">
-        <div class="f"><label class="fl">Full Name</label><input class="fi" id="e-name" placeholder="Full name"></div>
+        <div class="f"><label class="fl">Name</label><input class="fi" id="e-name"></div>
         <div class="f"><label class="fl">Degree</label>
-          <select class="fs" id="e-degree">
-            <option value="DBA">DBA</option><option value="PhD">PhD</option><option value="EdD">EdD</option>
-            <option value="MBA">MBA</option><option value="MS">MS</option><option value="MA">MA</option>
-          </select>
+          <select class="fs" id="e-deg"><option>DBA</option><option>PhD</option><option>EdD</option><option>MBA</option><option>MS</option><option>MA</option></select>
         </div>
       </div>
       <div class="g2">
-        <div class="f"><label class="fl">Field / Discipline</label><input class="fi" id="e-field" placeholder="Field"></div>
+        <div class="f"><label class="fl">Field</label><input class="fi" id="e-field"></div>
         <div class="f"><label class="fl">Citation Style</label>
-          <select class="fs" id="e-citation"><option>APA 7th</option><option>MLA 9th</option><option>Chicago 17th</option><option>Harvard</option><option>Vancouver</option><option>IEEE</option></select>
+          <select class="fs" id="e-cite"><option>APA 7th</option><option>MLA 9th</option><option>Chicago 17th</option><option>Harvard</option></select>
         </div>
       </div>
-      <div class="f"><label class="fl">Institution</label><input class="fi" id="e-inst" placeholder="Institution"></div>
-      <div class="f"><label class="fl">Dissertation Topic</label><input class="fi" id="e-topic" placeholder="Research question or title"></div>
-      <div class="f"><label class="fl">Advisor</label><input class="fi" id="e-advisor" placeholder="e.g. Professor Zhang"></div>
-      <div class="f"><label class="fl">Quality Target</label>
-        <select class="fs" id="e-quality">
-          <option value="75">75% — Work in progress, human-level</option>
-          <option value="85">85% — Solid doctoral quality</option>
-          <option value="95">95% — Near-perfect, submission ready</option>
-        </select>
-      </div>
-      <div class="f"><label class="fl">Formatting Notes</label><textarea class="ft" id="e-fmt" placeholder="Institution-specific formatting requirements..."></textarea></div>
+      <div class="f"><label class="fl">Institution</label><input class="fi" id="e-inst"></div>
+      <div class="f"><label class="fl">Dissertation Topic</label><input class="fi" id="e-topic"></div>
+      <div class="f"><label class="fl">Advisor</label><input class="fi" id="e-adv"></div>
+      <div class="f"><label class="fl">Formatting Notes</label><textarea class="ft" id="e-fmt"></textarea></div>
     </div>
-    <div class="mf"><button class="btn" onclick="closeM('m-edit')">Cancel</button><button class="btn btn-primary" onclick="saveClientEdit()">Save Changes</button></div>
-  </div>
-</div>
-
-<!-- Edit Chapter Status -->
-<div class="modal-bg" id="m-ch-edit" onclick="if(event.target===this)closeM('m-ch-edit')">
-  <div class="modal sm">
-    <div class="mh"><div class="mh-title" id="m-ch-edit-title">Edit Chapter</div><button class="mx" onclick="closeM('m-ch-edit')">×</button></div>
-    <div class="mb">
-      <div class="f"><label class="fl">Status</label>
-        <select class="fs" id="ch-edit-status">
-          <option value="not_started">Not Started</option>
-          <option value="draft">Draft</option>
-          <option value="revised">Revised</option>
-          <option value="complete">Complete</option>
-          <option value="pending_irb">Pending IRB</option>
-        </select>
-      </div>
-      <div class="f"><label class="fl">Notes</label><textarea class="ft" id="ch-edit-notes" placeholder="Chapter notes or status details..."></textarea></div>
-    </div>
-    <div class="mf"><button class="btn" onclick="closeM('m-ch-edit')">Cancel</button><button class="btn btn-primary" onclick="saveChapterEdit()">Save</button></div>
-  </div>
-</div>
-
-<!-- Add Chapter -->
-<div class="modal-bg" id="m-add-ch" onclick="if(event.target===this)closeM('m-add-ch')">
-  <div class="modal sm">
-    <div class="mh"><div class="mh-title">Add Chapter</div><button class="mx" onclick="closeM('m-add-ch')">×</button></div>
-    <div class="mb">
-      <div class="f"><label class="fl">Chapter Name</label><input class="fi" id="new-ch-name" placeholder="e.g. Chapter VI: Conclusions"></div>
-    </div>
-    <div class="mf"><button class="btn" onclick="closeM('m-add-ch')">Cancel</button><button class="btn btn-primary" onclick="addChapter()">Add Chapter</button></div>
+    <div class="mf"><button class="btn" onclick="closeM('m-edit')">Cancel</button><button class="btn btn-blue" onclick="saveEdit()">Save Changes</button></div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<!-- ── SIDEBAR ── -->
-<nav class="sb">
-  <div class="sb-brand">
-    <div class="sb-logo">📚</div>
-    <div><div class="sb-title">Dissertation Platform</div><div class="sb-sub">Doctoral Writing Suite</div></div>
+<!-- ── CLIENT SIDEBAR ── -->
+<nav class="csb">
+  <div class="csb-top">
+    <div class="csb-logo">
+      <div class="csb-icon">📚</div>
+      <div class="csb-brand">Dissertation<br><span style="font-weight:400;color:var(--i3);font-size:10px">Writing Platform</span></div>
+    </div>
   </div>
-  <div class="sb-scroll">
-    <div class="sb-lbl">Clients</div>
+  <div class="csb-list">
+    <div class="csb-lbl">Clients</div>
     <div id="client-list"></div>
-    <button class="sb-add" onclick="openM('m-add')">+ Add New Client</button>
+    <button class="csb-add" onclick="openM('m-add')">+ Add New Client</button>
   </div>
-  <div class="sb-foot">Gemini 2.5 Flash<br>CrossRef · OpenAlex · Semantic Scholar<br>Supabase · Notion · Railway</div>
+  <div class="csb-foot">Gemini 2.5 Flash<br>CrossRef · OpenAlex · Semantic Scholar<br>Supabase · Railway</div>
 </nav>
 
 <!-- ── MAIN ── -->
 <div class="main">
 
-  <!-- EMPTY -->
-  <div id="v-empty" class="show">
-    <div class="empty-icon">📚</div>
-    <div class="empty-h">Select a client to begin</div>
-    <div class="empty-s">Mitchell is pre-loaded — click his name in the sidebar<br>or add a new client with + Add New Client</div>
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="tb-client" id="tb-name">Select a client</div>
+    <div class="tb-meta" id="tb-meta"></div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <span class="tb-words" id="tb-words">0 words</span>
+      <button class="btn btn-sm" id="save-btn" onclick="saveDoc()" style="display:none">💾 Save</button>
+      <button class="btn btn-sm" id="export-btn" onclick="exportDoc()" style="display:none">↓ DOCX</button>
+      <button class="btn btn-sm" id="edit-client-btn" onclick="openEditClient()" style="display:none">✏️ Edit</button>
+    </div>
   </div>
 
-  <!-- DASHBOARD -->
-  <div id="v-dash">
-    <div class="dash-hero">
-      <div class="dash-hero-top">
-        <div style="flex:1;min-width:0">
-          <div class="dash-name" id="d-name"></div>
-          <div class="dash-meta" id="d-meta"></div>
-          <div class="dash-topic" id="d-topic"></div>
-        </div>
-        <div style="display:flex;gap:6px;flex-shrink:0">
-          <button class="btn btn-edit btn-sm" onclick="openEditClient()">✏️ Edit Profile</button>
-          <button class="btn btn-danger btn-sm" id="del-btn" onclick="deleteCurrentClient()">Delete</button>
-        </div>
-      </div>
-      <div class="hero-btns">
-        <button class="btn btn-primary" onclick="exportFull()">↓ Export Full Dissertation</button>
-      </div>
-    </div>
-    <div class="dtabs">
-      <button class="dtab on" onclick="showDTab('chapters',this)">Chapters</button>
-      <button class="dtab" onclick="showDTab('scratchpad',this)">📓 Scratchpad</button>
-      <button class="dtab" onclick="showDTab('documents',this)">📎 Documents</button>
-      <button class="dtab" onclick="showDTab('feedback',this)">⚡ Feedback</button>
-    </div>
-    <div class="dash-body">
+  <!-- WORKSPACE -->
+  <div class="workspace">
 
-      <!-- CHAPTERS -->
-      <div id="dt-chapters">
-        <div class="section-lbl">Overview</div>
-        <div class="stats-row" id="stat-row"></div>
-        <div class="section-lbl">Chapter Progress</div>
-        <div class="ch-grid" id="ch-grid"></div>
+    <!-- DOCUMENT AREA -->
+    <div class="doc-area">
+      <!-- empty state -->
+      <div class="empty-state" id="doc-empty">
+        <div class="empty-icon">📄</div>
+        <div class="empty-h">Your dissertation lives here</div>
+        <div class="empty-s">Select a client from the sidebar to load their dissertation.<br>Then use the chat on the right to edit it — just tell it what to fix.</div>
       </div>
 
-      <!-- SCRATCHPAD -->
-      <div id="dt-scratchpad" style="display:none">
-        <div style="margin-bottom:12px;font-size:13px;color:var(--i2);line-height:1.6">📓 Research notebook for <strong id="scratch-name"></strong>. Dump ideas, professor emails, source notes, arguments — anything. The AI reads this before writing every chapter.</div>
-        <div class="scratch-layout">
-          <div class="scratch-left">
-            <div class="section-lbl">Notes &amp; Ideas</div>
-            <textarea class="scratch-ta" id="scratch-ta" placeholder="Dump anything here:&#10;• Research ideas and angles&#10;• Professor feedback or emails&#10;• Interesting sources you found&#10;• Theoretical frameworks to use&#10;• Arguments you want to make&#10;&#10;The AI reads this before writing any chapter for this client."></textarea>
-            <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
-              <button class="btn btn-primary" onclick="saveScratch()">💾 Save Notes</button>
-              <button class="btn" id="analyze-btn" onclick="analyzeScratch()">🤖 Analyze with AI</button>
-              <span style="font-size:11px;color:var(--i3)" id="scratch-saved-msg"></span>
-            </div>
+      <!-- doc editor -->
+      <div class="doc-scroll" id="doc-scroll" style="display:none">
+        <div class="doc-page">
+          <div class="doc-title-section">
+            <div class="doc-client-name" id="doc-client-name"></div>
+            <div class="doc-topic" id="doc-topic"></div>
+            <div class="doc-degree" id="doc-degree"></div>
           </div>
-          <div class="scratch-right">
-            <div id="ai-summary-card" class="ai-card" style="display:none">
-              <div class="ai-card-t">🤖 AI Summary</div>
-              <div class="ai-summary" id="ai-summary"></div>
-            </div>
-            <div id="ai-points-card" class="ai-card" style="display:none">
-              <div class="ai-card-t">📌 Key Dissertation Themes</div>
-              <ul class="kp-list" id="ai-points"></ul>
-            </div>
-            <div id="scratch-hint" style="font-size:12px;color:var(--i3);text-align:center;padding:20px 10px;line-height:1.6">Add notes then click<br><strong>Analyze with AI</strong><br>to extract key dissertation themes</div>
+          <textarea class="doc-editor" id="doc-editor"
+            placeholder="Your dissertation will appear here. Start by telling the AI to write a chapter, or paste existing work."
+            oninput="onDocInput()"
+            spellcheck="true"></textarea>
+          <!-- overlay during generation -->
+          <div class="gen-overlay" id="gen-overlay">
+            <div class="gen-spinner"></div>
+            <div class="gen-label" id="gen-label">Applying edit…</div>
+            <div class="gen-sub" id="gen-sub">Gemini 2.5 Flash is working on it</div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- DOCUMENTS -->
-      <div id="dt-documents" style="display:none">
-        <div style="margin-bottom:12px;font-size:13px;color:var(--i2);line-height:1.6">📎 Upload past essays or writing samples for <strong id="docs-name"></strong>. Gemini analyzes the writing style and voice — every chapter generated will sound like <em>them</em>, not generic AI.</div>
-        <div class="doc-upload-bar">
-          <select id="doc-type" style="padding:7px 22px 7px 9px;background:var(--s2);border:1px solid var(--bd);border-radius:6px;font-size:12px;font-family:inherit;outline:none;appearance:none;background-image:url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239e9d94'/%3E%3C/svg%3E);background-repeat:no-repeat;background-position:right 8px center;cursor:pointer">
-            <option value="writing_sample">Past Essay / Writing Sample</option>
-            <option value="professor_feedback">Professor Feedback / Email</option>
-            <option value="research_notes">Research Notes</option>
-            <option value="syllabus">Syllabus / Rubric</option>
-            <option value="reference">Reference Material</option>
-          </select>
-          <label style="cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:0 14px;height:30px;border-radius:6px;border:1px solid var(--bd2);background:var(--sur);color:var(--i2);font-size:12px;font-weight:500;font-family:inherit;transition:all .12s" onmouseover="this.style.background='var(--blue)';this.style.color='#fff';this.style.borderColor='var(--blue)'" onmouseout="this.style.background='var(--sur)';this.style.color='var(--i2)';this.style.borderColor='var(--bd2)'">
-            <input type="file" id="doc-file" style="display:none" accept=".txt,.md,.docx,.pdf,.doc" onchange="uploadDoc(event)">
-            ↑ Upload File
-          </label>
-          <span style="font-size:11px;color:var(--i3)">.txt .md .pdf .docx — max 10MB</span>
-          <span style="font-size:11px;color:var(--green);margin-left:auto" id="upload-status"></span>
-        </div>
-        <div class="voice-banner" id="voice-banner">✅ <strong>Voice profile active</strong> — AI has analyzed this client's writing style and will match it when generating chapters.</div>
-        <div class="section-lbl">Uploaded Documents</div>
-        <div id="docs-list"><div style="font-size:13px;color:var(--i3);padding:8px 0">No documents uploaded yet.</div></div>
+    <!-- CHAT SIDEBAR -->
+    <div class="chat-sidebar">
+      <div class="chat-head">
+        <span class="chat-head-title">AI Assistant</span>
+        <span style="font-size:10px;color:var(--i3)" id="chat-client-label"></span>
+      </div>
+      <div class="chat-tabs">
+        <button class="ctab on" onclick="showCtab('chat',this)">Chat</button>
+        <button class="ctab" onclick="showCtab('scratch',this)">Notebook</button>
+        <button class="ctab" onclick="showCtab('docs',this)">Documents</button>
       </div>
 
-      <!-- FEEDBACK TAB -->
-      <div id="dt-feedback" style="display:none">
-        <div style="margin-bottom:16px;font-size:13px;color:var(--i2);line-height:1.6">
-          ⚡ Paste professor feedback once. The AI rewrites <strong>all chapters together</strong> — coherently, as one dissertation — addressing every point. No more going chapter by chapter.
-        </div>
-
-        <!-- Feedback input -->
-        <div style="background:var(--sur);border:1.5px solid var(--bd);border-radius:10px;padding:18px 20px;margin-bottom:16px">
-          <div class="section-lbl">Professor Feedback</div>
-          <textarea id="bulk-feedback-text" style="width:100%;min-height:180px;padding:12px 14px;background:var(--s2);border:1.5px solid var(--bd);border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;color:var(--ink);resize:vertical;outline:none;transition:border .15s;margin-bottom:12px" 
-            placeholder="Paste the professor's feedback here…&#10;&#10;Examples:&#10;• The literature review lacks depth — needs more empirical studies on turnover intentions&#10;• Chapter III methodology section needs more detail on sampling procedures&#10;• References throughout are not consistently in APA 7th format&#10;• The problem statement in Chapter I needs to be more specific&#10;• Chapter V conclusions are too brief and don't tie back to the hypotheses"
-            onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--bd)'"></textarea>
-
-          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <!-- CHAT TAB -->
+      <div id="ct-chat" style="display:flex;flex-direction:column;flex:1;overflow:hidden">
+        <div class="chat-msgs" id="chat-msgs">
+          <div class="msg msg-ai">
             <div>
-              <div style="font-size:11px;font-weight:600;color:var(--i3);margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px">Apply to</div>
-              <div style="display:flex;gap:6px">
-                <label style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--i2);cursor:pointer">
-                  <input type="radio" name="fb-scope" value="all" checked id="fb-scope-all"> All chapters with drafts
-                </label>
-                <label style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--i2);cursor:pointer">
-                  <input type="radio" name="fb-scope" value="selected" id="fb-scope-sel"> Selected only
-                </label>
-              </div>
+              <div class="msg-bubble">👋 Select a client and their dissertation loads here as one document. Tell me what to fix — "make the intro stronger", "chapter 2 needs more sources", "the methodology sounds too formal". I'll edit it in place.</div>
             </div>
-            <button class="btn btn-primary" id="apply-fb-btn" onclick="applyBulkFeedback()" style="height:38px;padding:0 20px;font-size:13px;margin-left:auto">
-              ⚡ Apply to All Chapters
+          </div>
+        </div>
+        <!-- Quick chips -->
+        <div class="chips" id="chat-chips">
+          <button class="chip" onclick="useChip(this)">Make the intro stronger</button>
+          <button class="chip" onclick="useChip(this)">Expand the literature review</button>
+          <button class="chip" onclick="useChip(this)">Methodology needs more detail</button>
+          <button class="chip" onclick="useChip(this)">Add more citations throughout</button>
+          <button class="chip" onclick="useChip(this)">Make it sound more human</button>
+          <button class="chip" onclick="useChip(this)">Tighten the conclusions</button>
+          <button class="chip" onclick="useChip(this)">Fix APA formatting</button>
+          <button class="chip" onclick="useChip(this)">Write the full dissertation</button>
+        </div>
+        <div class="chat-input-area">
+          <div class="chat-input-row">
+            <textarea class="chat-input" id="chat-input" rows="2"
+              placeholder="Tell me what to fix… "make chapter 3 stronger" or "the intro is too vague""
+              onkeydown="onChatKey(event)"></textarea>
+            <button class="send-btn" id="send-btn" onclick="sendChat()">
+              <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
             </button>
           </div>
         </div>
+      </div>
 
-        <!-- Chapter selector (shown when "selected only") -->
-        <div id="fb-ch-selector" style="display:none;background:var(--sur);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:16px">
-          <div class="section-lbl">Select Chapters</div>
-          <div id="fb-ch-checkboxes" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px"></div>
-        </div>
-
-        <!-- Progress area -->
-        <div id="bulk-progress" style="display:none;background:var(--bdim);border:1px solid rgba(37,99,235,.12);border-radius:10px;padding:16px 18px;margin-bottom:16px">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-            <span class="badge" id="bulk-badge">Running</span>
-            <span style="font-size:13px;font-weight:500" id="bulk-msg">Revising chapters…</span>
-            <span style="font-size:12px;color:var(--i3);margin-left:auto" id="bulk-counter">0/0</span>
+      <!-- NOTEBOOK TAB -->
+      <div id="ct-scratch" style="display:none;flex:1;overflow:hidden;flex-direction:column">
+        <div class="cpanel" style="flex:1;overflow-y:auto">
+          <div class="section-lbl">Research Notes</div>
+          <textarea class="scratch-ta" id="scratch-ta" placeholder="Dump anything here: ideas, professor emails, source notes, arguments, theoretical frameworks…&#10;&#10;The AI reads this before editing the dissertation."></textarea>
+          <div style="display:flex;gap:7px">
+            <button class="btn btn-blue btn-sm" onclick="saveScratch()">💾 Save</button>
+            <button class="btn btn-sm" id="analyze-btn" onclick="analyzeScratch()">🤖 Analyze</button>
+            <span style="font-size:11px;color:var(--i3);align-self:center" id="scratch-saved"></span>
           </div>
-          <div style="height:4px;background:rgba(37,99,235,.15);border-radius:2px;overflow:hidden;margin-bottom:8px">
-            <div style="height:100%;background:var(--blue);border-radius:2px;transition:width .5s" id="bulk-prog-fill"></div>
+          <div id="ai-sum" style="display:none;margin-top:12px">
+            <div class="section-lbl">AI Summary</div>
+            <div class="ai-sum-card" id="ai-sum-text"></div>
           </div>
-          <div style="font-size:12px;color:var(--i2)" id="bulk-current">Starting…</div>
-        </div>
-
-        <!-- Results -->
-        <div id="bulk-results" style="display:none">
-          <div class="section-lbl">Results</div>
-          <div id="bulk-results-list"></div>
-        </div>
-
-        <!-- Feedback History -->
-        <div style="margin-top:20px">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-            <div class="section-lbl" style="margin-bottom:0">Feedback History</div>
-            <button class="btn btn-sm" onclick="loadFeedbackLog()">↺ Refresh</button>
+          <div id="ai-pts" style="display:none;margin-top:10px">
+            <div class="section-lbl">Key Themes</div>
+            <div id="ai-pts-list"></div>
           </div>
-          <div id="feedback-log-list"><div style="font-size:13px;color:var(--i3);padding:6px 0">No feedback history yet.</div></div>
         </div>
       </div>
 
-    </div>
-  </div>
-
-  <!-- CHAPTER WORKSPACE -->
-  <div id="v-chapter">
-    <div class="ws">
-      <div class="ch-nav">
-        <div class="ch-nav-head">
-          <button class="back-btn" onclick="goBack()">← Dashboard</button>
-          <div class="ch-nav-lbl">Chapters</div>
-        </div>
-        <div class="ch-nav-list" id="ch-nav-list"></div>
-      </div>
-      <div class="ed-col">
-        <div class="ed-bar">
-          <span class="ed-ch-title" id="ed-title">Chapter</span>
-          <button class="btn btn-sm" onclick="saveDraft()">💾 Save</button>
-          <button class="btn btn-sm" onclick="exportChapter()">↓ DOCX</button>
-          <button class="btn btn-sm btn-primary" id="gen-btn" onclick="generateChapter()">✨ Generate</button>
-        </div>
-        <div class="prog-strip" id="prog-strip">
-          <div class="prog-row">
-            <span class="badge" id="prog-badge">Queued</span>
-            <span style="font-size:12px;color:var(--i2)" id="prog-msg">Starting…</span>
+      <!-- DOCUMENTS TAB -->
+      <div id="ct-docs" style="display:none;flex:1;overflow:hidden;flex-direction:column">
+        <div class="cpanel" style="flex:1;overflow-y:auto">
+          <div class="section-lbl">Voice Profile</div>
+          <div class="voice-badge" id="voice-badge">✅ Voice profile active — AI will match this writer's style</div>
+          <div style="font-size:12px;color:var(--i2);margin-bottom:10px;line-height:1.6">Upload past essays so the AI writes in their voice.</div>
+          <div class="doc-upload-row">
+            <select class="doc-type-sel" id="doc-type">
+              <option value="writing_sample">Past Essay</option>
+              <option value="professor_feedback">Professor Feedback</option>
+              <option value="research_notes">Research Notes</option>
+              <option value="syllabus">Syllabus/Rubric</option>
+            </select>
+            <label class="upload-lbl">
+              <input type="file" id="doc-file" style="display:none" accept=".txt,.md,.pdf,.docx" onchange="uploadDoc(event)">
+              ↑ Upload
+            </label>
+            <span style="font-size:10px;color:var(--i3)">max 10MB</span>
           </div>
-          <div class="pbar"><div class="pfill" id="prog-fill" style="width:5%"></div></div>
-          <div class="prog-det" id="prog-det"></div>
-        </div>
-        <div class="ed-scroll">
-          <div class="ed-wrap">
-            <div class="ed-doc-title" id="ed-doc-title"></div>
-            <textarea class="editor" id="editor" placeholder="Click ✨ Generate to write this chapter with AI, or paste your existing draft here." oninput="onType()" spellcheck="true"></textarea>
-          </div>
-        </div>
-        <div class="ed-status">
-          <span><span class="sb-live" id="sb-live"></span><span id="sb-status">Ready</span></span>
-          <span id="sb-words">0 words</span>
-          <span style="margin-left:auto" id="sb-client-name"></span>
-          <span>Gemini 2.5 Flash</span>
-        </div>
-      </div>
-      <div class="ai-panel">
-        <div class="ptabs">
-          <button class="ptab on" onclick="showPTab('gen',this)">Generate</button>
-          <button class="ptab" onclick="showPTab('feedback',this)">Feedback</button>
-          <button class="ptab" onclick="showPTab('sources',this)">Sources</button>
-        </div>
-        <div class="pb" id="pt-gen">
-          <div id="scratch-used" class="scratch-hint" style="display:none">📓 Scratchpad notes active — injected into generation</div>
-          <div class="psec">
-            <label class="pl">Chapter</label>
-            <select class="ps" id="p-chapter"></select>
-          </div>
-          <div class="psec">
-            <label class="pl">Instructions <span style="font-weight:400;color:var(--i3)">(optional)</span></label>
-            <textarea class="pt" id="p-inst" rows="3" placeholder="e.g. Focus on Meyer & Allen model. Include 15+ sources. Emphasize HR in healthcare."></textarea>
-          </div>
-          <div class="psec">
-            <label class="pl">Existing draft to improve <span style="font-weight:400;color:var(--i3)">(optional)</span></label>
-            <textarea class="pt" id="p-draft" rows="3" placeholder="Paste an existing draft to improve rather than start fresh…"></textarea>
-          </div>
-          <button class="pa" id="p-gen-btn" onclick="generateChapter()">✨ Generate Chapter</button>
-          <div id="gen-done" style="display:none">
-            <div class="gstats" id="gen-stats"></div>
-            <button class="pa pa-sec" style="margin-top:6px" onclick="generateChapter()">↺ Regenerate</button>
-          </div>
-        </div>
-        <div class="pb" id="pt-feedback" style="display:none">
-          <div class="fb-notice">⚡ <strong>Professor Feedback Mode</strong><br>Paste the exact feedback. AI will revise the chapter to address every point raised.</div>
-          <div class="psec">
-            <label class="pl">Professor Feedback</label>
-            <textarea class="pt" id="p-feedback" style="min-height:220px" placeholder="Paste professor feedback…&#10;&#10;• Lit review needs more empirical studies&#10;• Methodology lacks sampling detail&#10;• References not in APA 7th format&#10;• Problem statement too vague"></textarea>
-          </div>
-          <button class="pa" id="p-revise-btn" onclick="reviseChapter()">🔄 Revise Based on Feedback</button>
-        </div>
-        <div class="pb" id="pt-sources" style="display:none">
-          <div style="font-size:12px;color:var(--i2);margin-bottom:10px;line-height:1.6">Verified via CrossRef, OpenAlex &amp; Semantic Scholar (250M+ papers).</div>
-          <div id="sources-list"><div style="font-size:12px;color:var(--i3);text-align:center;padding:20px 0">Generate a chapter to see sources</div></div>
+          <span style="font-size:11px;color:var(--green)" id="upload-status"></span>
+          <div class="section-lbl" style="margin-top:10px">Uploaded Files</div>
+          <div id="docs-list"><div style="font-size:12px;color:var(--i3);padding:4px 0">No files yet.</div></div>
         </div>
       </div>
     </div>
-  </div>
 
+  </div>
 </div>
 
 <script>
 // ─── STATE ──────────────────────────────────────────────────
-let clients=[], activeClient=null, activeChapter=null, allChapters=[];
-let jobId=null, pollTimer=null;
-let templates={}, editingChapterName=null;
+let clients=[], activeClient=null, templates={};
+let chatJobId=null, chatPollTimer=null;
 const API=()=>window.location.origin;
-const ST_LABEL={complete:'Complete',draft:'Draft',revised:'Revised',pending_irb:'Pending IRB',not_started:'Not Started'};
-const ST_ICON={complete:'✅',draft:'📝',revised:'✏️',pending_irb:'⏳',not_started:'○'};
+const fmt=n=>n.toLocaleString();
 
 // ─── BOOT ───────────────────────────────────────────────────
 window.onload=async()=>{
@@ -604,38 +420,38 @@ window.onload=async()=>{
 
 // ─── TEMPLATES ──────────────────────────────────────────────
 async function loadTemplates(){
-  try{const d=await fetch(API()+'/clients/templates').then(r=>r.json());templates=d.templates||{};}catch(e){}
-  previewTmpl('a-degree','a-tmpl-preview');
+  try{const d=await fetch(API()+'/clients/templates').then(r=>r.json());templates=d.templates||{};}catch{}
+  prevTmpl();
 }
-function previewTmpl(selectId, previewId){
-  const key=document.getElementById(selectId)?.value||'dba';
-  const t=templates[key];
-  const el=document.getElementById(previewId);
+function prevTmpl(){
+  const k=document.getElementById('a-deg')?.value||'dba';
+  const t=templates[k];
+  const el=document.getElementById('a-tmpl-prev');
   if(el&&t) el.innerHTML=t.chapters.map((c,i)=>`<div>${i+1}. ${c}</div>`).join('');
 }
 
 // ─── CLIENTS ────────────────────────────────────────────────
 async function loadClients(){
-  try{const d=await fetch(API()+'/clients/').then(r=>r.json());clients=d.clients||[];}catch(e){}
-  renderSB();
+  try{const d=await fetch(API()+'/clients/').then(r=>r.json());clients=d.clients||[];}catch{}
+  renderClientList();
 }
 
-function renderSB(){
+function renderClientList(){
   const el=document.getElementById('client-list');
   if(!clients.length){el.innerHTML='<div style="padding:6px 10px;font-size:12px;color:var(--i3)">No clients yet.</div>';return;}
   el.innerHTML=clients.map(c=>{
     const chs=parseJ(c.chapter_structure);
-    const dots=chs.map(ch=>`<div class="dot ${ch.status==='complete'?'dot-c':ch.status==='pending_irb'?'dot-p':'dot-n'}" title="${ch.chapter||ch.chapter_name||''}"></div>`).join('');
+    const dots=chs.map(ch=>`<div class="dot ${ch.status==='complete'?'dot-c':ch.status==='pending_irb'?'dot-p':'dot-n'}"></div>`).join('');
     const isMitch=c.id==='mitchell-dba-ulv-001';
-    return `<div class="cc ${c.id===activeClient?'on':''}">
-      <div class="cc-main" onclick="selectClient('${c.id}')">
-        <div class="cc-name">${c.name}</div>
-        <div class="cc-meta">${c.degree||''} · ${c.institution||''}</div>
-        <div class="cc-dots">${dots}</div>
+    return `<div class="client-item ${c.id===activeClient?'on':''}" onclick="selectClient('${c.id}')">
+      <div class="ci-info">
+        <div class="ci-name">${c.name}</div>
+        <div class="ci-meta">${c.degree||''} · ${c.institution||''}</div>
+        <div class="ci-dots">${dots}</div>
       </div>
-      <div class="cc-actions">
-        <button class="cc-act-btn" onclick="event.stopPropagation();selectClient('${c.id}');openEditClient()">Edit</button>
-        ${!isMitch?`<button class="cc-act-btn del" onclick="event.stopPropagation();confirmDel('${c.id}','${c.name}')">Del</button>`:''}
+      <div class="ci-btns">
+        <button class="ci-btn" onclick="event.stopPropagation();selectClient('${c.id}');openEditClient()" title="Edit">✏️</button>
+        ${!isMitch?`<button class="ci-btn d" onclick="event.stopPropagation();confirmDel('${c.id}','${c.name}')" title="Delete">×</button>`:''}
       </div>
     </div>`;
   }).join('');
@@ -645,147 +461,185 @@ function parseJ(raw){if(!raw)return[];try{return typeof raw==='string'?JSON.pars
 
 async function selectClient(id){
   activeClient=id;
-  renderSB();
+  renderClientList();
   const c=clients.find(x=>x.id===id);
   if(!c)return;
-  showV('dash');
-  document.getElementById('d-name').textContent=c.name;
-  document.getElementById('d-meta').textContent=`${c.degree||''} · ${c.field||''} · ${c.institution||''}`;
-  document.getElementById('d-topic').textContent=c.topic||'';
-  document.getElementById('sb-client-name').textContent=c.name;
-  document.getElementById('scratch-name').textContent=c.name;
-  document.getElementById('docs-name').textContent=c.name;
-  document.getElementById('del-btn').style.display=id==='mitchell-dba-ulv-001'?'none':'';
-  await loadChapters(c);
+
+  // Top bar
+  document.getElementById('tb-name').textContent=c.name;
+  document.getElementById('tb-meta').textContent=`${c.degree||''} · ${c.field||''} · ${c.institution||''}`;
+  document.getElementById('chat-client-label').textContent=c.name;
+  document.getElementById('save-btn').style.display='';
+  document.getElementById('export-btn').style.display='';
+  document.getElementById('edit-client-btn').style.display='';
+
+  // Doc header
+  document.getElementById('doc-client-name').textContent=c.name;
+  document.getElementById('doc-topic').textContent=c.topic||'';
+  document.getElementById('doc-degree').textContent=`${c.degree} · ${c.institution} · ${c.citation_style||'APA 7th'}`;
+
+  // Show doc area
+  document.getElementById('doc-empty').style.display='none';
+  document.getElementById('doc-scroll').style.display='';
+
+  // Load document
+  await loadDoc(id);
   await loadScratch(id);
+
+  // Welcome message in chat
+  addMsg('ai', `Loaded ${c.name}'s dissertation. The full document is in the editor on the left. Tell me what to change — just type it naturally.`);
 }
 
-async function loadChapters(client){
+// ─── DOCUMENT ───────────────────────────────────────────────
+async function loadDoc(clientId){
   try{
-    const d=await fetch(API()+`/clients/${client.id}/chapters`).then(r=>r.json());
-    allChapters=d.chapters||parseJ(client.chapter_structure)||[];
-  }catch(e){allChapters=parseJ(client.chapter_structure)||[];}
-  renderGrid();updateStats();buildChSel();
+    const d=await fetch(API()+`/doc/load/${clientId}`).then(r=>r.json());
+    const editor=document.getElementById('doc-editor');
+    editor.value=d.content||'';
+    updateWordCount();
+    if(d.source==='stitched') toast('Loaded chapters as one document');
+  }catch(e){console.error(e);}
 }
 
-function renderGrid(){
-  const g=document.getElementById('ch-grid');
-  g.innerHTML=allChapters.map(ch=>{
-    const name=ch.chapter||ch.chapter_name||'';
-    const st=ch.status||'not_started';
-    return `<div class="ch-tile" onclick="openChapter('${name}')">
-      <button class="ch-tile-edit" onclick="event.stopPropagation();openChapterEdit('${name}','${st}',this.closest('.ch-tile').__notes||'')">✏️ Edit</button>
-      <div class="ch-tile-name">${name}</div>
-      <span class="badge b-${st}">${ST_LABEL[st]||st}</span>
-      ${ch.notes?`<div class="ch-tile-notes">${ch.notes}</div>`:''}
-      ${ch.word_count?`<div class="ch-tile-words">${ch.word_count.toLocaleString()} words</div>`:''}
-    </div>`;
-  }).join('')+`<div class="ch-add-tile" onclick="openM('m-add-ch')"><span style="font-size:20px">+</span><span>Add Chapter</span></div>`;
+function onDocInput(){updateWordCount();}
+function updateWordCount(){
+  const t=document.getElementById('doc-editor').value||'';
+  const w=t.trim()?t.trim().split(/\s+/).length:0;
+  document.getElementById('tb-words').textContent=fmt(w)+' words';
+}
 
-  // store notes for each tile
-  allChapters.forEach(ch=>{
-    const name=ch.chapter||ch.chapter_name||'';
-    const tiles=document.querySelectorAll('.ch-tile');
-    tiles.forEach(t=>{if(t.querySelector('.ch-tile-name')?.textContent===name) t.__notes=ch.notes||'';});
+async function saveDoc(){
+  if(!activeClient){toast('Select a client first');return;}
+  try{
+    await fetch(API()+'/doc/save',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({client_id:activeClient,content:document.getElementById('doc-editor').value})});
+    toast('✓ Saved');
+  }catch(e){toast('Error: '+e.message);}
+}
+
+function exportDoc(){
+  if(!activeClient){toast('Select a client first');return;}
+  // Save first then export
+  saveDoc().then(()=>{
+    window.open(API()+`/chapters/${activeClient}/export/full`,'_blank');
   });
 }
 
-function updateStats(){
-  const done=allChapters.filter(c=>['complete','draft','revised'].includes(c.status)).length;
-  const words=allChapters.reduce((s,c)=>s+(c.word_count||0),0);
-  document.getElementById('stat-row').innerHTML=`
-    <div class="sbox"><div class="sbox-n">${done}/${allChapters.length}</div><div class="sbox-l">Chapters done</div></div>
-    <div class="sbox"><div class="sbox-n">${words>0?words.toLocaleString():'—'}</div><div class="sbox-l">Total words</div></div>
-    <div class="sbox click" onclick="exportFull()"><div class="sbox-n" style="font-size:15px">↓ DOCX</div><div class="sbox-l">Export all chapters</div></div>
-  `;
+// ─── CHAT ───────────────────────────────────────────────────
+function addMsg(role, text, isTyping=false){
+  const el=document.getElementById('chat-msgs');
+  const div=document.createElement('div');
+  div.className=`msg msg-${role==='user'?'you':'ai'}`;
+  const ts=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  div.innerHTML=`<div>
+    <div class="msg-bubble${isTyping?' thinking':''}">${isTyping?
+      `<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>`:
+      text}
+    </div>
+    <div class="msg-ts">${ts}</div>
+  </div>`;
+  div.id=isTyping?'typing-msg':'';
+  el.appendChild(div);
+  el.scrollTop=el.scrollHeight;
+  return div;
 }
 
-function buildChSel(){
-  const sel=document.getElementById('p-chapter');
-  if(!sel)return;
-  sel.innerHTML=allChapters.map(ch=>{
-    const name=ch.chapter||ch.chapter_name||'';
-    return `<option value="${name}">${name}</option>`;
-  }).join('')+
-  `<option value="Literature Review Section">Extra Lit Review Section</option>
-   <option value="Custom Section">Custom Section</option>`;
-  if(activeChapter) sel.value=activeChapter;
+function removeTyping(){
+  const el=document.getElementById('typing-msg');
+  if(el) el.remove();
 }
 
-// ─── EDIT CLIENT ────────────────────────────────────────────
-function openEditClient(){
-  const c=clients.find(x=>x.id===activeClient);
-  if(!c)return;
-  document.getElementById('e-name').value=c.name||'';
-  document.getElementById('e-degree').value=c.degree||'DBA';
-  document.getElementById('e-field').value=c.field||'';
-  document.getElementById('e-inst').value=c.institution||'';
-  document.getElementById('e-topic').value=c.topic||'';
-  document.getElementById('e-advisor').value=c.advisor||'';
-  document.getElementById('e-quality').value=String(c.quality_target||75);
-  document.getElementById('e-fmt').value=c.formatting_notes||'';
-  const cit=document.getElementById('e-citation');
-  for(let o of cit.options) if(o.value===c.citation_style){cit.value=c.citation_style;break;}
-  openM('m-edit');
+function useChip(btn){
+  document.getElementById('chat-input').value=btn.textContent;
+  sendChat();
 }
 
-async function saveClientEdit(){
-  if(!activeClient){closeM('m-edit');return;}
-  const updates={
-    name:document.getElementById('e-name').value.trim(),
-    degree:document.getElementById('e-degree').value,
-    field:document.getElementById('e-field').value.trim(),
-    institution:document.getElementById('e-inst').value.trim(),
-    topic:document.getElementById('e-topic').value.trim(),
-    advisor:document.getElementById('e-advisor').value.trim()||null,
-    citation_style:document.getElementById('e-citation').value,
-    quality_target:parseInt(document.getElementById('e-quality').value),
-    formatting_notes:document.getElementById('e-fmt').value.trim()||null
-  };
+function onChatKey(e){
+  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}
+}
+
+async function sendChat(){
+  const input=document.getElementById('chat-input');
+  const msg=input.value.trim();
+  if(!msg)return;
+  if(!activeClient){toast('Select a client first');return;}
+  const docContent=document.getElementById('doc-editor').value;
+  if(!docContent.trim()){toast('No document content yet — ask me to write a chapter first');return;}
+
+  input.value='';
+  addMsg('user',msg);
+  const typingEl=addMsg('ai','',true);
+  setSending(true);
+
+  // Show overlay
+  const overlay=document.getElementById('gen-overlay');
+  overlay.classList.add('show');
+  document.getElementById('gen-label').textContent='Applying your edit…';
+  document.getElementById('gen-sub').textContent=`"${msg.substring(0,50)}${msg.length>50?'…':''}"`; 
+
   try{
-    await fetch(API()+`/clients/${activeClient}`,{
-      method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(updates)
-    });
-    // update local
-    const idx=clients.findIndex(x=>x.id===activeClient);
-    if(idx>=0) clients[idx]={...clients[idx],...updates};
-    closeM('m-edit');
-    toast('✓ Profile updated');
-    // refresh display
-    const c=clients.find(x=>x.id===activeClient);
-    document.getElementById('d-name').textContent=c.name;
-    document.getElementById('d-meta').textContent=`${c.degree} · ${c.field} · ${c.institution}`;
-    document.getElementById('d-topic').textContent=c.topic;
-    renderSB();
-  }catch(e){toast('Error: '+e.message);}
+    const d=await fetch(API()+'/doc/edit',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({client_id:activeClient,instruction:msg,current_doc:docContent,mode:'edit'})
+    }).then(r=>r.json());
+
+    if(!d.job_id){removeTyping();addMsg('ai','Error starting edit. Try again.');setSending(false);overlay.classList.remove('show');return;}
+    chatJobId=d.job_id;
+    if(chatPollTimer)clearInterval(chatPollTimer);
+    chatPollTimer=setInterval(()=>pollChat(typingEl),2500);
+  }catch(e){
+    removeTyping();addMsg('ai','Error: '+e.message);setSending(false);overlay.classList.remove('show');
+  }
 }
 
-// ─── EDIT CHAPTER STATUS ────────────────────────────────────
-function openChapterEdit(name, status, notes){
-  editingChapterName=name;
-  document.getElementById('m-ch-edit-title').textContent=`Edit: ${name}`;
-  document.getElementById('ch-edit-status').value=status||'not_started';
-  document.getElementById('ch-edit-notes').value=notes||'';
-  openM('m-ch-edit');
-}
-
-async function saveChapterEdit(){
-  if(!activeClient||!editingChapterName){closeM('m-ch-edit');return;}
-  const status=document.getElementById('ch-edit-status').value;
-  const notes=document.getElementById('ch-edit-notes').value.trim();
+async function pollChat(typingEl){
+  if(!chatJobId)return;
   try{
-    await fetch(API()+`/clients/${activeClient}/chapters/${encodeURIComponent(editingChapterName)}/status`,{
-      method:'PUT',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({status,notes})
-    });
-    // update local
-    const ch=allChapters.find(c=>(c.chapter||c.chapter_name)===editingChapterName);
-    if(ch){ch.status=status;ch.notes=notes;}
-    closeM('m-ch-edit');
-    toast('✓ Chapter updated');
-    renderGrid();updateStats();
-    if(document.getElementById('v-chapter').classList.contains('show')) renderChNav(activeChapter);
-  }catch(e){toast('Error: '+e.message);}
+    const j=await fetch(API()+'/doc/job/'+chatJobId).then(r=>r.json());
+    if(j.status==='thinking'){
+      document.getElementById('gen-label').textContent='Gemini is rewriting…';
+    }
+    if(j.status==='complete'){
+      clearInterval(chatPollTimer);
+      // Update document
+      document.getElementById('doc-editor').value=j.content||'';
+      updateWordCount();
+      // Hide overlay
+      document.getElementById('gen-overlay').classList.remove('show');
+      // AI message
+      if(typingEl) typingEl.remove();
+      addMsg('ai',`✓ Done — ${fmt(j.word_count||0)} words. The document has been updated. What else needs fixing?`);
+      setSending(false);
+      toast('✓ Edit applied');
+    }else if(j.status==='failed'){
+      clearInterval(chatPollTimer);
+      document.getElementById('gen-overlay').classList.remove('show');
+      if(typingEl) typingEl.remove();
+      addMsg('ai','Something went wrong: '+(j.error||'unknown error'));
+      setSending(false);
+    }
+  }catch(e){console.error(e);}
+}
+
+function setSending(loading){
+  document.getElementById('send-btn').disabled=loading;
+  document.getElementById('chat-input').disabled=loading;
+}
+
+// ─── TABS ───────────────────────────────────────────────────
+function showCtab(name,btn){
+  const tabs={chat:'ct-chat',scratch:'ct-scratch',docs:'ct-docs'};
+  Object.values(tabs).forEach(id=>{
+    const el=document.getElementById(id);
+    el.style.display='none';
+    el.style.flexDirection='';
+  });
+  const target=document.getElementById(tabs[name]);
+  target.style.display='flex';
+  target.style.flexDirection='column';
+  document.querySelectorAll('.ctab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  if(name==='docs'&&activeClient) loadDocs();
 }
 
 // ─── SCRATCHPAD ─────────────────────────────────────────────
@@ -793,27 +647,20 @@ async function loadScratch(clientId){
   try{
     const d=await fetch(API()+`/scratchpad/${clientId}`).then(r=>r.json());
     document.getElementById('scratch-ta').value=d.content||'';
-    const hasContent=(d.content||'').trim().length>50;
-    document.getElementById('scratch-used').style.display=hasContent?'':'none';
     if(d.ai_summary){
-      document.getElementById('ai-summary').textContent=d.ai_summary;
-      document.getElementById('ai-summary-card').style.display='';
-      document.getElementById('scratch-hint').style.display='none';
-    }else{
-      document.getElementById('ai-summary-card').style.display='none';
-      document.getElementById('scratch-hint').style.display='';
+      document.getElementById('ai-sum-text').textContent=d.ai_summary;
+      document.getElementById('ai-sum').style.display='';
+      document.getElementById('scratch-saved').textContent='';
     }
-  }catch(e){}
+  }catch{}
 }
 
 async function saveScratch(){
   const content=document.getElementById('scratch-ta').value;
-  const hasContent=content.trim().length>50;
-  document.getElementById('scratch-used').style.display=hasContent?'':'none';
   try{
     await fetch(API()+'/scratchpad/save',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({client_id:activeClient,content})});
-    const msg=document.getElementById('scratch-saved-msg');
+    const msg=document.getElementById('scratch-saved');
     msg.textContent='✓ Saved';setTimeout(()=>msg.textContent='',2000);
   }catch(e){toast('Save error: '+e.message);}
 }
@@ -827,51 +674,45 @@ async function analyzeScratch(){
   try{
     const d=await fetch(API()+'/scratchpad/summarize',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({client_id:activeClient})}).then(r=>r.json());
-    if(d.summary){document.getElementById('ai-summary').textContent=d.summary;document.getElementById('ai-summary-card').style.display='';}
+    if(d.summary){document.getElementById('ai-sum-text').textContent=d.summary;document.getElementById('ai-sum').style.display='';}
     if(d.key_points?.length){
-      document.getElementById('ai-points').innerHTML=d.key_points.map(p=>`<li>${p}</li>`).join('');
-      document.getElementById('ai-points-card').style.display='';
+      document.getElementById('ai-pts-list').innerHTML=d.key_points.map(p=>`<div class="kp">${p}</div>`).join('');
+      document.getElementById('ai-pts').style.display='';
     }
-    document.getElementById('scratch-hint').style.display='none';
-    toast('✓ AI analysis complete');
+    toast('✓ Analysis complete');
   }catch(e){toast('Error: '+e.message);}
-  finally{btn.disabled=false;btn.textContent='🤖 Analyze with AI';}
+  finally{btn.disabled=false;btn.textContent='🤖 Analyze';}
 }
 
 // ─── DOCUMENTS ──────────────────────────────────────────────
 async function loadDocs(){
   if(!activeClient)return;
   const el=document.getElementById('docs-list');
-  el.innerHTML='<div style="font-size:12px;color:var(--i3)">Loading…</div>';
   try{
     const d=await fetch(API()+'/documents/'+activeClient).then(r=>r.json());
     const docs=d.documents||[];
-    const hasVoice=docs.some(x=>x.extracted_style);
-    document.getElementById('voice-banner').style.display=hasVoice?'':'none';
-    if(!docs.length){el.innerHTML='<div style="font-size:13px;color:var(--i3);padding:8px 0">No documents yet. Upload past essays to activate voice matching.</div>';return;}
-    const tlbl={writing_sample:'Past Essay',professor_feedback:'Professor Feedback',research_notes:'Research Notes',syllabus:'Syllabus/Rubric',reference:'Reference'};
+    document.getElementById('voice-badge').style.display=docs.length?'':'none';
+    if(!docs.length){el.innerHTML='<div style="font-size:12px;color:var(--i3)">No files yet.</div>';return;}
+    const tlbl={writing_sample:'Past Essay',professor_feedback:'Prof Feedback',research_notes:'Research Notes',syllabus:'Syllabus'};
     el.innerHTML=docs.map(doc=>{
-      let styleSum='';
-      try{const s=JSON.parse(doc.extracted_style||'{}');styleSum=s.style_summary||'';}catch{}
-      return `<div class="doc-row">
-        <div class="doc-row-top">
-          <div style="flex:1;min-width:0">
-            <div class="doc-name">📄 ${doc.filename}</div>
-            <div class="doc-meta">${tlbl[doc.doc_type]||doc.doc_type} · ${(doc.word_count||0).toLocaleString()} words</div>
-            ${styleSum?`<div class="doc-style">"${styleSum.substring(0,140)}…"</div>`:''}
+      let ss='';try{const s=JSON.parse(doc.extracted_style||'{}');ss=s.style_summary||'';}catch{}
+      return `<div class="doc-item">
+        <div style="display:flex;align-items:center;gap:6px">
+          <div style="flex:1;min-width:0"><div class="doc-item-name">📄 ${doc.filename}</div>
+          <div class="doc-item-meta">${tlbl[doc.doc_type]||doc.doc_type} · ${(doc.word_count||0).toLocaleString()} words</div>
+          ${ss?`<div class="doc-item-style">${ss.substring(0,120)}…</div>`:''}
           </div>
-          <button onclick="deleteDoc('${doc.id}')" class="btn btn-danger btn-sm">Delete</button>
+          <button onclick="deleteDoc('${doc.id}')" class="btn btn-sm" style="color:var(--red);flex-shrink:0">✕</button>
         </div>
       </div>`;
     }).join('');
-  }catch(e){el.innerHTML='<div style="color:var(--red);font-size:12px">Error loading documents</div>';}
+  }catch{el.innerHTML='<div style="font-size:12px;color:var(--red)">Error loading</div>';}
 }
 
 async function uploadDoc(evt){
   const file=evt.target.files[0];
-  if(!file)return;
-  if(!activeClient){toast('Select a client first');return;}
-  if(file.size>10*1024*1024){toast('Max file size is 10MB');return;}
+  if(!file||!activeClient)return;
+  if(file.size>10*1024*1024){toast('Max 10MB');return;}
   const statusEl=document.getElementById('upload-status');
   statusEl.textContent='Uploading & analyzing…';
   const form=new FormData();
@@ -881,383 +722,104 @@ async function uploadDoc(evt){
   try{
     const resp=await fetch(API()+'/documents/upload',{method:'POST',body:form});
     const text=await resp.text();
-    let d;
-    try{d=JSON.parse(text);}catch{statusEl.textContent='Upload failed';console.error(text.substring(0,200));return;}
-    if(d.status==='error'){statusEl.textContent='Error: '+(d.detail||'failed');return;}
-    statusEl.textContent='✓ Uploaded — voice profile updated';
-    setTimeout(()=>statusEl.textContent='',3000);
+    let d;try{d=JSON.parse(text);}catch{statusEl.textContent='Upload failed';return;}
+    if(d.status==='error'){statusEl.textContent='Error: '+(d.detail||'');return;}
+    statusEl.textContent='✓ Uploaded';setTimeout(()=>statusEl.textContent='',3000);
     evt.target.value='';
     await loadDocs();
   }catch(e){statusEl.textContent='Error: '+e.message;}
 }
 
-async function deleteDoc(docId){
-  if(!confirm('Remove this document from the voice profile?'))return;
+async function deleteDoc(id){
+  if(!confirm('Remove this document?'))return;
+  try{await fetch(API()+'/documents/'+id,{method:'DELETE'});await loadDocs();}
+  catch(e){toast('Error: '+e.message);}
+}
+
+// ─── CLIENT CRUD ────────────────────────────────────────────
+function openEditClient(){
+  const c=clients.find(x=>x.id===activeClient);
+  if(!c)return;
+  document.getElementById('e-name').value=c.name||'';
+  document.getElementById('e-deg').value=c.degree||'DBA';
+  document.getElementById('e-field').value=c.field||'';
+  document.getElementById('e-inst').value=c.institution||'';
+  document.getElementById('e-topic').value=c.topic||'';
+  document.getElementById('e-adv').value=c.advisor||'';
+  document.getElementById('e-fmt').value=c.formatting_notes||'';
+  const cs=document.getElementById('e-cite');
+  for(let o of cs.options) if(o.value===c.citation_style){cs.value=c.citation_style;break;}
+  openM('m-edit');
+}
+
+async function saveEdit(){
+  if(!activeClient)return;
+  const updates={
+    name:document.getElementById('e-name').value.trim(),
+    degree:document.getElementById('e-deg').value,
+    field:document.getElementById('e-field').value.trim(),
+    institution:document.getElementById('e-inst').value.trim(),
+    topic:document.getElementById('e-topic').value.trim(),
+    advisor:document.getElementById('e-adv').value.trim()||null,
+    citation_style:document.getElementById('e-cite').value,
+    formatting_notes:document.getElementById('e-fmt').value.trim()||null
+  };
   try{
-    await fetch(API()+'/documents/'+docId,{method:'DELETE'});
-    toast('Document removed');
-    await loadDocs();
+    await fetch(API()+`/clients/${activeClient}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(updates)});
+    const idx=clients.findIndex(x=>x.id===activeClient);
+    if(idx>=0) clients[idx]={...clients[idx],...updates};
+    closeM('m-edit');toast('✓ Profile updated');
+    document.getElementById('tb-name').textContent=updates.name;
+    document.getElementById('tb-meta').textContent=`${updates.degree} · ${updates.field} · ${updates.institution}`;
+    document.getElementById('doc-client-name').textContent=updates.name;
+    document.getElementById('doc-topic').textContent=updates.topic;
+    renderClientList();
   }catch(e){toast('Error: '+e.message);}
 }
 
-// ─── VIEWS / TABS ────────────────────────────────────────────
-function showV(name){
-  ['empty','dash','chapter'].forEach(n=>{
-    const el=document.getElementById('v-'+n);
-    el.className=n===name?el.className.replace('show','')+' show':el.className.replace(' show','').replace('show','');
-  });
-}
-
-function showDTab(name,btn){
-  ['chapters','scratchpad','documents','feedback'].forEach(n=>document.getElementById('dt-'+n).style.display=n===name?'':'none');
-  if(name==='documents') loadDocs();
-  if(name==='feedback'){loadFeedbackLog();buildFbChCheckboxes();}
-  document.querySelectorAll('.dtab').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  if(name==='documents') loadDocs();
-}
-
-function showPTab(name,btn){
-  ['gen','feedback','sources'].forEach(n=>document.getElementById('pt-'+n).style.display=n===name?'':'none');
-  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-}
-
-// ─── CHAPTER WORKSPACE ───────────────────────────────────────
-async function openChapter(name){
-  activeChapter=name;
-  showV('chapter');
-  document.getElementById('ed-title').textContent=name;
-  document.getElementById('ed-doc-title').textContent=name;
-  const sel=document.getElementById('p-chapter');if(sel) sel.value=name;
-  renderChNav(name);
-  document.getElementById('editor').value='';
-  document.getElementById('prog-strip').style.display='none';
-  document.getElementById('gen-done').style.display='none';
-  updateWC();
-  try{
-    const d=await fetch(API()+`/chapters/${activeClient}/${encodeURIComponent(name)}`).then(r=>r.json());
-    if(d.content){document.getElementById('editor').value=d.content;updateWC();}
-    if(d.sources){let s=d.sources;if(typeof s==='string'){try{s=JSON.parse(s);}catch{s=[];}}if(s.length)renderSrcs(s);}
-  }catch(e){}
-}
-
-function renderChNav(active){
-  document.getElementById('ch-nav-list').innerHTML=allChapters.map(ch=>{
-    const name=ch.chapter||ch.chapter_name||'';
-    const st=ch.status||'not_started';
-    return `<div class="ch-nav-item ${name===active?'on':''}" onclick="openChapter('${name}')">
-      <div class="ch-nav-name">${name}</div>
-      <div class="ch-nav-badge"><span class="badge b-${st}">${ST_ICON[st]||'○'} ${ST_LABEL[st]||st}</span></div>
-    </div>`;
-  }).join('');
-}
-
-function goBack(){showV('dash');const c=clients.find(x=>x.id===activeClient);if(c)loadChapters(c);}
-function onType(){updateWC();}
-function updateWC(){const t=document.getElementById('editor').value||'';const w=t.trim()?t.trim().split(/\s+/).length:0;document.getElementById('sb-words').textContent=w.toLocaleString()+' words';}
-
-// ─── GENERATE ────────────────────────────────────────────────
-async function generateChapter(){
-  if(!activeClient){toast('Select a client first');return;}
-  const chName=document.getElementById('p-chapter')?.value||activeChapter;
-  if(!chName){toast('Select a chapter');return;}
-  if(chName!==activeChapter){activeChapter=chName;document.getElementById('ed-title').textContent=chName;document.getElementById('ed-doc-title').textContent=chName;renderChNav(chName);}
-  setGenBtns(true);
-  document.getElementById('prog-strip').style.display='block';
-  document.getElementById('gen-done').style.display='none';
-  setSt('queued','In queue…',5);
-  try{
-    const d=await fetch(API()+'/chapters/generate',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({client_id:activeClient,chapter_name:chName,
-        additional_instructions:document.getElementById('p-inst')?.value.trim()||null,
-        existing_draft:document.getElementById('p-draft')?.value.trim()||null})
-    }).then(r=>r.json());
-    if(!d.job_id) throw new Error(d.detail||'No job ID');
-    jobId=d.job_id;
-    if(pollTimer)clearInterval(pollTimer);
-    pollTimer=setInterval(poll,2500);
-  }catch(e){setSt('failed','Error: '+e.message,0);setGenBtns(false);}
-}
-
-async function poll(){
-  if(!jobId)return;
-  try{
-    const j=await fetch(API()+'/chapters/job/'+jobId).then(r=>r.json());
-    const msgs={queued:'In queue…',researching:'Searching CrossRef · OpenAlex · Semantic Scholar…',writing:'Writing with Gemini 2.5 Flash…',complete:'Done!',failed:j.error||'Failed'};
-    const pcts={queued:8,researching:42,writing:76,complete:100,failed:0};
-    setSt(j.status,msgs[j.status]||j.status,pcts[j.status]||0);
-    if(j.source_count) document.getElementById('prog-det').textContent=`${j.source_count} verified academic sources`;
-    if(j.status==='complete'){
-      clearInterval(pollTimer);
-      document.getElementById('editor').value=j.content||'';updateWC();
-      document.getElementById('gen-done').style.display='';
-      document.getElementById('gen-stats').innerHTML=`
-        <div class="gsb"><div class="gsb-n">${(j.word_count||0).toLocaleString()}</div><div class="gsb-l">Words</div></div>
-        <div class="gsb"><div class="gsb-n">${j.source_count||0}</div><div class="gsb-l">Sources</div></div>`;
-      if(j.sources?.length) renderSrcs(j.sources);
-      setGenBtns(false);
-      toast(`✓ ${activeChapter} — ${(j.word_count||0).toLocaleString()} words`);
-      const c=clients.find(x=>x.id===activeClient);
-      if(c){await loadChapters(c);renderChNav(activeChapter);}
-    }else if(j.status==='failed'){clearInterval(pollTimer);setGenBtns(false);toast('Failed: '+(j.error||'unknown'));}
-  }catch(e){console.error(e);}
-}
-
-function setSt(st,msg,pct){
-  const b=document.getElementById('prog-badge');
-  const cls={queued:'b-q',researching:'b-r',writing:'b-w',complete:'b-done',failed:'b-fail'};
-  b.className='badge '+(cls[st]||'b-q');
-  b.textContent=st.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
-  document.getElementById('prog-msg').textContent=msg;
-  document.getElementById('prog-fill').style.width=pct+'%';
-  document.getElementById('sb-status').textContent=st==='complete'?'Ready':msg;
-  document.getElementById('sb-live').className='sb-live'+(st==='complete'?'':' busy');
-}
-
-function setGenBtns(loading){
-  ['gen-btn','p-gen-btn'].forEach(id=>{
-    const b=document.getElementById(id);if(!b)return;
-    b.disabled=loading;
-    b.textContent=loading?'Generating…':(id==='gen-btn'?'✨ Generate':'✨ Generate Chapter');
-  });
-}
-
-function renderSrcs(srcs){
-  document.getElementById('sources-list').innerHTML=srcs.length
-    ?`<div style="font-size:11px;color:var(--i2);margin-bottom:8px">${srcs.length} verified sources</div>`+srcs.map((s,i)=>`<div class="src-item"><span class="src-num">[${i+1}]</span>${s}</div>`).join('')
-    :'<div style="font-size:12px;color:var(--i3);text-align:center;padding:16px 0">No sources yet</div>';
-}
-
-// ─── FEEDBACK / REVISE ───────────────────────────────────────
-async function reviseChapter(){
-  const fb=document.getElementById('p-feedback').value.trim();
-  if(!fb){toast('Paste professor feedback first');return;}
-  if(!activeClient||!activeChapter){toast('Open a chapter first');return;}
-  const btn=document.getElementById('p-revise-btn');btn.disabled=true;btn.textContent='Revising…';
-  try{
-    const d=await fetch(API()+`/chapters/${activeClient}/${encodeURIComponent(activeChapter)}`).then(r=>r.json());
-    if(!d.id){toast('Save a draft first');btn.disabled=false;btn.textContent='🔄 Revise Based on Feedback';return;}
-    const r=await fetch(API()+'/chapters/revise',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({client_id:activeClient,chapter_id:d.id,professor_feedback:fb})}).then(r=>r.json());
-    document.getElementById('editor').value=r.content||'';updateWC();
-    toast(`✓ Revised — ${(r.word_count||0).toLocaleString()} words`);
-  }catch(e){toast('Error: '+e.message);}
-  finally{btn.disabled=false;btn.textContent='🔄 Revise Based on Feedback';}
-}
-
-// ─── SAVE / EXPORT ───────────────────────────────────────────
-async function saveDraft(){
-  if(!activeClient||!activeChapter){toast('No chapter open');return;}
-  try{
-    await fetch(API()+'/chapters/save',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({client_id:activeClient,chapter_name:activeChapter,content:document.getElementById('editor').value})});
-    toast('✓ Draft saved');
-  }catch(e){toast('Error: '+e.message);}
-}
-function exportChapter(){if(!activeClient||!activeChapter){toast('No chapter open');return;}window.open(API()+`/chapters/${activeClient}/export/${encodeURIComponent(activeChapter)}`,'_blank');}
-function exportFull(){if(!activeClient){toast('Select a client first');return;}window.open(API()+`/chapters/${activeClient}/export/full`,'_blank');}
-
-// ─── CLIENT CRUD ─────────────────────────────────────────────
 async function addClient(){
   const name=document.getElementById('a-name').value.trim();
   const inst=document.getElementById('a-inst').value.trim();
   const topic=document.getElementById('a-topic').value.trim();
   if(!name||!inst||!topic){toast('Name, institution and topic are required');return;}
   try{
-    const degreeEl=document.getElementById('a-degree');
+    const degEl=document.getElementById('a-deg');
     const d=await fetch(API()+'/clients/',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({name,institution:inst,topic,
-        degree:degreeEl.selectedOptions[0].text.split('—')[0].trim(),
+        degree:degEl.selectedOptions[0].text,
         field:document.getElementById('a-field').value.trim(),
-        citation_style:document.getElementById('a-citation').value,
-        advisor:document.getElementById('a-advisor').value.trim()||null,
-        formatting_notes:document.getElementById('a-fmt').value.trim()||null,
-        chapter_template:degreeEl.value,quality_target:75})
+        citation_style:document.getElementById('a-cite').value,
+        advisor:document.getElementById('a-adv').value.trim()||null,
+        chapter_template:degEl.value,quality_target:75})
     }).then(r=>r.json());
     closeM('m-add');
-    ['a-name','a-field','a-inst','a-topic','a-advisor','a-fmt'].forEach(id=>document.getElementById(id).value='');
+    ['a-name','a-field','a-inst','a-topic','a-adv'].forEach(id=>document.getElementById(id).value='');
     toast(`✓ ${name} added`);
     await loadClients();
     selectClient(d.client_id);
   }catch(e){toast('Error: '+e.message);}
 }
 
-async function addChapter(){
-  const name=document.getElementById('new-ch-name').value.trim();
-  if(!name){toast('Enter a chapter name');return;}
-  if(!activeClient){toast('Select a client first');return;}
-  try{
-    await fetch(API()+`/clients/${activeClient}/chapters/add`,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({client_id:activeClient,chapter_name:name})});
-    closeM('m-add-ch');document.getElementById('new-ch-name').value='';
-    toast(`✓ "${name}" added`);
-    const c=clients.find(x=>x.id===activeClient);if(c)await loadChapters(c);
-  }catch(e){toast('Error: '+e.message);}
-}
-
-function confirmDel(id,name){if(confirm(`Delete "${name}" and all their data? Cannot be undone.`))deleteClient(id,name);}
+function confirmDel(id,name){if(confirm(`Delete "${name}" and all their data?`))deleteClient(id,name);}
 async function deleteClient(id,name){
   try{
     await fetch(API()+`/clients/${id}`,{method:'DELETE'});
     toast(`Deleted ${name}`);
-    if(activeClient===id){activeClient=null;showV('empty');}
+    if(activeClient===id){
+      activeClient=null;
+      document.getElementById('doc-empty').style.display='flex';
+      document.getElementById('doc-scroll').style.display='none';
+      document.getElementById('tb-name').textContent='Select a client';
+      document.getElementById('tb-meta').textContent='';
+      ['save-btn','export-btn','edit-client-btn'].forEach(id=>document.getElementById(id).style.display='none');
+    }
     await loadClients();
   }catch(e){toast('Error: '+e.message);}
 }
-async function deleteCurrentClient(){const c=clients.find(x=>x.id===activeClient);if(c)confirmDel(c.id,c.name);}
 
-// ─── MODALS ──────────────────────────────────────────────────
+// ─── UTILS ──────────────────────────────────────────────────
 function openM(id){document.getElementById(id).classList.add('on');}
 function closeM(id){document.getElementById(id).classList.remove('on');}
-
-// ─── BULK FEEDBACK ──────────────────────────────────────────
-let bulkJobId=null, bulkPollTimer=null;
-
-document.addEventListener('change', e => {
-  if(e.target.name==='fb-scope'){
-    const showSel=e.target.value==='selected';
-    document.getElementById('fb-ch-selector').style.display=showSel?'':'none';
-    if(showSel) buildFbChCheckboxes();
-    const btn=document.getElementById('apply-fb-btn');
-    btn.textContent=showSel?'⚡ Apply to Selected':'⚡ Apply to All Chapters';
-  }
-});
-
-function buildFbChCheckboxes(){
-  const el=document.getElementById('fb-ch-checkboxes');
-  el.innerHTML=allChapters.map(ch=>{
-    const name=ch.chapter||ch.chapter_name||'';
-    const hasContent=ch.word_count>0||ch.status==='complete'||ch.status==='draft'||ch.status==='revised';
-    return `<label style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink);cursor:pointer;padding:6px 10px;background:var(--s2);border-radius:6px;border:1px solid var(--bd)">
-      <input type="checkbox" value="${name}" ${hasContent?'checked':''} style="accent-color:var(--blue)">
-      <span>${name}</span>
-      ${hasContent?'<span class="badge b-draft" style="margin-left:auto">has draft</span>':''}
-    </label>`;
-  }).join('');
-}
-
-async function applyBulkFeedback(){
-  const feedback=document.getElementById('bulk-feedback-text').value.trim();
-  if(!feedback){toast('Paste professor feedback first');return;}
-  if(!activeClient){toast('Select a client first');return;}
-
-  const scope=document.querySelector('input[name="fb-scope"]:checked').value;
-  let chapters=null;
-  if(scope==='selected'){
-    chapters=Array.from(document.querySelectorAll('#fb-ch-checkboxes input:checked')).map(i=>i.value);
-    if(!chapters.length){toast('Select at least one chapter');return;}
-  }
-
-  const btn=document.getElementById('apply-fb-btn');
-  btn.disabled=true;btn.textContent='Running…';
-  document.getElementById('bulk-progress').style.display='';
-  document.getElementById('bulk-results').style.display='none';
-  setBulkStatus('running','Applying feedback to all chapters…',0,0,0,'Starting…');
-
-  try{
-    const d=await fetch(API()+'/feedback/apply',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({client_id:activeClient,feedback,scope,chapters})
-    }).then(r=>r.json());
-
-    if(!d.job_id){toast('Error: '+(d.error||'unknown'));btn.disabled=false;btn.textContent='⚡ Apply to All Chapters';return;}
-    bulkJobId=d.job_id;
-    if(bulkPollTimer)clearInterval(bulkPollTimer);
-    bulkPollTimer=setInterval(pollBulk,3000);
-  }catch(e){
-    toast('Error: '+e.message);
-    btn.disabled=false;btn.textContent='⚡ Apply to All Chapters';
-    document.getElementById('bulk-progress').style.display='none';
-  }
-}
-
-async function pollBulk(){
-  if(!bulkJobId)return;
-  try{
-    const j=await fetch(API()+'/feedback/job/'+bulkJobId).then(r=>r.json());
-    const total=j.total||1;const done=j.done||0;
-    const pct=Math.round((done/total)*100);
-    setBulkStatus(j.status,`Revising ${done} of ${total} chapters…`,pct,done,total,j.current_chapter||'');
-
-    if(j.status==='complete'||j.status==='complete_with_errors'){
-      clearInterval(bulkPollTimer);
-      const btn=document.getElementById('apply-fb-btn');
-      btn.disabled=false;
-      btn.textContent=document.querySelector('input[name="fb-scope"]:checked').value==='selected'?'⚡ Apply to Selected':'⚡ Apply to All Chapters';
-      setBulkStatus('complete','All chapters revised!',100,total,total,'Done');
-      renderBulkResults(j.results||[]);
-      toast(`✓ ${done} chapters revised successfully`);
-      // refresh chapter grid
-      const c=clients.find(x=>x.id===activeClient);if(c)await loadChapters(c);
-      await loadFeedbackLog();
-    }
-  }catch(e){console.error(e);}
-}
-
-function setBulkStatus(status,msg,pct,done,total,current){
-  const badge=document.getElementById('bulk-badge');
-  const cls={running:'b-w',complete:'b-done',complete_with_errors:'b-r',queued:'b-q'};
-  badge.className='badge '+(cls[status]||'b-q');
-  badge.textContent=status==='complete'?'Done':status==='running'?'Revising…':'Queued';
-  document.getElementById('bulk-msg').textContent=msg;
-  document.getElementById('bulk-prog-fill').style.width=pct+'%';
-  document.getElementById('bulk-counter').textContent=total?`${done}/${total}`:'';
-  document.getElementById('bulk-current').textContent=current?`Currently revising: ${current}`:'';
-}
-
-function renderBulkResults(results){
-  const el=document.getElementById('bulk-results');
-  el.style.display='';
-  document.getElementById('bulk-results-list').innerHTML=results.map(r=>{
-    const icon=r.status==='revised'?'✅':r.status==='skipped'?'⏭️':'❌';
-    const info=r.status==='revised'?`${(r.word_count||0).toLocaleString()} words`:r.reason||r.error||'';
-    return `<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--sur);border:1px solid var(--bd);border-radius:7px;margin-bottom:6px;font-size:13px">
-      <span>${icon}</span>
-      <span style="flex:1;font-weight:500">${r.chapter}</span>
-      <span style="color:var(--i3)">${info}</span>
-    </div>`;
-  }).join('');
-}
-
-async function loadFeedbackLog(){
-  if(!activeClient)return;
-  const el=document.getElementById('feedback-log-list');
-  try{
-    const d=await fetch(API()+'/feedback/log/'+activeClient).then(r=>r.json());
-    const entries=d.entries||[];
-    if(!entries.length){el.innerHTML='<div style="font-size:13px;color:var(--i3);padding:6px 0">No feedback history yet.</div>';return;}
-    el.innerHTML=entries.map(e=>{
-      const date=new Date(e.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-      const chs=JSON.parse(e.chapters_affected||'[]');
-      return `<div style="background:var(--sur);border:1px solid var(--bd);border-radius:8px;padding:12px 14px;margin-bottom:8px">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
-          <div style="flex:1;min-width:0">
-            <div style="font-size:12px;color:var(--i3);margin-bottom:4px">${date} · ${chs.length} chapters</div>
-            <div style="font-size:13px;color:var(--ink);line-height:1.5">${e.feedback.substring(0,200)}${e.feedback.length>200?'…':''}</div>
-          </div>
-          <div style="display:flex;gap:6px;flex-shrink:0">
-            <button class="btn btn-sm btn-edit" onclick="reuseeFeedback(\`${e.feedback.replace(/\`/g,'').replace(/"/g,'')}\`)">Reuse</button>
-            <button class="btn btn-sm btn-danger" onclick="deleteFbEntry('${e.id}')">Del</button>
-          </div>
-        </div>
-      </div>`;
-    }).join('');
-  }catch(err){el.innerHTML='<div style="font-size:12px;color:var(--red)">Error loading history</div>';}
-}
-
-function reuseeFeedback(text){
-  document.getElementById('bulk-feedback-text').value=text;
-  toast('Feedback loaded — edit if needed then Apply');
-}
-
-async function deleteFbEntry(id){
-  try{await fetch(API()+'/feedback/log/'+id,{method:'DELETE'});await loadFeedbackLog();}
-  catch(e){toast('Error: '+e.message);}
-}
-
-// ─── UTILS ───────────────────────────────────────────────────
 function toast(msg,dur=2800){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('on');setTimeout(()=>el.classList.remove('on'),dur);}
 </script>
 </body>
