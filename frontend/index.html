@@ -969,6 +969,8 @@ async function uploadDoc(event){
   const file=event.target.files[0];
   if(!file){return;}
   if(!activeClient){toast('Select a client first');return;}
+  const maxMB=10;
+  if(file.size>maxMB*1024*1024){toast('File too large — max 10MB');return;}
   const docType=document.getElementById('doc-type').value;
   toast('Uploading and analyzing writing style…');
   const form=new FormData();
@@ -976,7 +978,15 @@ async function uploadDoc(event){
   form.append('doc_type',docType);
   form.append('file',file);
   try{
-    const d=await fetch(API()+'/documents/upload',{method:'POST',body:form}).then(r=>r.json());
+    const resp=await fetch(API()+'/documents/upload',{method:'POST',body:form});
+    const text=await resp.text();
+    let d;
+    try{d=JSON.parse(text);}catch(e){
+      console.error('Server response:',text.substring(0,300));
+      toast('Upload failed — server error (check console)');
+      return;
+    }
+    if(d.status==='error'){toast('Upload error: '+(d.detail||'unknown'));return;}
     toast(`✓ "${file.name}" uploaded — voice profile updated`);
     event.target.value='';
     await loadDocsList();
